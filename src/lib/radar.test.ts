@@ -8,7 +8,12 @@ const row = (k: (typeof RADAR_KEYS)[number]) => p.find((r) => r.key === k)!.valu
 describe('radar profile', () => {
   it('has every axis with values in 0..1 or null', () => {
     expect(p.map((r) => r.key)).toEqual([...RADAR_KEYS]);
-    for (const r of p) for (const v of Object.values(r.values)) if (v !== null) expect(v).toBeGreaterThanOrEqual(0), expect(v).toBeLessThanOrEqual(1);
+    for (const r of p)
+      for (const v of Object.values(r.values)) {
+        if (v === null) continue;
+        expect(v).toBeGreaterThanOrEqual(0);
+        expect(v).toBeLessThanOrEqual(1);
+      }
   });
   it('downforce is not applicable to the Seal instead of zero', () => {
     expect(row('downforce').seal).toBeNull();

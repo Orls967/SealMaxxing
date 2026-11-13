@@ -19,6 +19,8 @@ import { downloadText } from '@/ui/downloadText';
 
 const CARS_ALL = CAR_LIST;
 const SPEEDS = Array.from({ length: 36 }, (_, i) => i * 10);
+/** Byte-order mark so spreadsheet apps read the CSV as UTF-8. */
+const BOM = String.fromCharCode(0xfeff);
 const FIELD = 'rounded border border-line bg-surface-2 px-2 py-1 text-sm text-text';
 
 export default function DataPage() {
@@ -70,7 +72,7 @@ export default function DataPage() {
         return cell ? cellText(cell, r.unit, r.digits, { ...labels, unknown: '' }) : '';
       }),
     ]);
-    downloadText('carsome-data.csv', 'text/csv;charset=utf-8', `﻿${toCsv([head, ...body])}`);
+    downloadText('carsome-data.csv', 'text/csv;charset=utf-8', `${BOM}${toCsv([head, ...body])}`);
   };
 
   return (
