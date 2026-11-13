@@ -12,13 +12,15 @@ interface Props {
   cars: Car[];
   result: RowResult;
   note?: string;
+  /** Show the PS conversion for kW values. */
+  ps?: boolean;
 }
 
 /**
  * One metric across the selected cars: bars on a shared axis, value, unit and measurement
  * basis. A winner is marked only when `result.best` says one may be declared.
  */
-export function CompareRow({ label, unit, digits, cars, result, note }: Props) {
+export function CompareRow({ label, unit, digits, cars, result, note, ps = true }: Props) {
   const byCar = new Map<CarId, Car>(cars.map((c) => [c.id, c]));
   return (
     <section aria-label={label} className="rounded-lg border border-line bg-surface p-3">
@@ -50,7 +52,7 @@ export function CompareRow({ label, unit, digits, cars, result, note }: Props) {
                 )}
               </span>
               <span className="col-span-7 text-sm sm:col-span-5">
-                <MetricValue cell={cell} unit={unit} digits={digits} best={result.best.includes(cell.carId)} />
+                <MetricValue cell={cell} unit={unit} digits={digits} best={result.best.includes(cell.carId)} ps={ps} />
               </span>
             </li>
           );

@@ -10,10 +10,12 @@ interface Props {
   best?: boolean;
   /** Compact: value and status only, without the basis line. */
   compact?: boolean;
+  /** Show the PS conversion next to kW values (power figures only). */
+  ps?: boolean;
 }
 
 /** One metric value with unit, basis and verification status; or an explicit absence. */
-export function MetricValue({ cell, unit, digits = 0, best = false, compact = false }: Props) {
+export function MetricValue({ cell, unit, digits = 0, best = false, compact = false, ps = true }: Props) {
   switch (cell.kind) {
     case 'value': {
       const d = cell.data;
@@ -21,7 +23,7 @@ export function MetricValue({ cell, unit, digits = 0, best = false, compact = fa
         <span className="inline-flex flex-col gap-0.5">
           <span className="inline-flex flex-wrap items-center gap-x-2 gap-y-0.5">
             <span className={`tnum font-semibold ${best ? 'text-accent-text' : 'text-text'}`}>{fmtSourced(d, unit, digits)}</span>
-            {unit === 'kW' && <span className="tnum text-xs text-muted">{fmt(kwToPs(d.value))} PS</span>}
+            {ps && unit === 'kW' && !d.basis?.includes('PS') && <span className="tnum text-xs text-muted">{fmt(kwToPs(d.value))} PS</span>}
             {best && <span className="rounded bg-accent px-1 text-xs leading-tight text-text">{UI.common.best}</span>}
             <SourceBadge verified={d.verified} />
           </span>
