@@ -30,7 +30,7 @@ function loft(rings: Ring[], e: number, theta0: number, theta1: number, segs: nu
     for (let j = 0; j < segs; j++) {
       const a = i * cols + j;
       const b = (i + 1) * cols + j;
-      idx.push(a, a + 1, b, a + 1, b + 1, b);
+      idx.push(a, b, a + 1, a + 1, b, b + 1);
     }
   }
   const g = new THREE.BufferGeometry();
