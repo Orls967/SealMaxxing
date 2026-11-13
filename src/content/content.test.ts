@@ -6,7 +6,9 @@ import { GLOSSARY } from './glossary';
 import { CAR_IDS, PART_IDS, SYSTEM_IDS } from './ids';
 import { PART_LABEL, SYSTEM_LABEL } from './labels';
 import { METRICS } from './metrics';
+import { existsSync } from 'node:fs';
 import { PARTS } from './parts';
+import { SOUNDS } from './sounds';
 
 describe('content', () => {
   it.each(CAR_LIST)('car $id matches the schema', (car) => {
@@ -68,6 +70,17 @@ describe('content', () => {
       expect(PART_COMPARISON[p].length).toBeGreaterThan(20);
     }
     expect(STORIES).toHaveLength(8);
+  });
+
+  it('every car has a rev recording whose file exists, and substitutes say so', () => {
+    for (const id of CAR_IDS) {
+      const s = SOUNDS[id];
+      for (const clip of s.idle ? [s.idle, s.rev] : [s.rev]) {
+        expect(existsSync(`public/sounds/${clip.file}`), clip.file).toBe(true);
+        expect(clip.credit.url.startsWith('https://')).toBe(true);
+        if (!clip.exact) expect(s.note, id).toMatch(/pengganti/);
+      }
+    }
   });
 
   it('glossary ids are unique and sorted by term', () => {
