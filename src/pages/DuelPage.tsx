@@ -39,6 +39,7 @@ export default function DuelPage() {
         <strong className="text-warn">{UI.common.simpleModel}.</strong> {UI.duel.modelNote}
       </p>
       <div role="tabpanel" id="panel-adu" aria-labelledby={`tab-${mode}`}>
+        <h2 className="sr-only">{UI.duel.modes[mode]}</h2>
         {mode === 'accel' && (
           <AccelPanel target={dist} onTarget={(d) => set({ dist: d })} instant={reduced} />
         )}

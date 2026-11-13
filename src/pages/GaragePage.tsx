@@ -30,7 +30,10 @@ export default function GaragePage() {
         <p className="mt-1 max-w-3xl text-muted">{UI.garage.lead}</p>
       </header>
 
-      <section aria-label={UI.garage.cars} className="flex flex-col gap-2">
+      <section aria-labelledby="mobil" className="flex flex-col gap-2">
+        <h2 id="mobil" className="sr-only">
+          {UI.garage.cars}
+        </h2>
         <div className="h-72 overflow-hidden rounded-lg border border-line md:h-96">
           {hasWebgl() ? (
             <GarageScene
