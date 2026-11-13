@@ -120,7 +120,7 @@ rinciannya di `docs/PROGRESS.md`.
 
 - [x] Judul, satu kalimat penjelasan, tautan situs (https://orls967.github.io/SealMaxxing/),
       dan lencana status deploy.
-- [ ] Tangkapan layar hasil deploy (dari R5), disimpan di `docs/screenshots/`: Garasi, Bedah
+- [x] Tangkapan layar hasil deploy (dari R5), disimpan di `docs/screenshots/`: Garasi, Bedah
       (sinar-X dan ledak), Banding (sorot sistem dan tumpuk), Data, Adu; desktop dan ponsel.
 - [x] Tabel empat mobil: jenis, tahun, daya, berat, 0–100, harga asli dan rupiah.
 - [x] Fitur per halaman, cara memakai (kontrol 3D, tautan yang bisa dibagikan).
@@ -138,8 +138,8 @@ rinciannya di `docs/PROGRESS.md`.
 ## R5 — Fase terakhir
 
 - [ ] Semua pemeriksaan: lint, typecheck, tes unit, e2e, build, Lighthouse aksesibilitas ≥ 95.
-- [ ] Push dan tunggu deploy sukses.
-- [ ] Ambil tangkapan layar dari situs yang sudah tayang, simpan ke `docs/screenshots/`,
+- [x] Push dan tunggu deploy sukses.
+- [x] Ambil tangkapan layar dari situs yang sudah tayang, simpan ke `docs/screenshots/`,
       pasang di README, push lagi.
 - [ ] Tunjukkan hasil ke pemilik. Setelah pemilik mengonfirmasi sesuai: hapus `revisi.md`,
       commit, push.
