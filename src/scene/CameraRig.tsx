@@ -27,9 +27,11 @@ export interface CameraRigProps {
   /** Allow looking from below the floor. */
   allowBelow?: boolean;
   onReady?: (controls: OrbitControlsImpl) => void;
+  /** Inertia after a drag; off for synced views so followers do not drift. */
+  damping?: boolean;
 }
 
-export function CameraRig({ preset, nonce = 0, target, distance, focus, instant = false, allowBelow = true, onReady }: CameraRigProps) {
+export function CameraRig({ preset, nonce = 0, target, distance, focus, instant = false, allowBelow = true, onReady, damping = true }: CameraRigProps) {
   const controls = useRef<OrbitControlsImpl>(null);
   const camera = useThree((s) => s.camera);
   const invalidate = useThree((s) => s.invalidate);
@@ -78,7 +80,7 @@ export function CameraRig({ preset, nonce = 0, target, distance, focus, instant 
       ref={controls}
       makeDefault
       enablePan={false}
-      enableDamping={!instant}
+      enableDamping={damping && !instant}
       minDistance={distance * 0.25}
       maxDistance={distance * 2.2}
       maxPolarAngle={allowBelow ? Math.PI * 0.93 : Math.PI * 0.49}
