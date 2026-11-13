@@ -5,7 +5,7 @@ import { CameraRig, type CamPreset } from './CameraRig';
 import { CarModel } from './CarModel';
 import type { DisplayState } from './display';
 import { applyCut, type CutAxis } from './dissect/cut';
-import type { MatKey } from './materials';
+import type { Livery } from '@/lib/viewState';
 import { SHAPES } from './procedural/shapes';
 import { Stage } from './Stage';
 import { Studio } from './Studio';
@@ -23,7 +23,7 @@ export interface DissectSceneProps {
   cutPos: number;
   cam: CamPreset;
   camNonce: number;
-  paint: MatKey;
+  livery: Livery;
   instant: boolean;
   onSelect: (id: PartId | null) => void;
 }
@@ -53,7 +53,7 @@ export function DissectScene(p: DissectSceneProps) {
         carId={p.carId}
         display={display}
         explode={p.explode / 100}
-        paint={p.paint}
+        livery={p.livery}
         cut={p.cut !== null}
         instant={p.instant}
         onSelect={select}
@@ -63,7 +63,7 @@ export function DissectScene(p: DissectSceneProps) {
         preset={p.cam}
         nonce={p.camNonce}
         target={[s.L / 2 - s.fo, 0.5, 0]}
-        distance={6.6 * spread}
+        distance={7.6 * spread}
         focus={focus}
         instant={p.instant}
       />

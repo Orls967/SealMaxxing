@@ -4,7 +4,8 @@ import type { CarId, PartId } from '@/content/ids';
 import { PARTS } from '@/content/parts';
 import { partMode, type DisplayState } from './display';
 import { ExplodeAnimator } from './dissect/ExplodeAnimator';
-import { PALETTE, type MatKey } from './materials';
+import type { Livery } from '@/lib/viewState';
+import { PALETTE } from './materials';
 import { CarCtx, type CarContext, type PartEntry } from './prim';
 import { CarBody } from './procedural/CarBody';
 import { CarInternals } from './procedural/CarInternals';
@@ -16,7 +17,8 @@ export interface CarModelProps {
   display?: DisplayState;
   /** Explode target, 0..1. */
   explode?: number;
-  paint?: MatKey;
+  /** `factory` = reference colour of each car, `theme` = the black-and-red theme livery. */
+  livery?: Livery;
   /** Ghost colour, used to tell cars apart when they are stacked. */
   tint?: string;
   /** `exterior` skips everything hidden behind the body: for views that never open the car. */
@@ -38,7 +40,7 @@ export function CarModel({
   carId,
   display = NO_DISPLAY,
   explode = 0,
-  paint = 'paint',
+  livery = 'factory',
   tint = PALETTE.white,
   detail = 'full',
   cut = false,
@@ -66,7 +68,7 @@ export function CarModel({
   return (
     <CarCtx.Provider value={ctx}>
       <group position={position}>
-        <CarBody s={s} lay={lay} paint={paint} cut={cut} />
+        <CarBody s={s} lay={lay} paint={livery === 'theme' ? 'paint' : s.paint} cut={cut} />
         <CarInternals s={s} lay={lay} exteriorOnly={detail === 'exterior'} />
         <ExplodeAnimator target={explode} instant={instant} />
       </group>

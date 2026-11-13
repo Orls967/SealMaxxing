@@ -25,14 +25,36 @@ const DEFS = {
     phys({ color: '#0b0b0e', metalness: 0.6, roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.06 }),
   paintRed: () =>
     phys({ color: '#c8101f', metalness: 0.5, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.06 }),
+  // Factory-style colours taken from the reference pictures of each car.
+  paintSeal: () =>
+    phys({ color: '#51667d', metalness: 0.65, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.08 }),
+  paintP1: () =>
+    phys({ color: '#8e0d16', metalness: 0.7, roughness: 0.26, clearcoat: 1, clearcoatRoughness: 0.05 }),
+  paintSenna: () =>
+    phys({ color: '#e2491b', metalness: 0.35, roughness: 0.32, clearcoat: 1, clearcoatRoughness: 0.06 }),
   carbon: () => std({ color: '#1d1d22', metalness: 0.35, roughness: 0.45 }),
+  /** Openings: grilles, ducts, meshes. */
+  intake: () => std({ color: '#050506', metalness: 0.1, roughness: 0.85 }),
+  trim: () => std({ color: '#121215', metalness: 0.2, roughness: 0.6 }),
+  lens: () => phys({ color: '#0d0d10', metalness: 0.4, roughness: 0.08, clearcoat: 1 }),
+  liner: () => std({ color: '#060607', metalness: 0, roughness: 1, side: THREE.DoubleSide }),
+  glassDark: () =>
+    phys({
+      color: '#050507',
+      metalness: 0.5,
+      roughness: 0.04,
+      transparent: true,
+      opacity: 0.92,
+      clearcoat: 1,
+      side: THREE.DoubleSide,
+    }),
   glass: () =>
     phys({
-      color: '#16090b',
-      metalness: 0.2,
-      roughness: 0.05,
+      color: '#0b0a0d',
+      metalness: 0.35,
+      roughness: 0.04,
       transparent: true,
-      opacity: 0.55,
+      opacity: 0.8,
       clearcoat: 1,
       side: THREE.DoubleSide,
     }),
@@ -146,40 +168,6 @@ export const CUT_CAP = new THREE.MeshBasicMaterial({
   side: THREE.BackSide,
   clippingPlanes: CLIP_PLANES,
 });
-
-export interface ArchSpec {
-  frontX: number;
-  rearX: number;
-  frontR: number;
-  rearR: number;
-  y: number;
-  zMin: number;
-}
-
-/** Adds a fragment discard inside the wheel-arch circles so wheels show through the body side. */
-export function withArches<T extends THREE.Material>(m: T, a: ArchSpec): T {
-  const c = m.clone() as T;
-  c.onBeforeCompile = (shader) => {
-    shader.uniforms.uArchF = { value: new THREE.Vector3(a.frontX, a.y, a.frontR) };
-    shader.uniforms.uArchR = { value: new THREE.Vector3(a.rearX, a.y, a.rearR) };
-    shader.uniforms.uArchZ = { value: a.zMin };
-    shader.vertexShader = shader.vertexShader
-      .replace('#include <common>', '#include <common>\nvarying vec3 vArchP;')
-      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvArchP = position;');
-    shader.fragmentShader = shader.fragmentShader
-      .replace(
-        '#include <common>',
-        '#include <common>\nvarying vec3 vArchP; uniform vec3 uArchF; uniform vec3 uArchR; uniform float uArchZ;',
-      )
-      .replace(
-        '#include <clipping_planes_fragment>',
-        `#include <clipping_planes_fragment>
-        if (abs(vArchP.z) > uArchZ && (distance(vArchP.xy, uArchF.xy) < uArchF.z || distance(vArchP.xy, uArchR.xy) < uArchR.z)) discard;`,
-      );
-  };
-  c.customProgramCacheKey = () => `arch:${a.frontX}:${a.rearX}:${a.frontR}:${a.rearR}:${a.y}:${a.zMin}`;
-  return c;
-}
 
 /** Thin connector lines drawn from each exploded part back to where it belongs. */
 export const EXPLODE_LINE = new THREE.LineBasicMaterial({

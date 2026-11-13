@@ -63,7 +63,7 @@ export default function DissectPage() {
 
   if (!isCarId(carId)) return <Navigate to="/bedah/seal" replace />;
   const car = CARS[carId];
-  const factory = carId === 'laferrari' && livery === 'factory';
+  const factory = livery === 'factory';
   const qs = serializeView({ ...DEFAULT_VIEW, part, system, xray, peel, explode, cut, cutPos, cam, livery });
 
   return (
@@ -73,16 +73,14 @@ export default function DissectPage() {
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line bg-surface px-3 py-2">
           <CarTabs search={qs ? `?${qs}` : ''} />
           <div className="flex items-center gap-3 text-xs text-muted">
-            {carId === 'laferrari' && (
-              <label className="flex items-center gap-2 text-text">
-                <input
-                  type="checkbox"
-                  checked={factory}
-                  onChange={(e) => set({ livery: e.target.checked ? 'factory' : 'theme' })}
-                />
-                {UI.garage.liveryToggle}
-              </label>
-            )}
+            <label className="flex items-center gap-2 text-text">
+              <input
+                type="checkbox"
+                checked={!factory}
+                onChange={(e) => set({ livery: e.target.checked ? 'theme' : 'factory' })}
+              />
+              {UI.garage.liveryToggle}
+            </label>
             <span className="rounded border border-line px-1">
               {factory ? UI.common.factoryLivery : UI.common.themeLivery}
             </span>
@@ -103,7 +101,7 @@ export default function DissectPage() {
                 cutPos={cutPos}
                 cam={cam}
                 camNonce={camNonce}
-                paint={factory ? 'paintRed' : 'paint'}
+                livery={livery}
                 instant={reduced}
                 onSelect={pickFromModel}
               />

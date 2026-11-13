@@ -7,7 +7,7 @@ describe('viewState', () => {
     expect(serializeView(DEFAULT_VIEW)).toBe('');
   });
   it('round-trips a full dissect view', () => {
-    const q = 'part=battery&sys=energy&xray=1&peel=3&ex=40&cut=x&cp=30&cam=side&liv=factory';
+    const q = 'part=battery&sys=energy&xray=1&peel=3&ex=40&cut=x&cp=30&cam=side&liv=theme';
     const v = parseView(`?${q}`);
     expect(v.part).toBe('battery');
     expect(v.cut).toBe('x');

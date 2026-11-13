@@ -94,9 +94,18 @@ function Structure({ s, lay }: P) {
         <Rod k="metal" a={[s.wb + 0.12, 0.22, -0.42]} b={[s.wb + 0.12, 0.22, 0.42]} rad={0.03} />
       </Part>
       <Part id="crash-structure">
-        <Box k="metal" p={[-s.fo + 0.2, 0.36, 0]} s={[0.07, 0.1, s.W * 0.62]} />
+        <Box
+          k="metal"
+          p={[-s.fo + 0.2, Math.min(0.36, belt(s, -s.fo + 0.2) - 0.12), 0]}
+          s={[0.07, 0.08, halfW(s, -s.fo + 0.2) * 1.5]}
+        />
         {SIDES.map((z) => (
-          <Box key={z} k="redDeep" p={[-s.fo + 0.4, 0.34, z * 0.38]} s={[0.34, 0.1, 0.1]} />
+          <Box
+            key={z}
+            k="redDeep"
+            p={[-s.fo + 0.4, Math.min(0.34, belt(s, -s.fo + 0.4) - 0.12), z * 0.38]}
+            s={[0.34, 0.08, 0.1]}
+          />
         ))}
       </Part>
       <Part id="crash-structure" dir={[1.7, 0, 0]}>
@@ -474,7 +483,10 @@ function Corner({ s, lay, rear, z }: P & { rear: boolean; z: Side }) {
   const zu = z * (wheelZ(s, rear) - 0.14);
   const disc = rear ? lay.discRR : lay.discRF;
   const mirror = z === -1;
-  const spokes = 10;
+  const w = s.wheel;
+  const n = w.twin ? w.spokes * 2 : w.spokes;
+  const step = (2 * Math.PI) / w.spokes;
+  const angle = (i: number) => (w.twin ? Math.floor(i / 2) * step + (i % 2 ? 0.16 : -0.16) : i * step);
   const dx = rear ? 0.35 : -0.35;
   return (
     <>
@@ -519,21 +531,17 @@ function Corner({ s, lay, rear, z }: P & { rear: boolean; z: Side }) {
       <Part id="wheels" mirror={mirror}>
         <Cyl k="dark" p={[a.x, a.r, zw]} rad={a.rim} h={a.w * 0.96} axis="z" />
         <group position={[a.x, a.r, zw + z * (a.w / 2 + 0.002)]}>
-          {Array.from({ length: spokes }, (_, i) => (
+          {Array.from({ length: n }, (_, i) => (
             <Box
               key={i}
-              k="metal"
-              s={[a.rim * 0.92, 0.022, 0.014]}
-              p={[
-                Math.cos((i * 2 * Math.PI) / spokes) * a.rim * 0.5,
-                Math.sin((i * 2 * Math.PI) / spokes) * a.rim * 0.5,
-                0,
-              ]}
-              r={[0, 0, (i * 2 * Math.PI) / spokes]}
+              k={w.k}
+              s={[a.rim * 0.94, w.twin ? 0.02 : 0.026, 0.02]}
+              p={[Math.cos(angle(i)) * a.rim * 0.5, Math.sin(angle(i)) * a.rim * 0.5, 0]}
+              r={[0, 0, angle(i)]}
             />
           ))}
-          <Cyl k="red" rad={0.035} h={0.02} axis="z" />
-          <Ring k="metal" rad={a.rim * 0.97} axis="z" />
+          <Cyl k={w.centreLock ? 'red' : w.k} rad={w.centreLock ? 0.05 : 0.04} h={0.03} axis="z" />
+          <Ring k={w.k} rad={a.rim * 0.97} axis="z" />
         </group>
       </Part>
       <Part id="tires" mirror={mirror}>
@@ -586,19 +594,24 @@ function Aero({ s, lay }: P) {
       <Part id="front-aero">
         <Box
           k={ev ? 'plastic' : 'carbon'}
-          p={[nose + (ev ? 0.14 : 0.3), ev ? 0.2 : 0.075, 0]}
-          s={[ev ? 0.14 : 0.44, ev ? 0.05 : 0.014, s.W * (ev ? 0.72 : 0.8)]}
+          p={[nose + (ev ? 0.16 : 0.26), ev ? 0.2 : 0.085, 0]}
+          s={[ev ? 0.14 : 0.36, ev ? 0.05 : 0.014, halfW(s, nose + (ev ? 0.16 : 0.2)) * (ev ? 1.5 : 1.9)]}
         />
         {!ev &&
           SIDES.map((z) => (
-            <Box key={z} k="carbon" p={[nose + 0.3, 0.12, z * s.W * 0.4]} s={[0.3, 0.09, 0.012]} />
+            <Box
+              key={z}
+              k="carbon"
+              p={[nose + 0.26, 0.12, z * halfW(s, nose + 0.2) * 0.94]}
+              s={[0.3, 0.08, 0.012]}
+            />
           ))}
       </Part>
       <Part id="underbody">
         <Box
           k="plastic"
-          p={[(nose + 0.3 + s.wb + 0.1) / 2, floorY, 0]}
-          s={[s.wb - nose - 0.2, 0.012, s.W * 0.72]}
+          p={[(nose + 0.5 + s.wb + 0.1) / 2, floorY, 0]}
+          s={[s.wb - nose - 0.4, 0.012, s.W * 0.7]}
         />
         <Box
           k="carbon"

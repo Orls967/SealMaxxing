@@ -1,15 +1,15 @@
 import { useThree } from '@react-three/fiber';
-import { CAR_IDS, type CarId } from '@/content/ids';
+import { CAR_IDS } from '@/content/ids';
 import { CameraRig } from './CameraRig';
 import { CarModel } from './CarModel';
-import type { MatKey } from './materials';
+import type { Livery } from '@/lib/viewState';
 import { SHAPES } from './procedural/shapes';
 import { Stage } from './Stage';
 import { Studio } from './Studio';
 
 const GAP = 2.75;
 
-function Row({ paints, instant }: { paints: Partial<Record<CarId, MatKey>>; instant: boolean }) {
+function Row({ livery, instant }: { livery: Livery; instant: boolean }) {
   const aspect = useThree((s) => s.size.width / s.size.height);
   const span = GAP * (CAR_IDS.length - 1);
   return (
@@ -23,7 +23,7 @@ function Row({ paints, instant }: { paints: Partial<Record<CarId, MatKey>>; inst
             key={id}
             carId={id}
             detail="exterior"
-            paint={paints[id]}
+            livery={livery}
             instant
             position={[s.fo - s.L / 2, 0, i * GAP - span / 2]}
           />
@@ -32,7 +32,7 @@ function Row({ paints, instant }: { paints: Partial<Record<CarId, MatKey>>; inst
       <CameraRig
         preset="quarter"
         target={[0, 0.45, 0]}
-        distance={aspect < 1 ? 13.5 / aspect : aspect < 1.6 ? 15 : 11}
+        distance={aspect < 1 ? 13.5 / aspect : aspect < 1.6 ? 15 : 12.5}
         instant={instant}
         allowBelow={false}
       />
@@ -41,18 +41,10 @@ function Row({ paints, instant }: { paints: Partial<Record<CarId, MatKey>>; inst
 }
 
 /** The four cars side by side at true scale. */
-export function GarageScene({
-  label,
-  paints,
-  instant,
-}: {
-  label: string;
-  paints: Partial<Record<CarId, MatKey>>;
-  instant: boolean;
-}) {
+export function GarageScene({ label, livery, instant }: { label: string; livery: Livery; instant: boolean }) {
   return (
     <Stage label={label} fov={28}>
-      <Row paints={paints} instant={instant} />
+      <Row livery={livery} instant={instant} />
     </Stage>
   );
 }

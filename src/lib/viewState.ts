@@ -64,7 +64,7 @@ export const DEFAULT_VIEW: ViewState = {
   layout: 'side',
   anchor: 'front',
   sync: true,
-  livery: 'theme',
+  livery: 'factory',
   metric: null,
   group: null,
   query: '',

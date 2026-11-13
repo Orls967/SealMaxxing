@@ -31,7 +31,7 @@ export const UI = {
     unknownHint: 'Pabrikan tidak mempublikasikan angka ini.',
     illustration: 'Ilustrasi skematis, bukan CAD pabrikan. Skala antarmobil sebenarnya.',
     themeLivery: 'livery tema',
-    factoryLivery: 'warna pabrik',
+    factoryLivery: 'warna acuan',
     basis: 'Dasar ukur',
     sources: 'Sumber',
     best: 'terbaik',
@@ -64,7 +64,7 @@ export const UI = {
     modules: 'Mulai dari sini',
     stories: 'Delapan cerita banding',
     storyGo: 'Lihat',
-    liveryToggle: 'LaFerrari merah, atap hitam',
+    liveryToggle: 'Livery tema hitam-merah',
     moduleDissect: 'Kupas lapisan, ledakkan, potong, dan sinar-X satu mobil.',
     moduleCompare: 'Sorot satu sistem di semua mobil sekaligus.',
     moduleData: 'Tabel lengkap, grafik, sumber, dan status verifikasi.',
@@ -263,7 +263,7 @@ export const UI = {
       },
       {
         h: 'Livery',
-        p: 'Keempat mobil memakai satu livery tema hitam-merah yang bukan warna pabrik. Untuk LaFerrari tersedia varian bodi merah atap hitam, kombinasi pabrik yang paling dikenal.',
+        p: 'Warna bawaan tiap mobil mengikuti warna yang paling dikenal: Seal biru-abu, LaFerrari merah beratap hitam, P1 merah tua, dan Senna jingga dengan bagian tengah karbon. Sakelar "Livery tema hitam-merah" mengganti keempatnya menjadi satu livery tema yang bukan warna pabrik.',
       },
       {
         h: 'Kredit',

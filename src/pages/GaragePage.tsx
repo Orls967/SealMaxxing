@@ -36,11 +36,7 @@ export default function GaragePage() {
         </h2>
         <div className="h-72 overflow-hidden rounded-lg border border-line md:h-96">
           {hasWebgl() ? (
-            <GarageScene
-              label={UI.garage.canvas}
-              paints={{ laferrari: livery === 'factory' ? 'paintRed' : 'paint' }}
-              instant={reduced}
-            />
+            <GarageScene label={UI.garage.canvas} livery={livery} instant={reduced} />
           ) : (
             <StaticCars cars={CAR_IDS} />
           )}
@@ -48,13 +44,15 @@ export default function GaragePage() {
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
           <span>
             {UI.common.illustration}{' '}
-            <span className="rounded border border-line px-1">{UI.common.themeLivery}</span>
+            <span className="rounded border border-line px-1">
+              {livery === 'factory' ? UI.common.factoryLivery : UI.common.themeLivery}
+            </span>
           </span>
           <label className="flex items-center gap-2 text-sm text-text">
             <input
               type="checkbox"
-              checked={livery === 'factory'}
-              onChange={(e) => set({ livery: e.target.checked ? 'factory' : 'theme' })}
+              checked={livery === 'theme'}
+              onChange={(e) => set({ livery: e.target.checked ? 'theme' : 'factory' })}
             />
             {UI.garage.liveryToggle}
           </label>
