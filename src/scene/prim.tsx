@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import * as THREE from 'three';
 import type { ThreeEvent } from '@react-three/fiber';
 import { PART_SYSTEM, type CarId, type PartId } from '@/content/ids';
@@ -6,13 +6,26 @@ import type { Mode } from './display';
 import { EXPLODE, type V3 } from './explode';
 import { mat, matGhost, matHi, type MatKey } from './materials';
 
+export interface PartEntry {
+  id: PartId;
+  g: THREE.Group;
+  /** Offset in metres at 100% explode. */
+  d: V3;
+  /** Home centre in car space; filled lazily by the explode animator. */
+  c?: THREE.Vector3;
+}
+
 export interface CarContext {
   carId: CarId;
   tint: string;
-  explode: number;
+  /** Live registry of mounted part groups; the explode animator moves them without React state. */
+  parts: Set<PartEntry>;
+  /** Current animated explode amount, 0..1. */
+  explodeT: { current: number };
   modeOf: (id: PartId) => Mode;
   present: (id: PartId) => boolean;
   onSelect?: (id: PartId) => void;
+  onFocus?: (point: THREE.Vector3) => void;
 }
 
 export const CarCtx = createContext<CarContext | null>(null);
@@ -34,17 +47,38 @@ const setCursor = (v: string) => {
  */
 export function Part({ id, dir, mirror, children }: { id: PartId; dir?: V3; mirror?: boolean; children: ReactNode }) {
   const c = useCar();
-  const mode = c.modeOf(id);
+  const base = c.modeOf(id);
+  const [hover, setHover] = useState(false);
+  const mode: Mode = hover && base === 'solid' && c.onSelect ? 'hi' : base;
   const ctx = useMemo(() => ({ mode, tint: c.tint }), [mode, c.tint]);
-  if (!c.present(id) || mode === 'hidden') return null;
+  const ref = useRef<THREE.Group>(null);
+  const visible = c.present(id) && base !== 'hidden';
   const d = dir ?? EXPLODE[id];
-  const t = c.explode;
+  const dx = d[0];
+  const dy = d[1];
+  const dz = d[2] * (mirror ? -1 : 1);
+  const { parts, explodeT } = c;
+  useLayoutEffect(() => {
+    const g = ref.current;
+    if (!g) return;
+    let n = 0;
+    for (const e of parts) if (e.id === id) n++;
+    g.name = `${PART_SYSTEM[id]}__${id}__${n}`;
+    const t = explodeT.current;
+    g.position.set(dx * t, dy * t, dz * t);
+    const entry: PartEntry = { id, g, d: [dx, dy, dz] };
+    parts.add(entry);
+    return () => {
+      parts.delete(entry);
+    };
+  }, [parts, explodeT, id, dx, dy, dz, visible]);
+  if (!visible) return null;
   const select = c.onSelect;
+  const focus = c.onFocus;
   return (
     <ModeCtx.Provider value={ctx}>
       <group
-        name={`${PART_SYSTEM[id]}__${id}`}
-        position={[d[0] * t, d[1] * t, d[2] * t * (mirror ? -1 : 1)]}
+        ref={ref}
         onClick={
           select
             ? (e: ThreeEvent<MouseEvent>) => {
@@ -53,8 +87,16 @@ export function Part({ id, dir, mirror, children }: { id: PartId; dir?: V3; mirr
               }
             : undefined
         }
-        onPointerOver={select ? (e) => (e.stopPropagation(), setCursor('pointer')) : undefined}
-        onPointerOut={select ? () => setCursor('') : undefined}
+        onDoubleClick={
+          focus
+            ? (e: ThreeEvent<MouseEvent>) => {
+                e.stopPropagation();
+                focus(e.point);
+              }
+            : undefined
+        }
+        onPointerOver={select ? (e) => (e.stopPropagation(), setCursor('pointer'), setHover(true)) : undefined}
+        onPointerOut={select ? () => (setCursor(''), setHover(false)) : undefined}
       >
         {children}
       </group>

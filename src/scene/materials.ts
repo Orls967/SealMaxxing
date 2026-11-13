@@ -11,6 +11,7 @@ export const PALETTE = {
   redDeep: '#8f0f1a',
   white: '#f2f2f3',
   grey: '#8b8b94',
+  floor: '#0c0c0f',
 };
 
 type Std = THREE.MeshStandardMaterialParameters;
@@ -40,6 +41,8 @@ const DEFS = {
   screen: () => std({ color: '#200609', emissive: '#e11d2e', emissiveIntensity: 0.55, roughness: 0.2 }),
   flow: () =>
     new THREE.MeshBasicMaterial({ color: '#ff4654', transparent: true, opacity: 0.4, depthWrite: false, clippingPlanes: CLIP_PLANES }),
+  floor: () => new THREE.MeshStandardMaterial({ color: PALETTE.floor, metalness: 0, roughness: 1, envMapIntensity: 0.2 }),
+  strip: () => new THREE.MeshBasicMaterial({ color: PALETTE.red, toneMapped: false }),
   volume: () =>
     new THREE.MeshBasicMaterial({ color: '#f2f2f3', transparent: true, opacity: 0.14, depthWrite: false, clippingPlanes: CLIP_PLANES }),
 } satisfies Record<string, () => THREE.Material>;
@@ -149,3 +152,6 @@ export function withArches<T extends THREE.Material>(m: T, a: ArchSpec): T {
   c.customProgramCacheKey = () => `arch:${a.frontX}:${a.rearX}:${a.frontR}:${a.rearR}:${a.y}:${a.zMin}`;
   return c;
 }
+
+/** Thin connector lines drawn from each exploded part back to where it belongs. */
+export const EXPLODE_LINE = new THREE.LineBasicMaterial({ color: PALETTE.red, transparent: true, opacity: 0.55, depthWrite: false });
