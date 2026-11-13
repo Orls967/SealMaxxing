@@ -10,7 +10,12 @@ describe('acceleration model', () => {
     const seal = run('seal');
     const senna = run('senna');
     const at = (r: typeof seal, t: number) => r.samples[Math.round(t * 100)]!.x;
-    expect(at(seal, 1) / at(senna, 1)).toBeGreaterThan(0.75);
+    // Instant electric thrust on four wheels: ahead of all three hypercars for the first second.
+    for (const id of ['laferrari', 'p1', 'senna'] as const) {
+      expect(at(seal, 0.5)).toBeGreaterThan(at(run(id), 0.5));
+      expect(at(seal, 1)).toBeGreaterThan(at(run(id), 1));
+      expect(at(run(id), 3)).toBeGreaterThan(at(seal, 3));
+    }
     expect(at(senna, 8) - at(seal, 8)).toBeGreaterThan(60);
   });
   it('respects a limited top speed and reports unreachable speeds as null', () => {

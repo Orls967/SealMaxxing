@@ -173,7 +173,7 @@ export const UI = {
     title: 'Adu',
     lead: 'Simulasi sederhana untuk melihat watak tiap mobil. Hasil model selalu ditampilkan di samping klaim pabrikan.',
     modelNote:
-      'Parameter cengkeraman dan efisiensi dikalibrasi supaya 0–100 dan 0–200 km/jam berada dalam ±5% dari klaim. Bukan data pabrikan.',
+      'Parameter cengkeraman dan efisiensi dikalibrasi supaya 0–100 dan 0–200 km/jam berada dalam ±5% dari klaim. Saat start, motor listrik Seal langsung memberi dorongan penuh ke empat roda, sedangkan mobil bermesin bakar perlu sepersekian detik untuk kopling dan turbo; karena itu Seal unggul di meter-meter awal lalu tersusul. Bukan data pabrikan.',
     modes: { accel: 'Akselerasi', brake: 'Pengereman', downforce: 'Downforce', energy: 'Aliran energi' },
     target: 'Sasaran',
     targets: {

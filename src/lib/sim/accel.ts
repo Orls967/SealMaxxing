@@ -45,6 +45,11 @@ export interface AccelInput {
   downforceDriven: number;
   engine: EngineInput | null;
   motor: MotorInput | null;
+  /**
+   * Seconds for thrust to build from zero to full at launch: clutch take-up and boost for a
+   * combustion car, close to nothing for electric motors.
+   */
+  launchS: number;
 }
 
 export interface AccelSample {
@@ -141,7 +146,8 @@ export function simulateAccel(inp: AccelInput, maxT = 45): AccelResult {
         : (inp.mu * (inp.massKg * G * inp.drivenFraction + df * inp.downforceDriven)) /
           (1 - (inp.mu * inp.cgHeightM) / inp.wheelbaseM);
     const resist = 0.5 * RHO * inp.cdA * v * v + inp.crr * (inp.massKg * G + df);
-    const a = v >= vMax ? 0 : (Math.min(traction, drive) - resist) / inp.massKg;
+    const build = inp.launchS > 0 ? Math.min(1, (i * dt) / inp.launchS) : 1;
+    const a = v >= vMax ? 0 : (Math.min(traction, drive) * build - resist) / inp.massKg;
     v = Math.min(vMax, Math.max(0, v + a * dt));
     x += v * dt;
     if (i % 10 === 0) samples.push({ t: i * dt, v: v * KMH, x });

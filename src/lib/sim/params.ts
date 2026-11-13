@@ -7,7 +7,8 @@ import { downforceSpecFor } from './downforce';
 /**
  * Model parameters. These are NOT manufacturer data: they are assumptions of the simple
  * model, and `mu` / `eff` are calibrated so 0–100 and 0–200 km/h land within ±5% of the
- * claims (see params.test.ts). The UI labels every result "model sederhana".
+ * claims (see params.test.ts). `launchS` models how quickly thrust builds at the start: electric
+ * motors deliver it at once, while a combustion car needs clutch take-up and boost first. The UI labels every result "model sederhana".
  */
 export interface ModelParams {
   drive: 'awd' | 'rwd';
@@ -28,6 +29,8 @@ export interface ModelParams {
     launchRpm: number;
   } | null;
   motorBaseKmh: number;
+  /** Launch thrust build-up time (s): see AccelInput.launchS. */
+  launchS: number;
   muBrake: number;
   brakeCapG: number;
 }
@@ -37,8 +40,8 @@ export const DRIVER_KG = 75;
 export const MODEL: Record<CarId, ModelParams> = {
   seal: {
     drive: 'awd',
-    mu: 0.8,
-    eff: 0.9,
+    mu: 0.9,
+    eff: 0.86,
     drivenFraction: 1,
     cgHeightM: 0.5,
     cdA: 0.52,
@@ -47,12 +50,13 @@ export const MODEL: Record<CarId, ModelParams> = {
     downforceDriven: 0.5,
     engine: null,
     motorBaseKmh: 62,
+    launchS: 0.05,
     muBrake: 1.0,
     brakeCapG: 1.1,
   },
   laferrari: {
     drive: 'rwd',
-    mu: 1.3,
+    mu: 1.4,
     eff: 0.84,
     drivenFraction: 0.59,
     cgHeightM: 0.42,
@@ -62,12 +66,13 @@ export const MODEL: Record<CarId, ModelParams> = {
     downforceDriven: 0.6,
     engine: { powerRpm: 9000, torqueRpm: 6750, firstGearKmh: 92, shiftS: 0.06, launchRpm: 4500 },
     motorBaseKmh: 70,
+    launchS: 0.35,
     muBrake: 1.2,
     brakeCapG: 2,
   },
   p1: {
     drive: 'rwd',
-    mu: 1.38,
+    mu: 1.45,
     eff: 0.81,
     drivenFraction: 0.58,
     cgHeightM: 0.43,
@@ -77,12 +82,13 @@ export const MODEL: Record<CarId, ModelParams> = {
     downforceDriven: 0.6,
     engine: { powerRpm: 7500, torqueRpm: 4000, firstGearKmh: 84, shiftS: 0.06, launchRpm: 3500 },
     motorBaseKmh: 60,
+    launchS: 0.35,
     muBrake: 1.22,
     brakeCapG: 2,
   },
   senna: {
     drive: 'rwd',
-    mu: 1.38,
+    mu: 1.47,
     eff: 0.82,
     drivenFraction: 0.58,
     cgHeightM: 0.43,
@@ -92,6 +98,7 @@ export const MODEL: Record<CarId, ModelParams> = {
     downforceDriven: 0.6,
     engine: { powerRpm: 7250, torqueRpm: 5500, firstGearKmh: 82, shiftS: 0.06, launchRpm: 3500 },
     motorBaseKmh: 0,
+    launchS: 0.4,
     muBrake: 1.25,
     brakeCapG: 2.2,
   },
@@ -133,6 +140,7 @@ export function accelInputFor(car: Car, p: ModelParams = MODEL[car.id]): AccelIn
           }
         : null,
     motor: motorKw ? { powerKw: motorKw, baseKmh: p.motorBaseKmh } : null,
+    launchS: p.launchS,
   };
 }
 
