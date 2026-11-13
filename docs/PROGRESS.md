@@ -1,7 +1,7 @@
 # PROGRESS
 Diperbarui: 2026-11-14
-Milestone aktif: M9 selesai; publikasi (Bagian 6) sedang berjalan
-Sub-tugas aktif: publikasi ke GitHub Pages
+Milestone aktif: M9 selesai; sudah dipublikasikan
+Sub-tugas aktif: tidak ada
 Langkah berikut yang persis: lihat "Masalah terbuka"; lanjutkan verifikasi angka di "Data yang belum terverifikasi" (ubah `tbc(...)` menjadi `ok(..., [sumber])` di `src/content/cars/*.ts`).
 
 ## Selesai
@@ -15,6 +15,11 @@ Langkah berikut yang persis: lihat "Masalah terbuka"; lanjutkan verifikasi angka
 - M7 Data dan grafik: tabel induk (cari, saring, urut), batang, radar, sebar, kurva downforce, varian ekstrem, ekspor CSV, glosarium, daftar sumber.
 - M8 Adu: akselerasi, pengereman, downforce, aliran energi. Kalibrasi teruji.
 - M9: cadangan tanpa WebGL (gambar statis), halaman Tentang, CREDITS, README, e2e, audit aksesibilitas.
+
+## Publikasi
+- Repositori: https://github.com/Orls967/SealMaxxing (publik, cabang `master`, tag m0–m9).
+- Situs: https://orls967.github.io/SealMaxxing/ lewat `.github/workflows/deploy.yml` (lint, tes, build, deploy pada setiap push ke `master`).
+- Diperiksa setelah tayang: tujuh rute termuat tanpa permintaan gagal; tangkapan layar desktop dan ponsel sesuai.
 
 ## Hasil pemeriksaan akhir
 - `lint`, `typecheck`, `build` lolos. Vitest: 82 tes lolos. Playwright: 15 tes lolos.
