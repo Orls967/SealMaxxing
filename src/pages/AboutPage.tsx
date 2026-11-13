@@ -2,6 +2,7 @@ import { CAR_LIST } from '@/content/cars';
 import { METRIC_BY_ID, METRIC_IDS } from '@/content/metrics';
 import { UI } from '@/content/ui';
 import { fmtSourced } from '@/lib/format';
+import { priceView } from '@/lib/price';
 
 export default function AboutPage() {
   const pending = CAR_LIST.map((c) => ({
@@ -12,7 +13,7 @@ export default function AboutPage() {
         const m = METRIC_BY_ID[id];
         return v && !v.verified ? [`${m.label}: ${fmtSourced(v, m.unit, m.digits)}`] : [];
       }),
-      ...(c.price.verified ? [] : [`${UI.data.price}: ${c.price.value}`]),
+      ...(c.price.verified ? [] : [`${UI.data.price}: ${priceView(c.price).original}`]),
     ],
   }));
   return (

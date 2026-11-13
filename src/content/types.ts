@@ -13,6 +13,19 @@ export interface Sourced<T = number> {
   market?: string;
 }
 
+export type Currency = 'IDR' | 'USD';
+
+/** Launch price in its original currency. Rupiah equivalents are computed in `src/lib/price.ts`. */
+export interface Price {
+  amount: number;
+  currency: Currency;
+  year: number;
+  /** What the figure covers, e.g. "OTR Jakarta" or "harga dasar pasar AS". */
+  basis: string;
+  sources: SourceId[];
+  verified: boolean;
+}
+
 export type Presence = { kind: 'present' } | { kind: 'absent'; reason: string };
 
 export type SpecMap = Partial<Record<MetricId, Sourced>>;
@@ -32,7 +45,7 @@ export interface Car {
   kindLabel: string;
   years: string;
   role: string;
-  price: Sourced<string>;
+  price: Price;
   specs: SpecMap;
   /** Metrics that do not apply to this car, with the reason. */
   absent: Partial<Record<MetricId, string>>;

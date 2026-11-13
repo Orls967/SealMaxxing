@@ -6,7 +6,7 @@ import { UI } from '@/content/ui';
 import type { RowGroup, TableRow } from '@/lib/table';
 import { MarkSwatch } from './charts/ChartDefs';
 import { MetricValue } from './MetricValue';
-import { SourceBadge } from './SourceBadge';
+import { PriceCell } from './PriceCell';
 
 interface Props {
   cars: Car[];
@@ -75,10 +75,7 @@ export function DataTable({ cars, rows, extreme, sortBy, onSort }: Props) {
                 </th>
                 {cars.map((c) => (
                   <td key={c.id} className={TD}>
-                    <span className="flex flex-wrap items-center gap-2">
-                      <span className="font-semibold">{c.price.value}</span>
-                      <SourceBadge verified={c.price.verified} />
-                    </span>
+                    <PriceCell price={c.price} />
                   </td>
                 ))}
                 {ext.map((c) => (

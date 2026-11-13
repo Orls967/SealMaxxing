@@ -5,6 +5,7 @@ import type { Car } from '@/content/types';
 import { UI } from '@/content/ui';
 import { cellFor } from '@/lib/compare';
 import { MetricValue } from './MetricValue';
+import { PriceCell } from './PriceCell';
 
 const KEY: MetricId[] = ['powerTotalKw', 'kerbKg', 'zeroTo100S', 'lengthMm'];
 
@@ -39,6 +40,12 @@ export function CarCard({ car }: { car: Car }) {
           );
         })}
       </dl>
+      <div>
+        <p className="text-xs text-muted">{UI.data.price}</p>
+        <p className="text-sm">
+          <PriceCell price={car.price} />
+        </p>
+      </div>
       <Link
         to={`/bedah/${car.id}`}
         className="mt-auto rounded bg-accent px-3 py-2 text-center text-sm font-semibold text-text hover:bg-accent-dim"

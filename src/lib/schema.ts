@@ -12,7 +12,16 @@ const base = {
   market: z.string().optional(),
 };
 export const sourcedNumber = z.object({ value: z.number().finite(), ...base }).strict();
-export const sourcedText = z.object({ value: z.string().min(1), ...base }).strict();
+export const priceSchema = z
+  .object({
+    amount: z.number().positive(),
+    currency: z.enum(['IDR', 'USD']),
+    year: z.number().int().min(2000).max(2100),
+    basis: z.string().min(3),
+    sources: z.array(sourceId).min(1),
+    verified: z.boolean(),
+  })
+  .strict();
 
 const metricKey = z.enum(METRIC_IDS as [string, ...string[]]);
 const specMap = z.partialRecord(metricKey, sourcedNumber);
@@ -27,7 +36,7 @@ export const carSchema = z
     kindLabel: z.string().min(1),
     years: z.string().min(1),
     role: z.string().min(1),
-    price: sourcedText,
+    price: priceSchema,
     specs: specMap,
     absent: z.partialRecord(metricKey, z.string().min(8)),
     extreme: z.object({ name: z.string(), note: z.string(), specs: specMap }).optional(),
