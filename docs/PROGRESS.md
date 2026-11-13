@@ -1,9 +1,9 @@
 # PROGRESS
 
 Diperbarui: 2026-11-14
-Milestone aktif: revisi putaran 2 (lihat `revisi.md`), fase R7 dan R8
-Sub-tugas aktif: menunggu berkas dari pemilik: model GLB (R7.1) dan rekaman suara (R8.1)
-Langkah berikut yang persis: begitu pemilik menaruh GLB di `public/models/` atau rekaman di `public/sounds/` (atau memutuskan sumbernya), kerjakan R7.2–R7.7 dan R8.2–R8.4 di `revisi.md`. `revisi.md` belum dihapus.
+Milestone aktif: revisi putaran 2 (lihat `revisi.md`), fase R7
+Sub-tugas aktif: menunggu berkas model GLB dari pemilik (R7.1)
+Langkah berikut yang persis: begitu pemilik menaruh GLB di `public/models/` (atau memutuskan sumbernya), kerjakan R7.2–R7.7 di `revisi.md`. `revisi.md` belum dihapus.
 
 ## Selesai
 
@@ -12,6 +12,8 @@ Langkah berikut yang persis: begitu pemilik menaruh GLB di `public/models/` atau
 - R2: harga dan data dicek ke sumber dan diterapkan; harga disimpan sebagai angka + mata uang + tahun, rupiah dihitung di `src/lib/price.ts` dengan kurs tetap $1 = Rp18.100 (`src/content/fx.ts`).
 - R3: README ditulis ulang. R4: `CREDITS.md`, halaman Tentang, dan versi aksi GitHub diperbarui.
 - Tambahan (permintaan pemilik, 2026-11-14): suara tiap mobil lewat tombol "Tahan untuk injak gas" di kartu Garasi dan di halaman Bedah.
+
+- R8 (2026-11-14): tombol "Tahan untuk injak gas" memutar rekaman di `public/sounds/` (disiapkan pemilik): klip langsam berulang ditambah klip digas selama tombol ditahan. Data klip dan kredit di `src/content/sounds.ts`; suara sintetis hanya cadangan bila rekaman gagal dimuat. Diperiksa di peramban: ketujuh berkas termuat dan terurai, keempat tombol memutar rekaman tanpa galat. Belum dinilai dengan telinga.
 
 ## Hasil verifikasi R2
 
@@ -51,6 +53,9 @@ Langkah berikut yang persis: begitu pemilik menaruh GLB di `public/models/` atau
 
 ## Masalah terbuka
 
+- Rekaman pengganti: Seal memakai Tesla Model S Plaid, Senna memakai supercar tak dikenal, langsam LaFerrari memakai Ferrari lain; UI melabelinya "rekaman pengganti". Ganti bila ada rekaman terbuka dari mobil yang sama.
+- Rekaman P1 dan LaFerrari dari Wikimedia Commons berlisensi CC BY 3.0 tetapi halaman sumbernya masih bertanda "menunggu tinjauan lisensi"; bila tinjauan itu gagal, kedua rekaman harus diganti.
+- Klip langsam diulang tanpa penghalusan sambungan; bisa terdengar klik kecil di titik ulang.
 - Kemiripan bodi masih pada tingkat ilustrasi: proporsi, warna, dan ciri utama tiap mobil dikenali, tetapi permukaannya belum sehalus model hasil pahat. Muka depan Seal masih polos.
 - Kaca tembus pandang memperlihatkan rangka kabin ilustratif di dalamnya.
 - Kurva downforce LaFerrari diekstrapolasi dari satu titik yang belum terverifikasi.

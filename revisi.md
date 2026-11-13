@@ -190,21 +190,21 @@ lisensi dan asal-usulnya bisa dipastikan untuk keempat mobil.
 
 Pencarian 2026-11-14 tidak menemukan rekaman LaFerrari, P1, atau Senna berlisensi terbuka.
 
-- [ ] R8.1 **Pemilik menyiapkan rekaman** tiap mobil (MP3/OGG/WAV) beserta asal dan
+- [x] R8.1 **Pemilik menyiapkan rekaman** tiap mobil (MP3/OGG/WAV) beserta asal dan
       lisensinya. Paling baik dua klip per mobil: langsam (bisa diulang) dan digas sampai
       putaran tinggi, 3–8 detik, tanpa musik atau suara orang. Seal: dengung motor saat
       berakselerasi.
-- [ ] R8.2 Simpan di `public/sounds/<carId>-idle.*` dan `<carId>-rev.*`; catat di `CREDITS.md`.
-- [ ] R8.3 Pemutar: tombol "Tahan untuk injak gas" memutar rekaman (langsam berulang, lalu
+- [x] R8.2 Simpan di `public/sounds/<carId>-idle.*` dan `<carId>-rev.*`; catat di `CREDITS.md`.
+- [x] R8.3 Pemutar: tombol "Tahan untuk injak gas" memutar rekaman (langsam berulang, lalu
       klip digas dengan nada dan volume mengikuti gas); dimuat saat tombol pertama ditekan.
-- [ ] R8.4 Suara sintetis hanya menjadi cadangan bila berkas rekaman sebuah mobil belum ada,
+- [x] R8.4 Suara sintetis hanya menjadi cadangan bila berkas rekaman sebuah mobil belum ada,
       dan tetap berlabel sintetis.
 
 ---
 
 ## Keputusan yang ditunggu dari pemilik
 
-2. Sumber model 3D (R7.1) dan rekaman suara (R8.1).
+2. Sumber model 3D (R7.1). Rekaman suara (R8.1) sudah disiapkan pemilik.
 
 1. Livery bawaan: dikerjakan dengan warna acuan sebagai bawaan dan livery tema sebagai sakelar
    (usul di R1.3); dibalik bila pemilik memilih sebaliknya.
