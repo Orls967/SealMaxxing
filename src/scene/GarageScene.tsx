@@ -32,7 +32,7 @@ function Row({ paints, instant }: { paints: Partial<Record<CarId, MatKey>>; inst
       <CameraRig
         preset="quarter"
         target={[0, 0.45, 0]}
-        distance={aspect < 1 ? 13 / aspect : aspect < 1.6 ? 17 : 13.5}
+        distance={aspect < 1 ? 13.5 / aspect : aspect < 1.6 ? 15 : 11}
         instant={instant}
         allowBelow={false}
       />

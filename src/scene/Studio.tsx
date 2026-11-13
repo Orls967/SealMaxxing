@@ -10,7 +10,7 @@ export function Studio({ shadows = true, span = 6 }: { shadows?: boolean; span?:
     <>
       <color attach="background" args={[PALETTE.bg]} />
       <fog attach="fog" args={[PALETTE.bg, span * 2.2, span * 6]} />
-      <ambientLight intensity={0.35} />
+      <ambientLight intensity={0.55} />
       <directionalLight position={[-3, 6, 4]} intensity={1.6} color={PALETTE.white} />
       <directionalLight position={[6, 3, -6]} intensity={2.4} color={PALETTE.white} />
       <directionalLight position={[-6, 2.5, -5]} intensity={1.4} color={PALETTE.white} />
