@@ -5,3 +5,6 @@ coverage
 playwright-report
 test-results
 .DS_Store
+
+# Third-party reference photos: local only (no clear licence)
+model/

@@ -25,13 +25,8 @@ tangkapan layar desktop dan ponsel, lalu commit kecil.
 | `model/senna.png`     | McLaren Senna     | Atas-depan: splitter, sayap, bagian tengah hitam, kaca                       |
 
 - [x] Empat gambar disalin ke `model/` (lokal).
-- [ ] **Keputusan pemilik: push ke repositori publik atau tidak.** Keempatnya foto pihak ketiga
-      (salah satunya bertanda air detik.com, satu memuat logo BYD) tanpa lisensi yang jelas.
-      Ini bertentangan dengan aturan keras 5 di `CLAUDE.md` (aset harus CC0/CC-BY atau buatan
-      sendiri, tanpa logo pabrikan). Pilihan: (a) tetap lokal dan masuk `.gitignore`,
-      (b) di-push apa adanya atas keputusan pemilik dan dicatat di `CREDITS.md` sebagai
-      "acuan, bukan aset aplikasi, hak cipta pemilik masing-masing".
-- [ ] `model/README.md`: daftar gambar, sudut pandang, dan catatan bahwa gambar hanya acuan
+- [x] Keputusan pemilik (2026-11-14): gambar **tetap lokal**. `model/` masuk `.gitignore` karena
+      keempatnya foto pihak ketiga tanpa lisensi jelas (aturan keras 5). Gambar hanya acuan
       bentuk dan tidak pernah dimuat oleh aplikasi.
 
 ## R1 — Model 3D supaya mirip acuan
@@ -142,5 +137,5 @@ berlabel ilustrasi, nama node `<systemId>__<partId>__<indeks>`.
 
 ## Keputusan yang ditunggu dari pemilik
 
-1. Gambar acuan di `model/`: di-push ke repo publik atau tetap lokal (lihat R0).
-2. Livery bawaan: warna acuan atau livery tema hitam-merah (lihat R1.3).
+1. Livery bawaan: dikerjakan dengan warna acuan sebagai bawaan dan livery tema sebagai sakelar
+   (usul di R1.3); dibalik bila pemilik memilih sebaliknya.
