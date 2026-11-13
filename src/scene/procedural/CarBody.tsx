@@ -44,13 +44,15 @@ function Shell({ s, paint, cut }: { s: CarShape; paint: MatKey; cut: boolean }) 
   const geo = useDisposable(() => bodyGeometry(s), [s]);
   const roof = useDisposable(() => (s.roof ? [roofGeometry(s, s.roof[0], s.roof[1])] : []), [s]);
   const m = useArchPaint(s, paint);
+  // The factory-style red livery keeps a black roof.
+  const roofM = useArchPaint(s, 'paint');
   const mode = useMode();
   return (
     <>
       <Geo geometry={geo} material={m} />
       {cut && mode !== 'ghost' && <Geo geometry={geo} material={CUT_CAP} />}
       {roof.map((g, i) => (
-        <Geo key={i} geometry={g} material={m} />
+        <Geo key={i} geometry={g} material={roofM} />
       ))}
     </>
   );

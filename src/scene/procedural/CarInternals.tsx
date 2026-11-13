@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import type { V3 } from '../explode';
-import { Box, Cyl, Part, Ring, Rod, Sph, Tube } from '../prim';
+import { Box, Cyl, Part, Ring, Rod, Sph, Tube, useMode } from '../prim';
 import type { CarLayout } from './layouts';
 import { stationAt, tOf, type CarShape } from './shapes';
 
@@ -20,6 +20,11 @@ const axles = (s: CarShape) =>
     { rear: false, x: 0, r: s.wheelRF, rim: s.rimRF, w: s.tireWF },
     { rear: true, x: s.wb, r: s.wheelRR, rim: s.rimRR, w: s.tireWR },
   ] as const;
+
+/** Airflow and volume hints clutter the intact car, so they only draw once their part is singled out. */
+function Hint({ children }: { children: ReactNode }) {
+  return useMode() === 'solid' ? null : <>{children}</>;
+}
 
 /* ---------- Structure ---------- */
 
@@ -279,6 +284,7 @@ function Thermal({ s, lay }: P) {
         </Part>
       )}
       <Part id="air-paths">
+        <Hint>
         {ev ? (
           SIDES.map((z) => (
             <Tube key={z} k="flow" pts={[[nose - 0.3, 0.32, z * 0.62], [nose + 0.15, 0.32, z * 0.82], [0.2, 0.4, z * (s.W / 2 + 0.06)], [1.2, 0.5, z * (s.W / 2 + 0.05)]]} rad={0.03} />
@@ -291,6 +297,7 @@ function Thermal({ s, lay }: P) {
             ))}
           </>
         )}
+        </Hint>
       </Part>
     </>
   );
@@ -409,8 +416,8 @@ function Aero({ s, lay }: P) {
   return (
     <>
       <Part id="front-aero">
-        <Box k={ev ? 'plastic' : 'carbon'} p={[nose + (ev ? 0.14 : 0.08), ev ? 0.2 : 0.075, 0]} s={[ev ? 0.14 : 0.42, ev ? 0.05 : 0.014, s.W * (ev ? 0.72 : 0.86)]} />
-        {!ev && SIDES.map((z) => <Box key={z} k="carbon" p={[nose + 0.1, 0.13, z * s.W * 0.4]} s={[0.3, 0.1, 0.012]} />)}
+        <Box k={ev ? 'plastic' : 'carbon'} p={[nose + (ev ? 0.14 : 0.3), ev ? 0.2 : 0.075, 0]} s={[ev ? 0.14 : 0.44, ev ? 0.05 : 0.014, s.W * (ev ? 0.72 : 0.8)]} />
+        {!ev && SIDES.map((z) => <Box key={z} k="carbon" p={[nose + 0.3, 0.12, z * s.W * 0.4]} s={[0.3, 0.09, 0.012]} />)}
       </Part>
       <Part id="underbody">
         <Box k="plastic" p={[(nose + 0.3 + s.wb + 0.1) / 2, floorY, 0]} s={[s.wb - nose - 0.2, 0.012, s.W * 0.72]} />
@@ -528,7 +535,17 @@ function Cabin({ s, lay }: P) {
   );
 }
 
-export function CarInternals({ s, lay }: P) {
+export function CarInternals({ s, lay, exteriorOnly = false }: P & { exteriorOnly?: boolean }) {
+  const corners = ([false, true] as const).flatMap((rear) =>
+    SIDES.map((z) => <Corner key={`${rear}${z}`} s={s} lay={lay} rear={rear} z={z} />),
+  );
+  if (exteriorOnly)
+    return (
+      <>
+        {corners}
+        <Aero s={s} lay={lay} />
+      </>
+    );
   return (
     <>
       <Structure s={s} lay={lay} />
@@ -536,7 +553,7 @@ export function CarInternals({ s, lay }: P) {
       <Energy s={s} lay={lay} />
       <Thermal s={s} lay={lay} />
       <Exhaust s={s} lay={lay} />
-      {([false, true] as const).flatMap((rear) => SIDES.map((z) => <Corner key={`${rear}${z}`} s={s} lay={lay} rear={rear} z={z} />))}
+      {corners}
       <Steering s={s} lay={lay} />
       <Aero s={s} lay={lay} />
       <Cabin s={s} lay={lay} />
