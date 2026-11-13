@@ -68,9 +68,9 @@ describe('format', () => {
     expect(fmt(82.56, 2)).toBe('82,56');
   });
   it('adds qualifier prefixes and keeps years unseparated', () => {
-    expect(fmtSourced({ value: 3, qualifier: 'lessThan', sources: ['spec'], verified: false }, 'dtk', 1)).toBe(
-      '< 3,0 dtk',
-    );
+    expect(
+      fmtSourced({ value: 3, qualifier: 'lessThan', sources: ['spec'], verified: false }, 'dtk', 1),
+    ).toBe('< 3,0 dtk');
     expect(fmtSourced({ value: 2013, sources: ['spec'], verified: true }, '')).toBe('2013');
   });
   it('converts kW to PS', () => {

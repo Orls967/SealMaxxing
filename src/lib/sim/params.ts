@@ -20,7 +20,13 @@ export interface ModelParams {
   crr: number;
   downforceCapped: boolean;
   downforceDriven: number;
-  engine: { powerRpm: number; torqueRpm: number; firstGearKmh: number; shiftS: number; launchRpm: number } | null;
+  engine: {
+    powerRpm: number;
+    torqueRpm: number;
+    firstGearKmh: number;
+    shiftS: number;
+    launchRpm: number;
+  } | null;
   motorBaseKmh: number;
   muBrake: number;
   brakeCapG: number;
@@ -30,26 +36,64 @@ export const DRIVER_KG = 75;
 
 export const MODEL: Record<CarId, ModelParams> = {
   seal: {
-    drive: 'awd', mu: 0.8, eff: 0.9, drivenFraction: 1, cgHeightM: 0.5, cdA: 0.52, crr: 0.011,
-    downforceCapped: false, downforceDriven: 0.5, engine: null, motorBaseKmh: 62, muBrake: 1.0, brakeCapG: 1.1,
+    drive: 'awd',
+    mu: 0.8,
+    eff: 0.9,
+    drivenFraction: 1,
+    cgHeightM: 0.5,
+    cdA: 0.52,
+    crr: 0.011,
+    downforceCapped: false,
+    downforceDriven: 0.5,
+    engine: null,
+    motorBaseKmh: 62,
+    muBrake: 1.0,
+    brakeCapG: 1.1,
   },
   laferrari: {
-    drive: 'rwd', mu: 1.3, eff: 0.84, drivenFraction: 0.59, cgHeightM: 0.42, cdA: 0.66, crr: 0.012,
-    downforceCapped: false, downforceDriven: 0.6,
+    drive: 'rwd',
+    mu: 1.3,
+    eff: 0.84,
+    drivenFraction: 0.59,
+    cgHeightM: 0.42,
+    cdA: 0.66,
+    crr: 0.012,
+    downforceCapped: false,
+    downforceDriven: 0.6,
     engine: { powerRpm: 9000, torqueRpm: 6750, firstGearKmh: 92, shiftS: 0.06, launchRpm: 4500 },
-    motorBaseKmh: 70, muBrake: 1.2, brakeCapG: 2,
+    motorBaseKmh: 70,
+    muBrake: 1.2,
+    brakeCapG: 2,
   },
   p1: {
-    drive: 'rwd', mu: 1.38, eff: 0.81, drivenFraction: 0.58, cgHeightM: 0.43, cdA: 0.68, crr: 0.012,
-    downforceCapped: true, downforceDriven: 0.6,
+    drive: 'rwd',
+    mu: 1.38,
+    eff: 0.81,
+    drivenFraction: 0.58,
+    cgHeightM: 0.43,
+    cdA: 0.68,
+    crr: 0.012,
+    downforceCapped: true,
+    downforceDriven: 0.6,
     engine: { powerRpm: 7500, torqueRpm: 4000, firstGearKmh: 84, shiftS: 0.06, launchRpm: 3500 },
-    motorBaseKmh: 60, muBrake: 1.22, brakeCapG: 2,
+    motorBaseKmh: 60,
+    muBrake: 1.22,
+    brakeCapG: 2,
   },
   senna: {
-    drive: 'rwd', mu: 1.38, eff: 0.82, drivenFraction: 0.58, cgHeightM: 0.43, cdA: 0.75, crr: 0.012,
-    downforceCapped: true, downforceDriven: 0.6,
+    drive: 'rwd',
+    mu: 1.38,
+    eff: 0.82,
+    drivenFraction: 0.58,
+    cgHeightM: 0.43,
+    cdA: 0.75,
+    crr: 0.012,
+    downforceCapped: true,
+    downforceDriven: 0.6,
     engine: { powerRpm: 7250, torqueRpm: 5500, firstGearKmh: 82, shiftS: 0.06, launchRpm: 3500 },
-    motorBaseKmh: 0, muBrake: 1.25, brakeCapG: 2.2,
+    motorBaseKmh: 0,
+    muBrake: 1.25,
+    brakeCapG: 2.2,
   },
 };
 

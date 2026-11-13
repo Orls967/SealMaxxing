@@ -8,7 +8,12 @@ const L = { absent: 'Tidak ada', unknown: 'Tidak dipublikasikan', unverified: 'p
 
 describe('csv', () => {
   it('quotes fields containing commas, quotes or newlines', () => {
-    expect(toCsv([['a', 'b,c'], ['d"e', 'f\ng']])).toBe('a,"b,c"\r\n"d""e","f\ng"');
+    expect(
+      toCsv([
+        ['a', 'b,c'],
+        ['d"e', 'f\ng'],
+      ]),
+    ).toBe('a,"b,c"\r\n"d""e","f\ng"');
   });
   it('exports value, basis and verification status', () => {
     expect(cellText(cellFor(CARS.seal, METRIC_BY_ID.evRangeKm), 'km', 0, L)).toBe('520 km (WLTP)');

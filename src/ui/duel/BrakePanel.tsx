@@ -37,7 +37,9 @@ export function BrakePanel({ from: raw, onFrom }: { from: string | null; onFrom:
             carId: car.id,
             value: r ? r.distanceM : null,
             text: r ? `${fmt(r.distanceM, 1)} m` : UI.duel.never,
-            sub: r ? `${UI.duel.brakeTime}: ${fmt(r.timeS, 2)} dtk · ${fmt(r.peakG, 2)} g` : UI.duel.neverWhy(top),
+            sub: r
+              ? `${UI.duel.brakeTime}: ${fmt(r.timeS, 2)} dtk · ${fmt(r.peakG, 2)} g`
+              : UI.duel.neverWhy(top),
           }))}
         />
         <ModelBars
@@ -49,7 +51,11 @@ export function BrakePanel({ from: raw, onFrom }: { from: string | null; onFrom:
               carId: car.id,
               value: none ? null : gain,
               text: !r ? UI.duel.never : none ? UI.duel.dfNone : `−${fmt(gain ?? 0, 1)} m`,
-              sub: !r ? UI.duel.neverWhy(top) : none ? undefined : `${fmt(r.distanceNoAeroM, 1)} m → ${fmt(r.distanceM, 1)} m`,
+              sub: !r
+                ? UI.duel.neverWhy(top)
+                : none
+                  ? undefined
+                  : `${fmt(r.distanceNoAeroM, 1)} m → ${fmt(r.distanceM, 1)} m`,
             };
           })}
         />

@@ -39,7 +39,9 @@ export default function DuelPage() {
         <strong className="text-warn">{UI.common.simpleModel}.</strong> {UI.duel.modelNote}
       </p>
       <div role="tabpanel" id="panel-adu" aria-labelledby={`tab-${mode}`}>
-        {mode === 'accel' && <AccelPanel target={dist} onTarget={(d) => set({ dist: d })} instant={reduced} />}
+        {mode === 'accel' && (
+          <AccelPanel target={dist} onTarget={(d) => set({ dist: d })} instant={reduced} />
+        )}
         {mode === 'brake' && <BrakePanel from={dist} onFrom={(d) => set({ dist: d })} />}
         {mode === 'downforce' && <DownforcePanel speed={speed} onSpeed={(v) => set({ speed: v })} />}
         {mode === 'energy' && <EnergyPanel />}

@@ -1,4 +1,13 @@
-import { CAR_IDS, MAX_LAYER, isCarId, isPartId, isSystemId, type CarId, type PartId, type SystemId } from '@/content/ids';
+import {
+  CAR_IDS,
+  MAX_LAYER,
+  isCarId,
+  isPartId,
+  isSystemId,
+  type CarId,
+  type PartId,
+  type SystemId,
+} from '@/content/ids';
 
 export const CAM_PRESETS = ['quarter', 'front', 'side', 'top', 'bottom'] as const;
 export type CamPreset = (typeof CAM_PRESETS)[number];

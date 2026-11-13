@@ -2,7 +2,17 @@ import { Suspense, type ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
 
 /** The single WebGL canvas of a page: renders on demand, clipping enabled for the cut tool. */
-export function Stage({ label, children, fov = 32, onMiss }: { label: string; children: ReactNode; fov?: number; onMiss?: () => void }) {
+export function Stage({
+  label,
+  children,
+  fov = 32,
+  onMiss,
+}: {
+  label: string;
+  children: ReactNode;
+  fov?: number;
+  onMiss?: () => void;
+}) {
   return (
     <Canvas
       frameloop="demand"

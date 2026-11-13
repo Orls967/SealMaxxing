@@ -34,7 +34,8 @@ function valueAt(points: [number, number][], x: number): number | null {
   for (let i = 1; i < points.length; i++) {
     const a = points[i - 1]!;
     const b = points[i]!;
-    if (x >= a[0] && x <= b[0]) return b[0] === a[0] ? b[1] : a[1] + ((x - a[0]) / (b[0] - a[0])) * (b[1] - a[1]);
+    if (x >= a[0] && x <= b[0])
+      return b[0] === a[0] ? b[1] : a[1] + ((x - a[0]) / (b[0] - a[0])) * (b[1] - a[1]);
   }
   return null;
 }
@@ -44,8 +45,13 @@ export function LineChart({ title, xLabel, yLabel, series, tableXs, cursor, digi
   const all = series.flatMap((s) => s.points);
   const xMax = Math.max(1, ...all.map((p) => p[0]));
   const yMax = Math.max(1, ...all.map((p) => p[1]));
-  const x = scaleLinear().domain([0, xMax]).range([M.l, W - M.r]);
-  const y = scaleLinear().domain([0, yMax]).nice().range([H - M.b, M.t]);
+  const x = scaleLinear()
+    .domain([0, xMax])
+    .range([M.l, W - M.r]);
+  const y = scaleLinear()
+    .domain([0, yMax])
+    .nice()
+    .range([H - M.b, M.t]);
   const path = line<[number, number]>()
     .x((p) => x(p[0]))
     .y((p) => y(p[1]));
@@ -75,15 +81,43 @@ export function LineChart({ title, xLabel, yLabel, series, tableXs, cursor, digi
         <text x={(M.l + W - M.r) / 2} y={H - 4} textAnchor="middle" className="fill-muted text-xs">
           {xLabel}
         </text>
-        <text x={12} y={(M.t + H - M.b) / 2} textAnchor="middle" transform={`rotate(-90 12 ${(M.t + H - M.b) / 2})`} className="fill-muted text-xs">
+        <text
+          x={12}
+          y={(M.t + H - M.b) / 2}
+          textAnchor="middle"
+          transform={`rotate(-90 12 ${(M.t + H - M.b) / 2})`}
+          className="fill-muted text-xs"
+        >
           {yLabel}
         </text>
-        {cursor !== undefined && <line x1={x(cursor)} x2={x(cursor)} y1={M.t} y2={H - M.b} className="stroke-accent" strokeDasharray="3 3" />}
+        {cursor !== undefined && (
+          <line
+            x1={x(cursor)}
+            x2={x(cursor)}
+            y1={M.t}
+            y2={H - M.b}
+            className="stroke-accent"
+            strokeDasharray="3 3"
+          />
+        )}
         {series.map((s) => (
-          <path key={s.carId} d={path(s.points) ?? ''} fill="none" stroke={CAR_MARKS[s.carId].color} strokeWidth={2.5} strokeDasharray={DASH[s.carId]} />
+          <path
+            key={s.carId}
+            d={path(s.points) ?? ''}
+            fill="none"
+            stroke={CAR_MARKS[s.carId].color}
+            strokeWidth={2.5}
+            strokeDasharray={DASH[s.carId]}
+          />
         ))}
         {labels.map((l) => (
-          <text key={l.id} x={W - M.r + 6} y={l.y + 4} fill={CAR_MARKS[l.id].color} className="text-xs font-semibold">
+          <text
+            key={l.id}
+            x={W - M.r + 6}
+            y={l.y + 4}
+            fill={CAR_MARKS[l.id].color}
+            className="text-xs font-semibold"
+          >
             {CARS[l.id].short}
           </text>
         ))}

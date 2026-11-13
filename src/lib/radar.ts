@@ -24,12 +24,27 @@ const mean = (xs: (number | null)[]): number | null => {
 export function radarProfile(cars: Car[]): RadarRow[] {
   const ratio = DERIVED.find((d) => d.id === 'powerPerTonneKw');
   const col = (raw: (number | null)[], better: 'higher' | 'lower') => normalise(raw, better);
-  const seats = col(cars.map((c) => c.specs.seats?.value ?? null), 'higher');
-  const cargo = col(cars.map((c) => c.specs.cargoL?.value ?? null), 'higher');
+  const seats = col(
+    cars.map((c) => c.specs.seats?.value ?? null),
+    'higher',
+  );
+  const cargo = col(
+    cars.map((c) => c.specs.cargoL?.value ?? null),
+    'higher',
+  );
   const axes: Record<RadarKey, (number | null)[]> = {
-    accel: col(cars.map((c) => c.specs.zeroTo100S?.value ?? null), 'lower'),
-    top: col(cars.map((c) => c.specs.topSpeedKmh?.value ?? null), 'higher'),
-    ratio: col(cars.map((c) => ratio?.get(c)?.value ?? null), 'higher'),
+    accel: col(
+      cars.map((c) => c.specs.zeroTo100S?.value ?? null),
+      'lower',
+    ),
+    top: col(
+      cars.map((c) => c.specs.topSpeedKmh?.value ?? null),
+      'higher',
+    ),
+    ratio: col(
+      cars.map((c) => ratio?.get(c)?.value ?? null),
+      'higher',
+    ),
     downforce: col(
       cars.map((c) => {
         const spec = downforceSpecFor(c, MODEL[c.id].downforceCapped);
@@ -37,7 +52,10 @@ export function radarProfile(cars: Car[]): RadarRow[] {
       }),
       'higher',
     ),
-    braking: col(cars.map((c) => simulateBrake(brakeInputFor(c), 100).distanceM), 'lower'),
+    braking: col(
+      cars.map((c) => simulateBrake(brakeInputFor(c), 100).distanceM),
+      'lower',
+    ),
     daily: cars.map((_, i) => mean([seats[i] ?? null, cargo[i] ?? null])),
   };
   return RADAR_KEYS.map((key) => ({

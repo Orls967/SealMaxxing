@@ -27,7 +27,9 @@ export function DataTable({ cars, rows, extreme, sortBy, onSort }: Props) {
   const groups: RowGroup[] = [];
   for (const r of rows) if (sortBy === null && !groups.includes(r.group)) groups.push(r.group);
   const sections: { group: RowGroup | null; rows: TableRow[] }[] =
-    sortBy === null ? groups.map((g) => ({ group: g, rows: rows.filter((r) => r.group === g) })) : [{ group: null, rows }];
+    sortBy === null
+      ? groups.map((g) => ({ group: g, rows: rows.filter((r) => r.group === g) }))
+      : [{ group: null, rows }];
   return (
     <div className="overflow-x-auto rounded-lg border border-line">
       <table className="w-full border-collapse">
@@ -57,7 +59,9 @@ export function DataTable({ cars, rows, extreme, sortBy, onSort }: Props) {
             {ext.map((c) => (
               <th key={c.id} scope="col" className={TH}>
                 <span className="block font-semibold">{c.extreme?.name}</span>
-                <span className="rounded border border-warn px-1 text-xs font-normal text-warn">{UI.common.trackOnly}</span>
+                <span className="rounded border border-warn px-1 text-xs font-normal text-warn">
+                  {UI.common.trackOnly}
+                </span>
               </th>
             ))}
           </tr>
@@ -89,9 +93,15 @@ export function DataTable({ cars, rows, extreme, sortBy, onSort }: Props) {
             <Fragment key={sec.group ?? 'sorted'}>
               {sec.group && (
                 <tr>
-                  <th scope="colgroup" colSpan={span} className="border-b border-line bg-surface-2 px-3 py-1 text-left text-xs font-semibold uppercase tracking-wide text-accent-text">
+                  <th
+                    scope="colgroup"
+                    colSpan={span}
+                    className="border-b border-line bg-surface-2 px-3 py-1 text-left text-xs font-semibold uppercase tracking-wide text-accent-text"
+                  >
                     {groupLabel(sec.group)}
-                    {sec.group === 'derived' && <span className="ml-2 font-normal normal-case text-muted">{UI.data.derivedNote}</span>}
+                    {sec.group === 'derived' && (
+                      <span className="ml-2 font-normal normal-case text-muted">{UI.data.derivedNote}</span>
+                    )}
                   </th>
                 </tr>
               )}
@@ -101,18 +111,30 @@ export function DataTable({ cars, rows, extreme, sortBy, onSort }: Props) {
                     {r.label}
                     {r.unit && <span className="font-normal text-muted"> ({r.unit})</span>}
                     {r.note && <span className="block text-xs font-normal text-muted">{r.note}</span>}
-                    {r.result.noWinner === 'mixed-basis' && <span className="block text-xs font-normal text-warn">{UI.common.noWinnerBasis}</span>}
+                    {r.result.noWinner === 'mixed-basis' && (
+                      <span className="block text-xs font-normal text-warn">{UI.common.noWinnerBasis}</span>
+                    )}
                   </th>
                   {r.result.cells.map((cell) => (
                     <td key={cell.carId} className={TD}>
-                      <MetricValue cell={cell} unit={r.unit} digits={r.digits} best={r.result.best.includes(cell.carId)} ps={r.id !== 'dcChargeKw'} />
+                      <MetricValue
+                        cell={cell}
+                        unit={r.unit}
+                        digits={r.digits}
+                        best={r.result.best.includes(cell.carId)}
+                        ps={r.id !== 'dcChargeKw'}
+                      />
                     </td>
                   ))}
                   {ext.map((c) => {
                     const cell = r.extreme[c.id];
                     return (
                       <td key={c.id} className={TD}>
-                        {cell?.kind === 'value' ? <MetricValue cell={cell} unit={r.unit} digits={r.digits} /> : <span className="text-muted">–</span>}
+                        {cell?.kind === 'value' ? (
+                          <MetricValue cell={cell} unit={r.unit} digits={r.digits} />
+                        ) : (
+                          <span className="text-muted">–</span>
+                        )}
                       </td>
                     );
                   })}

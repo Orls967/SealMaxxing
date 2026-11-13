@@ -35,7 +35,8 @@ export function CompareRow({ label, unit, digits, cars, result, note, ps = true 
         {result.cells.map((cell) => {
           const car = byCar.get(cell.carId);
           if (!car) return null;
-          const frac = cell.kind === 'value' && result.max > 0 ? Math.max(0, cell.data.value) / result.max : 0;
+          const frac =
+            cell.kind === 'value' && result.max > 0 ? Math.max(0, cell.data.value) / result.max : 0;
           return (
             <li key={cell.carId} className="grid grid-cols-12 items-center gap-x-2 gap-y-1">
               <span className="col-span-12 flex items-center gap-2 text-sm sm:col-span-2">
@@ -44,7 +45,12 @@ export function CompareRow({ label, unit, digits, cars, result, note, ps = true 
               </span>
               <span className="col-span-5 sm:col-span-5">
                 {cell.kind === 'value' ? (
-                  <svg role="presentation" width="100%" height="14" className="block overflow-hidden rounded bg-surface-2">
+                  <svg
+                    role="presentation"
+                    width="100%"
+                    height="14"
+                    className="block overflow-hidden rounded bg-surface-2"
+                  >
                     <rect width={`${frac * 100}%`} height="14" fill={markFill(car.id)} />
                   </svg>
                 ) : (
@@ -52,13 +58,21 @@ export function CompareRow({ label, unit, digits, cars, result, note, ps = true 
                 )}
               </span>
               <span className="col-span-7 text-sm sm:col-span-5">
-                <MetricValue cell={cell} unit={unit} digits={digits} best={result.best.includes(cell.carId)} ps={ps} />
+                <MetricValue
+                  cell={cell}
+                  unit={unit}
+                  digits={digits}
+                  best={result.best.includes(cell.carId)}
+                  ps={ps}
+                />
               </span>
             </li>
           );
         })}
       </ul>
-      {result.noWinner === 'mixed-basis' && <p className="mt-2 text-xs text-warn">{UI.common.noWinnerBasis}</p>}
+      {result.noWinner === 'mixed-basis' && (
+        <p className="mt-2 text-xs text-warn">{UI.common.noWinnerBasis}</p>
+      )}
     </section>
   );
 }

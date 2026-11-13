@@ -21,11 +21,21 @@ const std = (p: Std) => new THREE.MeshStandardMaterial({ clippingPlanes: CLIP_PL
 const phys = (p: Phys) => new THREE.MeshPhysicalMaterial({ clippingPlanes: CLIP_PLANES, ...p });
 
 const DEFS = {
-  paint: () => phys({ color: '#0b0b0e', metalness: 0.6, roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.06 }),
-  paintRed: () => phys({ color: '#c8101f', metalness: 0.5, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.06 }),
+  paint: () =>
+    phys({ color: '#0b0b0e', metalness: 0.6, roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.06 }),
+  paintRed: () =>
+    phys({ color: '#c8101f', metalness: 0.5, roughness: 0.3, clearcoat: 1, clearcoatRoughness: 0.06 }),
   carbon: () => std({ color: '#1d1d22', metalness: 0.35, roughness: 0.45 }),
   glass: () =>
-    phys({ color: '#16090b', metalness: 0.2, roughness: 0.05, transparent: true, opacity: 0.55, clearcoat: 1, side: THREE.DoubleSide }),
+    phys({
+      color: '#16090b',
+      metalness: 0.2,
+      roughness: 0.05,
+      transparent: true,
+      opacity: 0.55,
+      clearcoat: 1,
+      side: THREE.DoubleSide,
+    }),
   rubber: () => std({ color: '#111113', metalness: 0, roughness: 0.9 }),
   plastic: () => std({ color: '#17171a', metalness: 0.1, roughness: 0.7 }),
   metal: () => std({ color: '#a9a9b2', metalness: 0.9, roughness: 0.35 }),
@@ -40,11 +50,29 @@ const DEFS = {
   tail: () => std({ color: '#ff1a2c', emissive: '#ff1a2c', emissiveIntensity: 2.4 }),
   screen: () => std({ color: '#200609', emissive: '#e11d2e', emissiveIntensity: 0.55, roughness: 0.2 }),
   flow: () =>
-    new THREE.MeshBasicMaterial({ color: '#ff4654', transparent: true, opacity: 0.4, depthWrite: false, clippingPlanes: CLIP_PLANES }),
-  floor: () => new THREE.MeshStandardMaterial({ color: PALETTE.floor, metalness: 0, roughness: 1, envMapIntensity: 0.2 }),
+    new THREE.MeshBasicMaterial({
+      color: '#ff4654',
+      transparent: true,
+      opacity: 0.4,
+      depthWrite: false,
+      clippingPlanes: CLIP_PLANES,
+    }),
+  floor: () =>
+    new THREE.MeshStandardMaterial({
+      color: PALETTE.floor,
+      metalness: 0,
+      roughness: 1,
+      envMapIntensity: 0.2,
+    }),
   strip: () => new THREE.MeshBasicMaterial({ color: PALETTE.red, toneMapped: false }),
   volume: () =>
-    new THREE.MeshBasicMaterial({ color: '#f2f2f3', transparent: true, opacity: 0.14, depthWrite: false, clippingPlanes: CLIP_PLANES }),
+    new THREE.MeshBasicMaterial({
+      color: '#f2f2f3',
+      transparent: true,
+      opacity: 0.14,
+      depthWrite: false,
+      clippingPlanes: CLIP_PLANES,
+    }),
 } satisfies Record<string, () => THREE.Material>;
 
 export type MatKey = keyof typeof DEFS;
@@ -154,4 +182,9 @@ export function withArches<T extends THREE.Material>(m: T, a: ArchSpec): T {
 }
 
 /** Thin connector lines drawn from each exploded part back to where it belongs. */
-export const EXPLODE_LINE = new THREE.LineBasicMaterial({ color: PALETTE.red, transparent: true, opacity: 0.55, depthWrite: false });
+export const EXPLODE_LINE = new THREE.LineBasicMaterial({
+  color: PALETTE.red,
+  transparent: true,
+  opacity: 0.55,
+  depthWrite: false,
+});

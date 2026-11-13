@@ -31,7 +31,14 @@ export const METRICS = def([
   { id: 'widthMm', group: 'dimensions', label: 'Lebar', unit: 'mm', better: 'none' },
   { id: 'heightMm', group: 'dimensions', label: 'Tinggi', unit: 'mm', better: 'none' },
   { id: 'wheelbaseMm', group: 'dimensions', label: 'Jarak sumbu roda', unit: 'mm', better: 'none' },
-  { id: 'kerbKg', group: 'dimensions', label: 'Berat siap jalan', unit: 'kg', better: 'lower', basisSensitive: true },
+  {
+    id: 'kerbKg',
+    group: 'dimensions',
+    label: 'Berat siap jalan',
+    unit: 'kg',
+    better: 'lower',
+    basisSensitive: true,
+  },
   { id: 'dryKg', group: 'dimensions', label: 'Berat kering', unit: 'kg', better: 'lower' },
 
   { id: 'cylinders', group: 'powertrain', label: 'Jumlah silinder', unit: '', better: 'none' },
@@ -39,12 +46,32 @@ export const METRICS = def([
   { id: 'enginePowerKw', group: 'powertrain', label: 'Daya mesin bakar', unit: 'kW', better: 'higher' },
   { id: 'engineTorqueNm', group: 'powertrain', label: 'Torsi mesin bakar', unit: 'Nm', better: 'higher' },
   { id: 'engineMaxRpm', group: 'powertrain', label: 'Putaran maksimum mesin', unit: 'rpm', better: 'higher' },
-  { id: 'motorPowerKw', group: 'powertrain', label: 'Daya motor listrik (total)', unit: 'kW', better: 'higher' },
+  {
+    id: 'motorPowerKw',
+    group: 'powertrain',
+    label: 'Daya motor listrik (total)',
+    unit: 'kW',
+    better: 'higher',
+  },
   { id: 'gears', group: 'powertrain', label: 'Tingkat transmisi', unit: '', better: 'none' },
 
-  { id: 'batteryKwh', group: 'energy', label: 'Kapasitas baterai traksi', unit: 'kWh', better: 'none', digits: 2 },
+  {
+    id: 'batteryKwh',
+    group: 'energy',
+    label: 'Kapasitas baterai traksi',
+    unit: 'kWh',
+    better: 'none',
+    digits: 2,
+  },
   { id: 'batteryKg', group: 'energy', label: 'Massa baterai', unit: 'kg', better: 'none' },
-  { id: 'evRangeKm', group: 'energy', label: 'Jarak listrik murni', unit: 'km', better: 'higher', basisSensitive: true },
+  {
+    id: 'evRangeKm',
+    group: 'energy',
+    label: 'Jarak listrik murni',
+    unit: 'km',
+    better: 'higher',
+    basisSensitive: true,
+  },
   { id: 'fuelTankL', group: 'energy', label: 'Tangki bensin', unit: 'L', better: 'none' },
   { id: 'dcChargeKw', group: 'energy', label: 'Pengisian DC maksimum', unit: 'kW', better: 'higher' },
 
@@ -59,7 +86,14 @@ export const METRICS = def([
   { id: 'wheelRearIn', group: 'wheels', label: 'Pelek belakang', unit: 'inci', better: 'none' },
 
   { id: 'dragCd', group: 'aero', label: 'Koefisien hambat (Cd)', unit: '', better: 'lower', digits: 3 },
-  { id: 'downforceKg', group: 'aero', label: 'Downforce (klaim)', unit: 'kg', better: 'higher', basisSensitive: true },
+  {
+    id: 'downforceKg',
+    group: 'aero',
+    label: 'Downforce (klaim)',
+    unit: 'kg',
+    better: 'higher',
+    basisSensitive: true,
+  },
 
   { id: 'cargoL', group: 'cabin', label: 'Volume bagasi', unit: 'L', better: 'higher' },
 ]);

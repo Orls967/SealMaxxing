@@ -64,7 +64,8 @@ export const DERIVED: DerivedMetric[] = [
     inputs: ['motorPowerKw', 'powerTotalKw'],
     get: (c) => {
       const p = c.specs.powerTotalKw;
-      if (c.absent.motorPowerKw && p) return { ...p, value: 0, basis: 'tidak ada motor listrik', qualifier: 'exact' };
+      if (c.absent.motorPowerKw && p)
+        return { ...p, value: 0, basis: 'tidak ada motor listrik', qualifier: 'exact' };
       const e = c.specs.motorPowerKw;
       return combine(e && p ? (e.value / p.value) * 100 : NaN, [e, p], 'daya motor ÷ daya gabungan');
     },

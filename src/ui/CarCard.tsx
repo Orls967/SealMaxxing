@@ -13,7 +13,11 @@ export function CarCard({ car }: { car: Car }) {
   return (
     <article className="flex flex-col gap-3 rounded-lg border border-line bg-surface p-4">
       <header className="flex items-start gap-3">
-        <span aria-hidden="true" className="mt-1.5 h-3 w-3 shrink-0 rounded-full border border-line" style={{ background: CAR_MARKS[car.id].color }} />
+        <span
+          aria-hidden="true"
+          className="mt-1.5 h-3 w-3 shrink-0 rounded-full border border-line"
+          style={{ background: CAR_MARKS[car.id].color }}
+        />
         <div>
           <h3 className="font-display text-xl font-bold uppercase leading-tight tracking-wide">{car.name}</h3>
           <p className="text-sm text-muted">
@@ -35,7 +39,10 @@ export function CarCard({ car }: { car: Car }) {
           );
         })}
       </dl>
-      <Link to={`/bedah/${car.id}`} className="mt-auto rounded bg-accent px-3 py-2 text-center text-sm font-semibold text-text hover:bg-accent-dim">
+      <Link
+        to={`/bedah/${car.id}`}
+        className="mt-auto rounded bg-accent px-3 py-2 text-center text-sm font-semibold text-text hover:bg-accent-dim"
+      >
         {UI.garage.open}
       </Link>
     </article>

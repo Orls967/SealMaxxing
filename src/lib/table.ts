@@ -36,29 +36,38 @@ export function buildRows(cars: Car[]): TableRow[] {
       unit: m.unit,
       digits: m.digits ?? 0,
       better: m.better,
-      result: rankCells(cars.map((c) => cellFor(c, m)), m.better, m.basisSensitive),
+      result: rankCells(
+        cars.map((c) => cellFor(c, m)),
+        m.better,
+        m.basisSensitive,
+      ),
       extreme,
     };
   });
-  const derived = DERIVED.map(
-    (d): TableRow => ({
-      id: d.id,
-      group: 'derived',
-      label: d.label,
-      unit: d.unit,
-      digits: d.digits,
-      better: d.better,
-      note: d.note,
-      result: rankCells(cars.map((c) => derivedCell(c, d)), d.better),
-      extreme: {},
-    }),
-  );
+  const derived = DERIVED.map((d): TableRow => ({
+    id: d.id,
+    group: 'derived',
+    label: d.label,
+    unit: d.unit,
+    digits: d.digits,
+    better: d.better,
+    note: d.note,
+    result: rankCells(
+      cars.map((c) => derivedCell(c, d)),
+      d.better,
+    ),
+    extreme: {},
+  }));
   return [...stored, ...derived];
 }
 
 export function filterRows(rows: TableRow[], query: string, group: string | null): TableRow[] {
   const q = query.trim().toLowerCase();
-  return rows.filter((r) => (!group || r.group === group) && (!q || r.label.toLowerCase().includes(q) || r.unit.toLowerCase().includes(q)));
+  return rows.filter(
+    (r) =>
+      (!group || r.group === group) &&
+      (!q || r.label.toLowerCase().includes(q) || r.unit.toLowerCase().includes(q)),
+  );
 }
 
 /** Sorts by one car's value, largest first; rows where that car has no value keep their order at the end. */
@@ -70,6 +79,14 @@ export function sortRows(rows: TableRow[], carId: CarId | null): TableRow[] {
   };
   return rows
     .map((r, i) => ({ r, i, v: val(r) }))
-    .sort((a, b) => (a.v === null && b.v === null ? a.i - b.i : a.v === null ? 1 : b.v === null ? -1 : b.v - a.v || a.i - b.i))
+    .sort((a, b) =>
+      a.v === null && b.v === null
+        ? a.i - b.i
+        : a.v === null
+          ? 1
+          : b.v === null
+            ? -1
+            : b.v - a.v || a.i - b.i,
+    )
     .map((x) => x.r);
 }

@@ -9,7 +9,12 @@ export const seal: Car = {
   kindLabel: 'Listrik baterai (BEV)',
   years: 'MY2026',
   role: 'Sedan listrik harian dengan dua motor dan baterai yang menjadi lantai mobil.',
-  price: { value: '± Rp750 juta (OTR Jakarta, 2026)', sources: ['moladin', 'zigwheels'], verified: true, market: 'ID' },
+  price: {
+    value: '± Rp750 juta (OTR Jakarta, 2026)',
+    sources: ['moladin', 'zigwheels'],
+    verified: true,
+    market: 'ID',
+  },
   specs: {
     yearFrom: ok(2026, ['zigwheels'], { basis: 'tahun model; generasi ini sejak 2022' }),
     seats: ok(5, ['byd-au']),

@@ -16,7 +16,17 @@ const R = 118;
 const DASH: Record<CarId, string> = { seal: '', laferrari: '8 4', p1: '2 4', senna: '10 3 2 3' };
 
 /** Normalised profile per car. Not-applicable axes sit at the centre and are named in the table. */
-export function RadarChart({ title, axes, cars, note }: { title: string; axes: RadarAxis[]; cars: CarId[]; note: string }) {
+export function RadarChart({
+  title,
+  axes,
+  cars,
+  note,
+}: {
+  title: string;
+  axes: RadarAxis[];
+  cars: CarId[];
+  note: string;
+}) {
   const n = axes.length;
   const pt = (i: number, v: number): [number, number] => {
     const a = (i / n) * Math.PI * 2 - Math.PI / 2;
@@ -27,7 +37,12 @@ export function RadarChart({ title, axes, cars, note }: { title: string; axes: R
       <figcaption className="mb-1 text-sm font-semibold">{title}</figcaption>
       <svg viewBox={`0 0 ${S} ${S}`} role="img" aria-label={title} className="mx-auto w-full max-w-md">
         {[0.25, 0.5, 0.75, 1].map((r) => (
-          <polygon key={r} points={axes.map((_, i) => pt(i, r).join(',')).join(' ')} fill="none" className="stroke-line" />
+          <polygon
+            key={r}
+            points={axes.map((_, i) => pt(i, r).join(',')).join(' ')}
+            fill="none"
+            className="stroke-line"
+          />
         ))}
         {axes.map((ax, i) => {
           const [x, y] = pt(i, 1.2);
@@ -57,7 +72,15 @@ export function RadarChart({ title, axes, cars, note }: { title: string; axes: R
         {cars.map((id) => (
           <li key={id} className="flex items-center gap-1">
             <svg aria-hidden="true" width="26" height="8">
-              <line x1="0" y1="4" x2="26" y2="4" stroke={CAR_MARKS[id].color} strokeWidth="2.5" strokeDasharray={DASH[id]} />
+              <line
+                x1="0"
+                y1="4"
+                x2="26"
+                y2="4"
+                stroke={CAR_MARKS[id].color}
+                strokeWidth="2.5"
+                strokeDasharray={DASH[id]}
+              />
             </svg>
             {CARS[id].short}
           </li>

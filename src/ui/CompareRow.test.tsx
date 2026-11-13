@@ -8,7 +8,15 @@ import { CompareRow } from './CompareRow';
 
 function row(id: keyof typeof METRIC_BY_ID) {
   const m = METRIC_BY_ID[id];
-  render(<CompareRow label={m.label} unit={m.unit} digits={m.digits} cars={CAR_LIST} result={compareMetric(CAR_LIST, m)} />);
+  render(
+    <CompareRow
+      label={m.label}
+      unit={m.unit}
+      digits={m.digits}
+      cars={CAR_LIST}
+      result={compareMetric(CAR_LIST, m)}
+    />,
+  );
   return screen.getByRole('region', { name: m.label });
 }
 

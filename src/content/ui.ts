@@ -47,7 +47,8 @@ export const UI = {
     tableOf: (what: string) => `Tabel padanan: ${what}`,
     noWinnerBasis: 'Dasar ukur berbeda: tidak dibandingkan langsung, tanpa pemenang.',
     noWebglTitle: 'Tampilan 3D tidak tersedia',
-    noWebgl: 'Peramban ini tidak menyediakan WebGL, jadi model 3D diganti gambar statis. Data dan teks tetap lengkap.',
+    noWebgl:
+      'Peramban ini tidak menyediakan WebGL, jadi model 3D diganti gambar statis. Data dan teks tetap lengkap.',
     staticAlt: (car: string) => `Gambar statis ${car} dari model ilustrasi.`,
     trackOnly: 'khusus sirkuit',
   },
@@ -103,7 +104,8 @@ export const UI = {
   compare: {
     title: 'Banding',
     lead: 'Pilih satu sistem untuk menyalakannya di semua mobil sekaligus.',
-    canvas: (cars: string, system: string) => `Model 3D ilustrasi ${cars} berdampingan${system ? `, sistem ${system} disorot` : ''}.`,
+    canvas: (cars: string, system: string) =>
+      `Model 3D ilustrasi ${cars} berdampingan${system ? `, sistem ${system} disorot` : ''}.`,
     cars: 'Mobil yang dibandingkan',
     carsHint: 'Minimal dua mobil.',
     layout: 'Tata letak',
@@ -141,7 +143,8 @@ export const UI = {
     chartMetric: 'Metrik untuk grafik batang',
     bar: 'Batang per mobil',
     radar: 'Profil ternormalisasi',
-    radarNote: 'Tiap sumbu dinormalkan ke mobil terbaik (= 1). Pengereman dan downforce berasal dari model sederhana.',
+    radarNote:
+      'Tiap sumbu dinormalkan ke mobil terbaik (= 1). Pengereman dan downforce berasal dari model sederhana.',
     scatter: 'Daya terhadap berat',
     scatterNote: 'Makin ke kiri-atas makin besar daya per tonnya.',
     downforce: 'Downforce terhadap kecepatan',
@@ -168,7 +171,13 @@ export const UI = {
       'Parameter cengkeraman dan efisiensi dikalibrasi supaya 0–100 dan 0–200 km/jam berada dalam ±5% dari klaim. Bukan data pabrikan.',
     modes: { accel: 'Akselerasi', brake: 'Pengereman', downforce: 'Downforce', energy: 'Aliran energi' },
     target: 'Sasaran',
-    targets: { '100': '0–100 km/jam', '200': '0–200 km/jam', '300': '0–300 km/jam', '402': '402 m', '1000': '1 km' },
+    targets: {
+      '100': '0–100 km/jam',
+      '200': '0–200 km/jam',
+      '300': '0–300 km/jam',
+      '402': '402 m',
+      '1000': '1 km',
+    },
     start: 'Mulai',
     pause: 'Jeda',
     restart: 'Ulangi',
@@ -187,10 +196,12 @@ export const UI = {
     brakeDist: 'Jarak henti',
     brakeTime: 'Waktu henti',
     brakeAero: 'Tambahan cengkeraman dari downforce',
-    brakeNote: 'Perlambatan = μ × (g + downforce ÷ massa). Tidak ada klaim pabrikan yang seragam untuk jarak henti, jadi hanya hasil model yang tampil.',
+    brakeNote:
+      'Perlambatan = μ × (g + downforce ÷ massa). Tidak ada klaim pabrikan yang seragam untuk jarak henti, jadi hanya hasil model yang tampil.',
     speed: 'Kecepatan',
     dfAt: (v: number) => `Downforce pada ${v} km/jam`,
-    dfNote: 'F(v) = F_ref × (v ÷ v_ref)², dari satu titik klaim pabrikan, dibatasi nilai klaim bila aero aktif membatasinya. Perkiraan dari satu titik.',
+    dfNote:
+      'F(v) = F_ref × (v ÷ v_ref)², dari satu titik klaim pabrikan, dibatasi nilai klaim bila aero aktif membatasinya. Perkiraan dari satu titik.',
     dfNone: 'Tidak dirancang untuk downforce',
     wingNote: 'Posisi sayap pada gambar hanya ilustrasi; angka berlaku untuk posisi menekan.',
     wing: 'Sayap',

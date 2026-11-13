@@ -24,24 +24,35 @@ export default function GaragePage() {
   return (
     <div className="mx-auto flex max-w-screen-2xl flex-col gap-6 px-4 py-4">
       <header>
-        <h1 className="font-display text-3xl font-bold uppercase tracking-wide md:text-5xl">{UI.garage.title}</h1>
+        <h1 className="font-display text-3xl font-bold uppercase tracking-wide md:text-5xl">
+          {UI.garage.title}
+        </h1>
         <p className="mt-1 max-w-3xl text-muted">{UI.garage.lead}</p>
       </header>
 
       <section aria-label={UI.garage.cars} className="flex flex-col gap-2">
         <div className="h-72 overflow-hidden rounded-lg border border-line md:h-96">
           {hasWebgl() ? (
-            <GarageScene label={UI.garage.canvas} paints={{ laferrari: livery === 'factory' ? 'paintRed' : 'paint' }} instant={reduced} />
+            <GarageScene
+              label={UI.garage.canvas}
+              paints={{ laferrari: livery === 'factory' ? 'paintRed' : 'paint' }}
+              instant={reduced}
+            />
           ) : (
             <StaticCars cars={CAR_IDS} />
           )}
         </div>
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
           <span>
-            {UI.common.illustration} <span className="rounded border border-line px-1">{UI.common.themeLivery}</span>
+            {UI.common.illustration}{' '}
+            <span className="rounded border border-line px-1">{UI.common.themeLivery}</span>
           </span>
           <label className="flex items-center gap-2 text-sm text-text">
-            <input type="checkbox" checked={livery === 'factory'} onChange={(e) => set({ livery: e.target.checked ? 'factory' : 'theme' })} />
+            <input
+              type="checkbox"
+              checked={livery === 'factory'}
+              onChange={(e) => set({ livery: e.target.checked ? 'factory' : 'theme' })}
+            />
             {UI.garage.liveryToggle}
           </label>
         </div>
@@ -59,8 +70,13 @@ export default function GaragePage() {
         <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {MODULES.map((m) => (
             <li key={m.to}>
-              <Link to={m.to} className="block h-full rounded-lg border border-line bg-surface p-4 hover:border-accent">
-                <span className="font-display text-xl font-bold uppercase tracking-wide text-accent-text">{m.title}</span>
+              <Link
+                to={m.to}
+                className="block h-full rounded-lg border border-line bg-surface p-4 hover:border-accent"
+              >
+                <span className="font-display text-xl font-bold uppercase tracking-wide text-accent-text">
+                  {m.title}
+                </span>
                 <span className="mt-1 block text-sm text-text">{m.text}</span>
               </Link>
             </li>
@@ -75,7 +91,10 @@ export default function GaragePage() {
         <ol className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {STORIES.map((s, i) => (
             <li key={s.id}>
-              <Link to={s.to} className="flex h-full gap-3 rounded-lg border border-line bg-surface p-4 hover:border-accent">
+              <Link
+                to={s.to}
+                className="flex h-full gap-3 rounded-lg border border-line bg-surface p-4 hover:border-accent"
+              >
                 <span aria-hidden="true" className="tnum font-display text-3xl font-bold text-accent-dim">
                   {i + 1}
                 </span>

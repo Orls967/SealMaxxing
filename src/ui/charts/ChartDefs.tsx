@@ -58,7 +58,13 @@ export function ChartDefs() {
 /** Small swatch showing a car's mark, for legends and labels. */
 export function MarkSwatch({ id }: { id: CarId }) {
   return (
-    <svg aria-hidden="true" focusable="false" width="14" height="14" className="inline-block shrink-0 align-middle">
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      width="14"
+      height="14"
+      className="inline-block shrink-0 align-middle"
+    >
       <rect width="14" height="14" rx="2" fill={markFill(id)} />
     </svg>
   );

@@ -34,7 +34,10 @@ export default function DataPage() {
   const all = useMemo(() => buildRows(CARS_ALL), []);
   const rows = useMemo(() => sortRows(filterRows(all, query, group), sortBy), [all, query, group, sortBy]);
   const chartRow = all.find((r) => r.id === metric) ?? all.find((r) => r.id === 'powerTotalKw');
-  const unverified = all.reduce((n, r) => n + r.result.cells.filter((c) => c.kind === 'value' && !c.data.verified).length, 0);
+  const unverified = all.reduce(
+    (n, r) => n + r.result.cells.filter((c) => c.kind === 'value' && !c.data.verified).length,
+    0,
+  );
 
   const radar = useMemo(
     () => radarProfile(CARS_ALL).map((r) => ({ label: UI.data.radarAxes[r.key], values: r.values })),
@@ -63,7 +66,11 @@ export default function DataPage() {
   const exportCsv = () => {
     const labels = { absent: UI.common.absent, unknown: UI.common.unknown, unverified: UI.common.unverified };
     const ext = extreme ? CARS_ALL.filter((c) => c.extreme) : [];
-    const head = [UI.common.metric, ...CARS_ALL.map((c) => `${c.name} (${c.years})`), ...ext.map((c) => `${c.extreme?.name ?? ''} (${UI.common.trackOnly})`)];
+    const head = [
+      UI.common.metric,
+      ...CARS_ALL.map((c) => `${c.name} (${c.years})`),
+      ...ext.map((c) => `${c.extreme?.name ?? ''} (${UI.common.trackOnly})`),
+    ];
     const body = rows.map((r) => [
       r.unit ? `${r.label} (${r.unit})` : r.label,
       ...r.result.cells.map((c) => cellText(c, r.unit, r.digits, labels)),
@@ -86,11 +93,20 @@ export default function DataPage() {
       <div className="flex flex-wrap items-end gap-3 rounded-lg border border-line bg-surface p-3 text-sm">
         <label className="flex flex-col gap-1">
           {UI.data.search}
-          <input type="search" className={FIELD} value={query} onChange={(e) => set({ query: e.target.value })} />
+          <input
+            type="search"
+            className={FIELD}
+            value={query}
+            onChange={(e) => set({ query: e.target.value })}
+          />
         </label>
         <label className="flex flex-col gap-1">
           {UI.data.group}
-          <select className={FIELD} value={group ?? ''} onChange={(e) => set({ group: e.target.value || null })}>
+          <select
+            className={FIELD}
+            value={group ?? ''}
+            onChange={(e) => set({ group: e.target.value || null })}
+          >
             <option value="">{UI.common.all}</option>
             {METRIC_GROUPS.map((g) => (
               <option key={g} value={g}>
@@ -104,7 +120,11 @@ export default function DataPage() {
           <input type="checkbox" checked={extreme} onChange={(e) => set({ extreme: e.target.checked })} />
           {UI.data.extreme}
         </label>
-        <button type="button" onClick={exportCsv} className="ml-auto rounded bg-accent px-3 py-1.5 font-semibold text-text hover:bg-accent-dim">
+        <button
+          type="button"
+          onClick={exportCsv}
+          className="ml-auto rounded bg-accent px-3 py-1.5 font-semibold text-text hover:bg-accent-dim"
+        >
           {UI.data.export}
         </button>
       </div>
@@ -119,7 +139,11 @@ export default function DataPage() {
           <div className="flex flex-col gap-2">
             <label className="flex flex-col gap-1 text-sm">
               {UI.data.chartMetric}
-              <select className={FIELD} value={chartRow?.id ?? ''} onChange={(e) => set({ metric: e.target.value })}>
+              <select
+                className={FIELD}
+                value={chartRow?.id ?? ''}
+                onChange={(e) => set({ metric: e.target.value })}
+              >
                 {all.map((r) => (
                   <option key={r.id} value={r.id}>
                     {r.label}
@@ -127,14 +151,41 @@ export default function DataPage() {
                 ))}
               </select>
             </label>
-            {chartRow && <CompareRow label={chartRow.label} unit={chartRow.unit} digits={chartRow.digits} cars={CARS_ALL} result={chartRow.result} note={chartRow.note} />}
+            {chartRow && (
+              <CompareRow
+                label={chartRow.label}
+                unit={chartRow.unit}
+                digits={chartRow.digits}
+                cars={CARS_ALL}
+                result={chartRow.result}
+                note={chartRow.note}
+              />
+            )}
           </div>
-          <ScatterChart title={UI.data.scatter} xLabel={UI.data.weight} yLabel={UI.data.power} points={scatter} note={UI.data.scatterNote} />
-          <RadarChart title={UI.data.radar} axes={radar} cars={CARS_ALL.map((c) => c.id)} note={`${UI.data.radarNote} ${UI.data.dailyNote}`} />
+          <ScatterChart
+            title={UI.data.scatter}
+            xLabel={UI.data.weight}
+            yLabel={UI.data.power}
+            points={scatter}
+            note={UI.data.scatterNote}
+          />
+          <RadarChart
+            title={UI.data.radar}
+            axes={radar}
+            cars={CARS_ALL.map((c) => c.id)}
+            note={`${UI.data.radarNote} ${UI.data.dailyNote}`}
+          />
           <div className="flex flex-col gap-1">
-            <LineChart title={UI.data.downforce} xLabel={UI.duel.axisSpeed} yLabel={UI.duel.axisForce} series={dfSeries} tableXs={[100, 150, 200, 250, 300, 350]} />
+            <LineChart
+              title={UI.data.downforce}
+              xLabel={UI.duel.axisSpeed}
+              yLabel={UI.duel.axisForce}
+              series={dfSeries}
+              tableXs={[100, 150, 200, 250, 300, 350]}
+            />
             <p className="text-xs text-muted">
-              <span className="rounded border border-line px-1">{UI.common.estimate}</span> {UI.data.downforceNote}
+              <span className="rounded border border-line px-1">{UI.common.estimate}</span>{' '}
+              {UI.data.downforceNote}
             </p>
           </div>
         </div>
@@ -148,7 +199,12 @@ export default function DataPage() {
           {Object.entries(SOURCES).map(([id, s]) => (
             <li key={id}>
               {s.url ? (
-                <a href={s.url} target="_blank" rel="noreferrer" className="text-text underline decoration-accent underline-offset-2">
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-text underline decoration-accent underline-offset-2"
+                >
                   {s.title}
                 </a>
               ) : (

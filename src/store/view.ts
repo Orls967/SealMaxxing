@@ -12,7 +12,9 @@ interface ViewStore extends ViewState {
 export function splitHash(hash: string): { path: string; search: string } {
   const raw = hash.replace(/^#/, '');
   const i = raw.indexOf('?');
-  return i < 0 ? { path: raw || '/', search: '' } : { path: raw.slice(0, i) || '/', search: raw.slice(i + 1) };
+  return i < 0
+    ? { path: raw || '/', search: '' }
+    : { path: raw.slice(0, i) || '/', search: raw.slice(i + 1) };
 }
 
 function pick(s: ViewStore): ViewState {

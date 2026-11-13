@@ -51,7 +51,8 @@ export function EnergyPanel() {
           const used = new Set<FlowNode>(FLOW_STATES.flatMap((s) => flows[s].flatMap((e) => [e.from, e.to])));
           const edges = flows[state];
           const live = new Set<FlowNode>(edges.flatMap((e) => [e.from, e.to]));
-          const name = (n: FlowNode) => (n === 'motor' && used.has('motorF') ? UI.duel.nodes.motorR : LABEL[n]);
+          const name = (n: FlowNode) =>
+            n === 'motor' && used.has('motorF') ? UI.duel.nodes.motorR : LABEL[n];
           const caption = UI.duel.flowCaption(car.short, UI.duel.states[state].toLowerCase());
           return (
             <figure key={car.id} className="rounded-lg border border-line bg-surface p-3">
@@ -60,7 +61,15 @@ export function EnergyPanel() {
               </figcaption>
               <svg viewBox="0 0 400 200" role="img" aria-label={caption} className="w-full">
                 <defs>
-                  <marker id={`arrow-${car.id}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <marker
+                    id={`arrow-${car.id}`}
+                    viewBox="0 0 10 10"
+                    refX="9"
+                    refY="5"
+                    markerWidth="6"
+                    markerHeight="6"
+                    orient="auto-start-reverse"
+                  >
                     <path d="M0 0L10 5L0 10z" className="fill-accent-text" />
                   </marker>
                 </defs>
@@ -87,8 +96,20 @@ export function EnergyPanel() {
                   const on = live.has(n);
                   return (
                     <g key={n}>
-                      <rect x={x - BW / 2} y={y - BH / 2} width={BW} height={BH} rx="5" className={on ? 'fill-surface-2 stroke-accent' : 'fill-surface stroke-line'} />
-                      <text x={x} y={y + 4} textAnchor="middle" className={`text-xs ${on ? 'fill-text' : 'fill-muted'}`}>
+                      <rect
+                        x={x - BW / 2}
+                        y={y - BH / 2}
+                        width={BW}
+                        height={BH}
+                        rx="5"
+                        className={on ? 'fill-surface-2 stroke-accent' : 'fill-surface stroke-line'}
+                      />
+                      <text
+                        x={x}
+                        y={y + 4}
+                        textAnchor="middle"
+                        className={`text-xs ${on ? 'fill-text' : 'fill-muted'}`}
+                      >
                         {name(n)}
                       </text>
                     </g>

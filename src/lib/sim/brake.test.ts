@@ -15,7 +15,9 @@ describe('braking model', () => {
     const r100 = simulateBrake(inp, 100);
     const r200 = simulateBrake(inp, 200);
     expect(r100.distanceM).toBeLessThan(r100.distanceNoAeroM);
-    expect(1 - r200.distanceM / r200.distanceNoAeroM).toBeGreaterThan(1 - r100.distanceM / r100.distanceNoAeroM);
+    expect(1 - r200.distanceM / r200.distanceNoAeroM).toBeGreaterThan(
+      1 - r100.distanceM / r100.distanceNoAeroM,
+    );
   });
   it('is limited by brake capacity', () => {
     const r = simulateBrake({ massKg: 1000, mu: 3, capG: 1.5, downforce: null }, 100);

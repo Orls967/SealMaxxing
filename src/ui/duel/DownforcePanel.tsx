@@ -22,14 +22,25 @@ export function DownforcePanel({ speed, onSpeed }: { speed: number; onSpeed: (v:
   });
   const max = Math.max(1, ...cars.map((c) => (c.spec ? downforceKg(c.spec, 350) : 0)));
   const series: Series[] = cars.map(({ car, spec }) =>
-    spec ? { carId: car.id, points: SPEEDS.map((v) => [v, downforceKg(spec, v)]) } : { carId: car.id, points: [], absent: UI.dissect.absentTag },
+    spec
+      ? { carId: car.id, points: SPEEDS.map((v) => [v, downforceKg(spec, v)]) }
+      : { carId: car.id, points: [], absent: UI.dissect.absentTag },
   );
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-4 rounded-lg border border-line bg-surface p-3 text-sm">
         <label className="flex min-w-0 flex-1 items-center gap-3">
           <span className="shrink-0">{UI.duel.speed}</span>
-          <input type="range" min={0} max={350} step={5} value={speed} onChange={(e) => onSpeed(Number(e.target.value))} className="min-w-0 flex-1" aria-valuetext={`${speed} km/jam`} />
+          <input
+            type="range"
+            min={0}
+            max={350}
+            step={5}
+            value={speed}
+            onChange={(e) => onSpeed(Number(e.target.value))}
+            className="min-w-0 flex-1"
+            aria-valuetext={`${speed} km/jam`}
+          />
           <span className="tnum w-24 shrink-0 font-display text-xl font-bold">{fmt(speed)} km/jam</span>
         </label>
         <fieldset className="flex flex-wrap items-center gap-1">
@@ -56,9 +67,18 @@ export function DownforcePanel({ speed, onSpeed }: { speed: number; onSpeed: (v:
           return (
             <li key={car.id} className="rounded-lg border border-line bg-surface p-3">
               <h3 className="font-semibold">{car.short}</h3>
-              <svg viewBox="0 0 200 130" role="img" aria-label={kg === null ? `${car.short}: ${UI.duel.dfNone}` : `${car.short}: ${fmt(kg)} kg`} className="w-full">
+              <svg
+                viewBox="0 0 200 130"
+                role="img"
+                aria-label={kg === null ? `${car.short}: ${UI.duel.dfNone}` : `${car.short}: ${fmt(kg)} kg`}
+                className="w-full"
+              >
                 <line x1="6" x2="194" y1="118" y2="118" className="stroke-line" />
-                <path d="M22 108 Q26 92 60 88 L92 72 Q118 66 140 76 L172 86 Q182 92 182 108 Z" fill={markFill(car.id)} fillOpacity="0.9" />
+                <path
+                  d="M22 108 Q26 92 60 88 L92 72 Q118 66 140 76 L172 86 Q182 92 182 108 Z"
+                  fill={markFill(car.id)}
+                  fillOpacity="0.9"
+                />
                 <circle cx="56" cy="108" r="10" className="fill-bg stroke-muted" />
                 <circle cx="150" cy="108" r="10" className="fill-bg stroke-muted" />
                 <g transform={`rotate(${active ? ANGLE[wing] : 0} 172 70)`}>
@@ -77,9 +97,17 @@ export function DownforcePanel({ speed, onSpeed }: { speed: number; onSpeed: (v:
               ) : (
                 <p className="tnum text-sm">
                   <span className="font-display text-2xl font-bold">{fmt(kg)} kg</span>{' '}
-                  <span className="rounded border border-line px-1 text-xs text-muted">{UI.common.estimate}</span>
-                  {spec?.capped && kg >= spec.refKg && <span className="block text-xs text-muted">{UI.duel.capped}</span>}
-                  {over && <span className="block text-xs text-warn">{UI.duel.neverWhy(car.specs.topSpeedKmh?.value ?? 0)}</span>}
+                  <span className="rounded border border-line px-1 text-xs text-muted">
+                    {UI.common.estimate}
+                  </span>
+                  {spec?.capped && kg >= spec.refKg && (
+                    <span className="block text-xs text-muted">{UI.duel.capped}</span>
+                  )}
+                  {over && (
+                    <span className="block text-xs text-warn">
+                      {UI.duel.neverWhy(car.specs.topSpeedKmh?.value ?? 0)}
+                    </span>
+                  )}
                 </p>
               )}
               <p className="mt-1 text-xs text-muted">{UI.common.claim}:</p>
@@ -94,7 +122,14 @@ export function DownforcePanel({ speed, onSpeed }: { speed: number; onSpeed: (v:
         {UI.duel.dfNote} {UI.duel.wingNote}
       </p>
       <div className="max-w-3xl">
-      <LineChart title={UI.data.downforce} xLabel={UI.duel.axisSpeed} yLabel={UI.duel.axisForce} series={series} tableXs={[100, 150, 200, 250, 300, 350]} cursor={speed} />
+        <LineChart
+          title={UI.data.downforce}
+          xLabel={UI.duel.axisSpeed}
+          yLabel={UI.duel.axisForce}
+          series={series}
+          tableXs={[100, 150, 200, 250, 300, 350]}
+          cursor={speed}
+        />
       </div>
     </div>
   );

@@ -18,7 +18,10 @@ export function cellFor(car: Car, metric: Pick<Metric, 'id'>): Cell {
 
 /** Speed-style bases ("pada 250 km/jam") differ per car but name the same kind of measurement. */
 function basisKey(basis: string | undefined): string {
-  return (basis ?? '').replace(/[\d.,]+/g, '#').trim().toLowerCase();
+  return (basis ?? '')
+    .replace(/[\d.,]+/g, '#')
+    .trim()
+    .toLowerCase();
 }
 
 export interface RowResult {

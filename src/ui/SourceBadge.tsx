@@ -8,7 +8,10 @@ export function SourceBadge({ verified }: { verified: boolean }) {
       <span className="sr-only">{UI.common.verified}</span>
     </span>
   ) : (
-    <span className="rounded border border-warn px-1 text-xs leading-tight text-warn" title={UI.common.unverifiedHint}>
+    <span
+      className="rounded border border-warn px-1 text-xs leading-tight text-warn"
+      title={UI.common.unverifiedHint}
+    >
       {UI.common.unverified}
     </span>
   );

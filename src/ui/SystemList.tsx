@@ -44,7 +44,11 @@ export function SystemList({ carId, part, system, onPart, onSystem }: Props) {
                     className={`flex w-full items-center justify-between gap-2 rounded px-2 py-1 text-left text-sm ${active ? 'bg-surface-2 text-text ring-1 ring-accent' : 'text-text hover:bg-surface-2'}`}
                   >
                     <span className={absent ? 'text-muted' : ''}>{PART_LABEL[p]}</span>
-                    {absent && <span className="shrink-0 rounded border border-line px-1 text-xs text-muted">{UI.dissect.absentTag}</span>}
+                    {absent && (
+                      <span className="shrink-0 rounded border border-line px-1 text-xs text-muted">
+                        {UI.dissect.absentTag}
+                      </span>
+                    )}
                   </button>
                 </li>
               );

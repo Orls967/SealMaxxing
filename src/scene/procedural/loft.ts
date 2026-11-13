@@ -12,7 +12,14 @@ interface Ring {
 }
 
 /** Lofts superellipse rings along X. theta 0 = +Z side, 90° = top. */
-function loft(rings: Ring[], e: number, theta0: number, theta1: number, segs: number, grow = 0): THREE.BufferGeometry {
+function loft(
+  rings: Ring[],
+  e: number,
+  theta0: number,
+  theta1: number,
+  segs: number,
+  grow = 0,
+): THREE.BufferGeometry {
   const pos: number[] = [];
   const idx: number[] = [];
   const closed = Math.abs(theta1 - theta0 - Math.PI * 2) < 1e-6;
@@ -39,7 +46,8 @@ function loft(rings: Ring[], e: number, theta0: number, theta1: number, segs: nu
   if (closed) {
     // Weld the seam so normals are smooth across it.
     const p = g.getAttribute('position');
-    for (let i = 0; i < rings.length; i++) p.setXYZ(i * cols + segs, p.getX(i * cols), p.getY(i * cols), p.getZ(i * cols));
+    for (let i = 0; i < rings.length; i++)
+      p.setXYZ(i * cols + segs, p.getX(i * cols), p.getY(i * cols), p.getZ(i * cols));
   }
   g.computeVertexNormals();
   if (closed) {
@@ -58,12 +66,19 @@ function loft(rings: Ring[], e: number, theta0: number, theta1: number, segs: nu
   return g;
 }
 
-const ts = (t0: number, t1: number, n: number) => Array.from({ length: n + 1 }, (_, i) => t0 + ((t1 - t0) * i) / n);
+const ts = (t0: number, t1: number, n: number) =>
+  Array.from({ length: n + 1 }, (_, i) => t0 + ((t1 - t0) * i) / n);
 
 function lowerRings(s: CarShape, t0: number, t1: number, n: number): Ring[] {
   const rings = ts(t0, t1, n).map((t) => {
     const st = stationAt(s, t);
-    return { x: st.x, yc: (st.bottom + st.belt) / 2, hy: (st.belt - st.bottom) / 2, hzBottom: st.hw * 0.97, hzTop: st.hw };
+    return {
+      x: st.x,
+      yc: (st.bottom + st.belt) / 2,
+      hy: (st.belt - st.bottom) / 2,
+      hzBottom: st.hw * 0.97,
+      hzTop: st.hw,
+    };
   });
   return rings;
 }
@@ -71,7 +86,13 @@ function lowerRings(s: CarShape, t0: number, t1: number, n: number): Ring[] {
 function capped(rings: Ring[]): Ring[] {
   const a = rings[0]!;
   const b = rings[rings.length - 1]!;
-  const shrink = (r: Ring, dx: number): Ring => ({ x: r.x + dx, yc: r.yc, hy: r.hy * 0.15, hzBottom: r.hzBottom * 0.15, hzTop: r.hzTop * 0.15 });
+  const shrink = (r: Ring, dx: number): Ring => ({
+    x: r.x + dx,
+    yc: r.yc,
+    hy: r.hy * 0.15,
+    hzBottom: r.hzBottom * 0.15,
+    hzTop: r.hzTop * 0.15,
+  });
   return [shrink(a, -0.03), ...rings, shrink(b, 0.03)];
 }
 

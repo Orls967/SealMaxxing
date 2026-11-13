@@ -9,7 +9,9 @@ export interface CarLayout {
   gearbox?: { x: number; len: number };
   motorFront?: { rad: number; len: number };
   /** Transverse motor on the rear axle (EV), or a motor inline with the powertrain. */
-  motorRear?: { kind: 'axle'; rad: number; len: number } | { kind: 'inline'; x: number; y: number; z: number; rad: number; len: number };
+  motorRear?:
+    | { kind: 'axle'; rad: number; len: number }
+    | { kind: 'inline'; x: number; y: number; z: number; rad: number; len: number };
   battery?: { x0: number; x1: number; w: number; y0: number; h: number; blades: number };
   tank?: { x: number; len: number; w: number; y0: number; h: number };
   inverters: { x: number; y: number; z: number; s: [number, number, number] }[];

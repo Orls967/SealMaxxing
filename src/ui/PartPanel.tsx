@@ -12,7 +12,15 @@ import { MetricValue } from './MetricValue';
 const H = 'mt-3 text-xs font-semibold uppercase tracking-wide text-accent-text';
 
 /** Explanation of one part on one car, always next to its counterpart on the other three. */
-export function PartPanel({ carId, part, onClear }: { carId: CarId; part: PartId | null; onClear: () => void }) {
+export function PartPanel({
+  carId,
+  part,
+  onClear,
+}: {
+  carId: CarId;
+  part: PartId | null;
+  onClear: () => void;
+}) {
   if (!part) return <p className="text-sm text-muted">{UI.dissect.noPart}</p>;
   const car = CARS[carId];
   const text = PARTS[carId][part];
@@ -26,9 +34,15 @@ export function PartPanel({ carId, part, onClear }: { carId: CarId; part: PartId
           <p className="text-xs uppercase tracking-wide text-muted">
             {SYSTEM_LABEL[system]} · {car.short}
           </p>
-          <h2 className="font-display text-2xl font-bold uppercase leading-tight tracking-wide">{PART_LABEL[part]}</h2>
+          <h2 className="font-display text-2xl font-bold uppercase leading-tight tracking-wide">
+            {PART_LABEL[part]}
+          </h2>
         </div>
-        <button type="button" onClick={onClear} className="shrink-0 rounded border border-line px-2 py-1 text-xs text-muted hover:border-accent hover:text-text">
+        <button
+          type="button"
+          onClick={onClear}
+          className="shrink-0 rounded border border-line px-2 py-1 text-xs text-muted hover:border-accent hover:text-text"
+        >
           {UI.dissect.clear}
         </button>
       </header>
@@ -70,12 +84,21 @@ export function PartPanel({ carId, part, onClear }: { carId: CarId; part: PartId
           return (
             <li key={c.id} className="rounded border border-line bg-surface-2 p-2">
               <div className="flex items-baseline justify-between gap-2">
-                <Link to={`/bedah/${c.id}?part=${part}&xray=1`} className="text-sm font-semibold text-text underline decoration-accent underline-offset-2">
+                <Link
+                  to={`/bedah/${c.id}?part=${part}&xray=1`}
+                  className="text-sm font-semibold text-text underline decoration-accent underline-offset-2"
+                >
                   {c.short}
                 </Link>
-                {other.presence.kind === 'absent' && <span className="rounded border border-line px-1 text-xs text-muted">{UI.dissect.absentTag}</span>}
+                {other.presence.kind === 'absent' && (
+                  <span className="rounded border border-line px-1 text-xs text-muted">
+                    {UI.dissect.absentTag}
+                  </span>
+                )}
               </div>
-              <p className="text-xs text-muted">{other.presence.kind === 'absent' ? other.presence.reason : other.summary}</p>
+              <p className="text-xs text-muted">
+                {other.presence.kind === 'absent' ? other.presence.reason : other.summary}
+              </p>
               {m && (
                 <p className="mt-1 text-xs">
                   <span className="text-muted">{m.label}: </span>
@@ -86,7 +109,10 @@ export function PartPanel({ carId, part, onClear }: { carId: CarId; part: PartId
           );
         })}
       </ul>
-      <Link to={`/banding/${system}?xray=1`} className="mt-3 block rounded bg-accent px-3 py-2 text-center text-sm font-semibold text-text hover:bg-accent-dim">
+      <Link
+        to={`/banding/${system}?xray=1`}
+        className="mt-3 block rounded bg-accent px-3 py-2 text-center text-sm font-semibold text-text hover:bg-accent-dim"
+      >
         {UI.dissect.compareBtn}: {SYSTEM_LABEL[system]}
       </Link>
     </article>

@@ -14,7 +14,8 @@ describe('viewState', () => {
     expect(serializeView(v)).toBe(q);
   });
   it('round-trips compare, data and sim state', () => {
-    const q = 'cars=seal,senna&lay=overlay&anc=mid&sync=0&m=powerPerTonneKw&g=energy&q=daya&ext=1&mode=brake&dist=200&v=120';
+    const q =
+      'cars=seal,senna&lay=overlay&anc=mid&sync=0&m=powerPerTonneKw&g=energy&q=daya&ext=1&mode=brake&dist=200&v=120';
     expect(serializeView(parseView(q))).toBe(q);
   });
   it('ignores invalid values and clamps numbers', () => {

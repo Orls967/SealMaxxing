@@ -33,16 +33,42 @@ function anchorX(id: CarId, anchor: CompareAnchor): number {
   return s.fo - s.L / 2;
 }
 
-function Rig({ target, onReady, instant }: { target: [number, number, number]; onReady?: (c: OrbitControlsImpl) => void; instant: boolean }) {
+function Rig({
+  target,
+  onReady,
+  instant,
+}: {
+  target: [number, number, number];
+  onReady?: (c: OrbitControlsImpl) => void;
+  instant: boolean;
+}) {
   const aspect = useThree((s) => s.size.width / Math.max(1, s.size.height));
-  return <CameraRig preset="quarter" target={target} distance={Math.max(6.2, 6.9 / aspect)} instant={instant} damping={false} onReady={onReady} />;
+  return (
+    <CameraRig
+      preset="quarter"
+      target={target}
+      distance={Math.max(6.2, 6.9 / aspect)}
+      instant={instant}
+      damping={false}
+      onReady={onReady}
+    />
+  );
 }
 
 /**
  * Side-by-side or stacked comparison. One WebGL canvas; each car is a viewport (drei View)
  * with its own camera, optionally kept in sync.
  */
-export function CompareScene({ label, cars, layout, anchor, sync, system, xray, instant }: CompareSceneProps) {
+export function CompareScene({
+  label,
+  cars,
+  layout,
+  anchor,
+  sync,
+  system,
+  xray,
+  instant,
+}: CompareSceneProps) {
   const wrap = useRef<HTMLDivElement>(null);
   const rigs = useRef(new Map<OrbitControlsImpl, () => void>());
   const syncRef = useRef(sync);
@@ -89,14 +115,21 @@ export function CompareScene({ label, cars, layout, anchor, sync, system, xray, 
           {cars.map((id) => {
             const s = SHAPES[id];
             return (
-              <div key={id} className="relative h-full shrink-0 basis-1/2 snap-start border-r border-line last:border-r-0 md:shrink md:grow md:basis-0">
+              <div
+                key={id}
+                className="relative h-full shrink-0 basis-1/2 snap-start border-r border-line last:border-r-0 md:shrink md:grow md:basis-0"
+              >
                 <View className="absolute inset-0">
                   <Studio span={4} shadows={solid} />
                   <CarModel carId={id} display={display} instant={instant} />
                   <Rig target={[s.L / 2 - s.fo, 0.5, 0]} onReady={register} instant={instant} />
                 </View>
                 <p className="pointer-events-none absolute left-2 top-2 z-10 rounded bg-bg/80 px-2 py-0.5 text-sm font-semibold text-text">
-                  <span aria-hidden="true" className="mr-2 inline-block h-2 w-2 rounded-full" style={{ background: CAR_MARKS[id].color }} />
+                  <span
+                    aria-hidden="true"
+                    className="mr-2 inline-block h-2 w-2 rounded-full"
+                    style={{ background: CAR_MARKS[id].color }}
+                  />
                   {CARS[id].short} <span className="font-normal text-muted">· {CARS[id].years}</span>
                 </p>
               </div>
@@ -108,14 +141,25 @@ export function CompareScene({ label, cars, layout, anchor, sync, system, xray, 
           <View className="absolute inset-0">
             <Studio span={4} shadows={false} />
             {cars.map((id) => (
-              <CarModel key={id} carId={id} display={display} tint={CAR_MARKS[id].color} instant={instant} position={[anchorX(id, anchor), 0, 0]} />
+              <CarModel
+                key={id}
+                carId={id}
+                display={display}
+                tint={CAR_MARKS[id].color}
+                instant={instant}
+                position={[anchorX(id, anchor), 0, 0]}
+              />
             ))}
             <Rig target={[anchor === 'front' ? 1.35 : 0, 0.5, 0]} instant={instant} />
           </View>
           <ul className="pointer-events-none absolute left-2 top-2 z-10 flex flex-wrap gap-2 text-sm">
             {cars.map((id) => (
               <li key={id} className="rounded bg-bg/80 px-2 py-0.5 font-semibold text-text">
-                <span aria-hidden="true" className="mr-2 inline-block h-2 w-2 rounded-full" style={{ background: CAR_MARKS[id].color }} />
+                <span
+                  aria-hidden="true"
+                  className="mr-2 inline-block h-2 w-2 rounded-full"
+                  style={{ background: CAR_MARKS[id].color }}
+                />
                 {CARS[id].short}
               </li>
             ))}

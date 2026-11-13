@@ -27,7 +27,12 @@ export function ModelBars({ title, bars }: { title: string; bars: ModelBar[] }) 
               {b.value === null ? (
                 <span aria-hidden="true" className="block h-3.5 rounded border border-dashed border-line" />
               ) : (
-                <svg role="presentation" width="100%" height="14" className="block overflow-hidden rounded bg-surface-2">
+                <svg
+                  role="presentation"
+                  width="100%"
+                  height="14"
+                  className="block overflow-hidden rounded bg-surface-2"
+                >
                   <rect width={`${(b.value / max) * 100}%`} height="14" fill={markFill(b.carId)} />
                 </svg>
               )}

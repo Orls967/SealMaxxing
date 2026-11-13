@@ -12,7 +12,9 @@ describe('table rows', () => {
     for (const r of rows) expect(r.result.cells).toHaveLength(4);
   });
   it('filters by text and group', () => {
-    expect(filterRows(rows, 'baterai', null).map((r) => r.id)).toEqual(expect.arrayContaining(['batteryKwh', 'batteryKg', 'batteryWhPerKg']));
+    expect(filterRows(rows, 'baterai', null).map((r) => r.id)).toEqual(
+      expect.arrayContaining(['batteryKwh', 'batteryKg', 'batteryWhPerKg']),
+    );
     expect(filterRows(rows, '', 'brakes').every((r) => r.group === 'brakes')).toBe(true);
     expect(filterRows(rows, 'zzz', null)).toHaveLength(0);
   });

@@ -16,7 +16,15 @@ describe('DataTable', () => {
     expect(screen.getByRole('rowheader', { name: /Kapasitas baterai traksi/ })).toBeInTheDocument();
   });
   it('renders absence, unpublished values and mixed-basis rows explicitly', () => {
-    render(<DataTable cars={CAR_LIST} rows={filterRows(rows, '', 'energy')} extreme={false} sortBy={null} onSort={() => {}} />);
+    render(
+      <DataTable
+        cars={CAR_LIST}
+        rows={filterRows(rows, '', 'energy')}
+        extreme={false}
+        sortBy={null}
+        onSort={() => {}}
+      />,
+    );
     const battery = screen.getByRole('rowheader', { name: /Kapasitas baterai traksi/ }).closest('tr')!;
     expect(within(battery).getByText(UI.common.absent)).toBeInTheDocument();
     const mass = screen.getByRole('rowheader', { name: /Massa baterai/ }).closest('tr')!;

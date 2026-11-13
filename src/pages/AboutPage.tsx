@@ -25,7 +25,9 @@ export default function AboutPage() {
         </section>
       ))}
       <section>
-        <h2 className="font-display text-xl font-bold uppercase tracking-wide text-warn">{UI.about.unverifiedTitle}</h2>
+        <h2 className="font-display text-xl font-bold uppercase tracking-wide text-warn">
+          {UI.about.unverifiedTitle}
+        </h2>
         <p className="text-sm text-muted">{UI.about.unverifiedLead}</p>
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
           {pending.map(({ car, items }) => (

@@ -6,7 +6,10 @@ import type { CarLayout } from './layouts';
 import { bodyGeometry, doorGeometry, greenhouseGeometry, roofGeometry } from './loft';
 import { stationAt, type CarShape } from './shapes';
 
-function useDisposable<T extends THREE.BufferGeometry | THREE.BufferGeometry[]>(make: () => T, deps: unknown[]): T {
+function useDisposable<T extends THREE.BufferGeometry | THREE.BufferGeometry[]>(
+  make: () => T,
+  deps: unknown[],
+): T {
   // eslint-disable-next-line react-hooks/exhaustive-deps -- deps are supplied by the caller
   const g = useMemo(make, deps);
   useEffect(
@@ -83,7 +86,13 @@ function FrontLights({ s }: { s: CarShape }) {
   return (
     <>
       {([1, -1] as const).map((side) => (
-        <Box key={side} k="light" p={[f.x + 0.02, f.belt - 0.05, side * f.hw * 0.66]} s={[0.1, 0.035, f.hw * 0.36]} r={[0, side * 0.5, 0]} />
+        <Box
+          key={side}
+          k="light"
+          p={[f.x + 0.02, f.belt - 0.05, side * f.hw * 0.66]}
+          s={[0.1, 0.035, f.hw * 0.36]}
+          r={[0, side * 0.5, 0]}
+        />
       ))}
     </>
   );
@@ -99,15 +108,33 @@ function RearLights({ s, lay }: { s: CarShape; lay: CarLayout }) {
     case 'blade':
       return <Box k="tail" p={[r.x + 0.03, y + 0.02, 0]} s={[0.03, 0.015, r.hw * 1.5]} />;
     case 'round':
-      return sides.map((side) => <Cyl key={side} k="tail" p={[r.x + 0.03, y, side * r.hw * 0.62]} rad={0.07} h={0.05} axis="x" />);
+      return sides.map((side) => (
+        <Cyl key={side} k="tail" p={[r.x + 0.03, y, side * r.hw * 0.62]} rad={0.07} h={0.05} axis="x" />
+      ));
     case 'strips':
       return sides.map((side) => (
-        <Box key={side} k="tail" p={[r.x + 0.02, y, side * r.hw * 0.62]} s={[0.03, 0.018, r.hw * 0.6]} r={[0, side * -0.35, 0]} />
+        <Box
+          key={side}
+          k="tail"
+          p={[r.x + 0.02, y, side * r.hw * 0.62]}
+          s={[0.03, 0.018, r.hw * 0.6]}
+          r={[0, side * -0.35, 0]}
+        />
       ));
   }
 }
 
-export function CarBody({ s, lay, paint, cut }: { s: CarShape; lay: CarLayout; paint: MatKey; cut: boolean }) {
+export function CarBody({
+  s,
+  lay,
+  paint,
+  cut,
+}: {
+  s: CarShape;
+  lay: CarLayout;
+  paint: MatKey;
+  cut: boolean;
+}) {
   return (
     <>
       <Part id="body-panels">

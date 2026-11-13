@@ -15,7 +15,10 @@ export const p1: Car = {
     unitsBuilt: ok(375, ['wiki-p1']),
     seats: ok(2, ['mclaren-p1']),
     powerTotalKw: ok(674, ['mclaren-p1', 'wiki-p1'], { basis: '916 PS' }),
-    torqueTotalNm: ok(900, ['mclaren-p1'], { qualifier: 'limited', basis: 'dibatasi untuk melindungi transmisi' }),
+    torqueTotalNm: ok(900, ['mclaren-p1'], {
+      qualifier: 'limited',
+      basis: 'dibatasi untuk melindungi transmisi',
+    }),
     zeroTo100S: ok(2.8, ['mclaren-p1'], { basis: 'klaim pabrikan' }),
     zeroTo200S: ok(6.8, ['mclaren-p1'], { basis: 'klaim pabrikan' }),
     zeroTo300S: ok(16.5, ['mclaren-p1'], { basis: 'klaim pabrikan' }),

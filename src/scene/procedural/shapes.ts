@@ -33,9 +33,17 @@ const tyreR = (w: number, aspect: number, rim: number) => (rim * inch) / 2 + (w 
 
 export const SHAPES: Record<CarId, CarShape> = {
   seal: {
-    L: 4.8, W: 1.875, H: 1.46, wb: 2.92, fo: 0.9,
-    wheelRF: tyreR(235, 45, 19), wheelRR: tyreR(235, 45, 19),
-    tireWF: 0.235, tireWR: 0.235, rimRF: 9.5 * inch, rimRR: 9.5 * inch,
+    L: 4.8,
+    W: 1.875,
+    H: 1.46,
+    wb: 2.92,
+    fo: 0.9,
+    wheelRF: tyreR(235, 45, 19),
+    wheelRR: tyreR(235, 45, 19),
+    tireWF: 0.235,
+    tireWR: 0.235,
+    rimRF: 9.5 * inch,
+    rimRR: 9.5 * inch,
     profile: [
       [0, 0.42, 0.52, 0.52, 0.55],
       [0.03, 0.24, 0.66, 0.66, 0.84],
@@ -50,14 +58,26 @@ export const SHAPES: Record<CarId, CarShape> = {
       [0.97, 0.28, 0.98, 0.98, 0.86],
       [1, 0.44, 0.8, 0.8, 0.62],
     ],
-    ghBelt: 0.86, ghRoof: 0.62,
-    doors: [[0.31, 0.5], [0.505, 0.68]],
+    ghBelt: 0.86,
+    ghRoof: 0.62,
+    doors: [
+      [0.31, 0.5],
+      [0.505, 0.68],
+    ],
     roof: null,
   },
   laferrari: {
-    L: 4.702, W: 1.992, H: 1.116, wb: 2.65, fo: 1.1,
-    wheelRF: tyreR(265, 30, 19), wheelRR: tyreR(345, 30, 20),
-    tireWF: 0.265, tireWR: 0.345, rimRF: 9.5 * inch, rimRR: 10 * inch,
+    L: 4.702,
+    W: 1.992,
+    H: 1.116,
+    wb: 2.65,
+    fo: 1.1,
+    wheelRF: tyreR(265, 30, 19),
+    wheelRR: tyreR(345, 30, 20),
+    tireWF: 0.265,
+    tireWR: 0.345,
+    rimRF: 9.5 * inch,
+    rimRR: 10 * inch,
     profile: [
       [0, 0.2, 0.3, 0.3, 0.42],
       [0.04, 0.11, 0.42, 0.42, 0.78],
@@ -72,14 +92,23 @@ export const SHAPES: Record<CarId, CarShape> = {
       [0.97, 0.22, 0.8, 0.8, 0.93],
       [1, 0.36, 0.66, 0.66, 0.74],
     ],
-    ghBelt: 0.74, ghRoof: 0.5,
+    ghBelt: 0.74,
+    ghRoof: 0.5,
     doors: [[0.35, 0.57]],
     roof: [0.43, 0.6],
   },
   p1: {
-    L: 4.588, W: 1.946, H: 1.188, wb: 2.67, fo: 1.05,
-    wheelRF: tyreR(245, 35, 19), wheelRR: tyreR(315, 30, 20),
-    tireWF: 0.245, tireWR: 0.315, rimRF: 9.5 * inch, rimRR: 10 * inch,
+    L: 4.588,
+    W: 1.946,
+    H: 1.188,
+    wb: 2.67,
+    fo: 1.05,
+    wheelRF: tyreR(245, 35, 19),
+    wheelRR: tyreR(315, 30, 20),
+    tireWF: 0.245,
+    tireWR: 0.315,
+    rimRF: 9.5 * inch,
+    rimRR: 10 * inch,
     profile: [
       [0, 0.22, 0.32, 0.32, 0.45],
       [0.04, 0.12, 0.44, 0.44, 0.8],
@@ -94,14 +123,23 @@ export const SHAPES: Record<CarId, CarShape> = {
       [0.97, 0.26, 0.84, 0.84, 0.92],
       [1, 0.4, 0.7, 0.7, 0.7],
     ],
-    ghBelt: 0.72, ghRoof: 0.46,
+    ghBelt: 0.72,
+    ghRoof: 0.46,
     doors: [[0.34, 0.56]],
     roof: [0.44, 0.62],
   },
   senna: {
-    L: 4.744, W: 1.958, H: 1.229, wb: 2.67, fo: 1.14,
-    wheelRF: tyreR(245, 35, 19), wheelRR: tyreR(315, 30, 20),
-    tireWF: 0.245, tireWR: 0.315, rimRF: 9.5 * inch, rimRR: 10 * inch,
+    L: 4.744,
+    W: 1.958,
+    H: 1.229,
+    wb: 2.67,
+    fo: 1.14,
+    wheelRF: tyreR(245, 35, 19),
+    wheelRR: tyreR(315, 30, 20),
+    tireWF: 0.245,
+    tireWR: 0.315,
+    rimRF: 9.5 * inch,
+    rimRR: 10 * inch,
     profile: [
       [0, 0.16, 0.26, 0.26, 0.6],
       [0.04, 0.1, 0.4, 0.4, 0.86],
@@ -116,7 +154,8 @@ export const SHAPES: Record<CarId, CarShape> = {
       [0.96, 0.26, 0.78, 0.78, 0.94],
       [1, 0.38, 0.64, 0.64, 0.78],
     ],
-    ghBelt: 0.72, ghRoof: 0.46,
+    ghBelt: 0.72,
+    ghRoof: 0.46,
     doors: [[0.34, 0.56]],
     roof: [0.44, 0.6],
   },
@@ -147,7 +186,10 @@ function interp(points: ProfilePoint[], t: number, col: 1 | 2 | 3 | 4): number {
   const u2 = u * u;
   const u3 = u2 * u;
   return (
-    (2 * u3 - 3 * u2 + 1) * p1[col] + (u3 - 2 * u2 + u) * h * m1 + (-2 * u3 + 3 * u2) * p2[col] + (u3 - u2) * h * m2
+    (2 * u3 - 3 * u2 + 1) * p1[col] +
+    (u3 - 2 * u2 + u) * h * m1 +
+    (-2 * u3 + 3 * u2) * p2[col] +
+    (u3 - u2) * h * m2
   );
 }
 

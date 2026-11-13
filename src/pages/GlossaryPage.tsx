@@ -7,7 +7,9 @@ const SORTED = [...GLOSSARY].sort((a, b) => a.term.localeCompare(b.term, 'id'));
 export default function GlossaryPage() {
   const [q, setQ] = useState('');
   const needle = q.trim().toLowerCase();
-  const terms = SORTED.filter((t) => !needle || t.term.toLowerCase().includes(needle) || t.def.toLowerCase().includes(needle));
+  const terms = SORTED.filter(
+    (t) => !needle || t.term.toLowerCase().includes(needle) || t.def.toLowerCase().includes(needle),
+  );
   return (
     <div className="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-4">
       <header>
@@ -16,7 +18,12 @@ export default function GlossaryPage() {
       </header>
       <label className="flex flex-col gap-1 text-sm">
         {UI.glossary.search}
-        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} className="rounded border border-line bg-surface-2 px-2 py-1 text-text" />
+        <input
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          className="rounded border border-line bg-surface-2 px-2 py-1 text-text"
+        />
       </label>
       {terms.length === 0 ? (
         <p className="text-sm text-muted">{UI.glossary.empty}</p>

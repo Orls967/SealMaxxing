@@ -9,7 +9,12 @@ export function toCsv(rows: string[][]): string {
 }
 
 /** Plain-text form of a cell for export: value with unit, basis and status, or the absence. */
-export function cellText(cell: Cell, unit: string, digits: number, labels: { absent: string; unknown: string; unverified: string }): string {
+export function cellText(
+  cell: Cell,
+  unit: string,
+  digits: number,
+  labels: { absent: string; unknown: string; unverified: string },
+): string {
   switch (cell.kind) {
     case 'value': {
       const d = cell.data;

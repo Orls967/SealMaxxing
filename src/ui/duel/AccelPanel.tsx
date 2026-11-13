@@ -12,14 +12,33 @@ import { MetricValue } from '../MetricValue';
 
 const TARGETS = ['100', '200', '300', '402', '1000'] as const;
 type Target = (typeof TARGETS)[number];
-const CLAIM: Partial<Record<Target, MetricId>> = { '100': 'zeroTo100S', '200': 'zeroTo200S', '300': 'zeroTo300S' };
+const CLAIM: Partial<Record<Target, MetricId>> = {
+  '100': 'zeroTo100S',
+  '200': 'zeroTo200S',
+  '300': 'zeroTo300S',
+};
 const isDistance = (t: Target) => t === '402' || t === '1000';
-const BTN = 'rounded border border-line bg-surface-2 px-3 py-1 text-sm font-medium text-text hover:border-accent';
+const BTN =
+  'rounded border border-line bg-surface-2 px-3 py-1 text-sm font-medium text-text hover:border-accent';
 
-export function AccelPanel({ target: raw, onTarget, instant }: { target: string | null; onTarget: (t: string) => void; instant: boolean }) {
+export function AccelPanel({
+  target: raw,
+  onTarget,
+  instant,
+}: {
+  target: string | null;
+  onTarget: (t: string) => void;
+  instant: boolean;
+}) {
   const target: Target = TARGETS.find((t) => t === raw) ?? '200';
-  const runs = useMemo(() => CAR_LIST.map((car) => ({ car, run: simulateAccel(accelInputFor(car), 45) })), []);
-  const results = runs.map(({ car, run }) => ({ car, time: isDistance(target) ? run.toDistance(Number(target)) : run.toSpeed(Number(target)) }));
+  const runs = useMemo(
+    () => CAR_LIST.map((car) => ({ car, run: simulateAccel(accelInputFor(car), 45) })),
+    [],
+  );
+  const results = runs.map(({ car, run }) => ({
+    car,
+    time: isDistance(target) ? run.toDistance(Number(target)) : run.toSpeed(Number(target)),
+  }));
   const tEnd = Math.min(45, Math.max(1, ...results.map((r) => r.time ?? 0)) * 1.05);
   const [t, setT] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -54,8 +73,12 @@ export function AccelPanel({ target: raw, onTarget, instant }: { target: string 
     setPlaying(true);
   };
 
-  const at = (i: number) => runs[i]!.run.samples[Math.min(runs[i]!.run.samples.length - 1, Math.round(t * 100))]!;
-  const xEnd = Math.max(1, ...runs.map(({ run }) => run.samples[Math.min(run.samples.length - 1, Math.round(tEnd * 100))]!.x));
+  const at = (i: number) =>
+    runs[i]!.run.samples[Math.min(runs[i]!.run.samples.length - 1, Math.round(t * 100))]!;
+  const xEnd = Math.max(
+    1,
+    ...runs.map(({ run }) => run.samples[Math.min(run.samples.length - 1, Math.round(tEnd * 100))]!.x),
+  );
   const upto = Math.round(tEnd * 100);
   const series = (key: 'v' | 'x'): Series[] =>
     runs.map(({ car, run }) => ({
@@ -69,7 +92,11 @@ export function AccelPanel({ target: raw, onTarget, instant }: { target: string 
       <div className="flex flex-wrap items-center gap-3 rounded-lg border border-line bg-surface p-3 text-sm">
         <label className="flex items-center gap-2">
           {UI.duel.target}
-          <select className="rounded border border-line bg-surface-2 px-2 py-1 text-text" value={target} onChange={(e) => onTarget(e.target.value)}>
+          <select
+            className="rounded border border-line bg-surface-2 px-2 py-1 text-text"
+            value={target}
+            onChange={(e) => onTarget(e.target.value)}
+          >
             {TARGETS.map((x) => (
               <option key={x} value={x}>
                 {UI.duel.targets[x]}
@@ -82,7 +109,11 @@ export function AccelPanel({ target: raw, onTarget, instant }: { target: string 
             {UI.duel.pause}
           </button>
         ) : (
-          <button type="button" className="rounded bg-accent px-3 py-1 text-sm font-semibold text-text hover:bg-accent-dim" onClick={start}>
+          <button
+            type="button"
+            className="rounded bg-accent px-3 py-1 text-sm font-semibold text-text hover:bg-accent-dim"
+            onClick={start}
+          >
             {UI.duel.start}
           </button>
         )}
@@ -125,7 +156,8 @@ export function AccelPanel({ target: raw, onTarget, instant }: { target: string 
                 {UI.common.car}
               </th>
               <th scope="col" className="px-3 py-2">
-                {UI.common.model} <span className="font-normal text-muted">({UI.common.simpleModel.toLowerCase()})</span>
+                {UI.common.model}{' '}
+                <span className="font-normal text-muted">({UI.common.simpleModel.toLowerCase()})</span>
               </th>
               <th scope="col" className="px-3 py-2">
                 {UI.common.claim}
@@ -154,7 +186,13 @@ export function AccelPanel({ target: raw, onTarget, instant }: { target: string 
                       <span className="tnum font-semibold">{fmt(time, 1)} dtk</span>
                     )}
                   </td>
-                  <td className="px-3 py-2">{claim ? <MetricValue cell={cellFor(car, { id: claim })} unit="dtk" digits={1} /> : <span className="text-muted">–</span>}</td>
+                  <td className="px-3 py-2">
+                    {claim ? (
+                      <MetricValue cell={cellFor(car, { id: claim })} unit="dtk" digits={1} />
+                    ) : (
+                      <span className="text-muted">–</span>
+                    )}
+                  </td>
                 </tr>
               );
             })}
@@ -163,8 +201,22 @@ export function AccelPanel({ target: raw, onTarget, instant }: { target: string 
       </div>
 
       <div className="grid gap-3 lg:grid-cols-2">
-        <LineChart title={UI.duel.speedTime} xLabel={UI.duel.axisTime} yLabel={UI.duel.axisSpeed} series={series('v')} tableXs={tableXs} cursor={Math.min(t, tEnd)} />
-        <LineChart title={UI.duel.distTime} xLabel={UI.duel.axisTime} yLabel={UI.duel.axisDist} series={series('x')} tableXs={tableXs} cursor={Math.min(t, tEnd)} />
+        <LineChart
+          title={UI.duel.speedTime}
+          xLabel={UI.duel.axisTime}
+          yLabel={UI.duel.axisSpeed}
+          series={series('v')}
+          tableXs={tableXs}
+          cursor={Math.min(t, tEnd)}
+        />
+        <LineChart
+          title={UI.duel.distTime}
+          xLabel={UI.duel.axisTime}
+          yLabel={UI.duel.axisDist}
+          series={series('x')}
+          tableXs={tableXs}
+          cursor={Math.min(t, tEnd)}
+        />
       </div>
     </div>
   );

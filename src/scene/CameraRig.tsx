@@ -31,11 +31,24 @@ export interface CameraRigProps {
   damping?: boolean;
 }
 
-export function CameraRig({ preset, nonce = 0, target, distance, focus, instant = false, allowBelow = true, onReady, damping = true }: CameraRigProps) {
+export function CameraRig({
+  preset,
+  nonce = 0,
+  target,
+  distance,
+  focus,
+  instant = false,
+  allowBelow = true,
+  onReady,
+  damping = true,
+}: CameraRigProps) {
   const controls = useRef<OrbitControlsImpl>(null);
   const camera = useThree((s) => s.camera);
   const invalidate = useThree((s) => s.invalidate);
-  const goal = useMemo(() => ({ pos: new THREE.Vector3(), tgt: new THREE.Vector3(), active: false, first: true }), []);
+  const goal = useMemo(
+    () => ({ pos: new THREE.Vector3(), tgt: new THREE.Vector3(), active: false, first: true }),
+    [],
+  );
   const [tx, ty, tz] = target;
 
   useEffect(() => {

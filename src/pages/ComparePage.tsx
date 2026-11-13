@@ -17,7 +17,15 @@ import { CompareRow } from '@/ui/CompareRow';
 import { StaticCars } from '@/ui/StaticCars';
 import { useReducedMotion } from '@/ui/useReducedMotion';
 
-const OVERALL: MetricId[] = ['powerTotalKw', 'kerbKg', 'zeroTo100S', 'zeroTo200S', 'topSpeedKmh', 'lengthMm', 'heightMm'];
+const OVERALL: MetricId[] = [
+  'powerTotalKw',
+  'kerbKg',
+  'zeroTo100S',
+  'zeroTo200S',
+  'topSpeedKmh',
+  'lengthMm',
+  'heightMm',
+];
 const chip = (active: boolean) =>
   `shrink-0 rounded border px-2 py-1 text-sm font-medium ${active ? 'border-accent bg-accent text-text' : 'border-line bg-surface-2 text-text hover:border-accent'}`;
 
@@ -35,7 +43,9 @@ export default function ComparePage() {
   const names = cars.map((c) => c.short).join(', ');
   const keep = serializeView({ ...DEFAULT_VIEW, cars: carIds, layout, anchor, sync, xray: true });
   const keepPlain = serializeView({ ...DEFAULT_VIEW, cars: carIds, layout, anchor, sync });
-  const metrics: Metric[] = system ? METRICS.filter((m) => m.group === system) : OVERALL.map((id) => METRIC_BY_ID[id]);
+  const metrics: Metric[] = system
+    ? METRICS.filter((m) => m.group === system)
+    : OVERALL.map((id) => METRIC_BY_ID[id]);
   const ratio = DERIVED.find((d) => d.id === 'powerPerTonneKw');
 
   return (
@@ -53,7 +63,12 @@ export default function ComparePage() {
           {UI.compare.allSystems}
         </NavLink>
         {SYSTEM_IDS.map((s) => (
-          <NavLink key={s} to={`/banding/${s}?${keep}`} className={chip(system === s)} aria-current={system === s ? 'page' : undefined}>
+          <NavLink
+            key={s}
+            to={`/banding/${s}?${keep}`}
+            className={chip(system === s)}
+            aria-current={system === s ? 'page' : undefined}
+          >
             {SYSTEM_LABEL[s]}
           </NavLink>
         ))}
@@ -64,7 +79,13 @@ export default function ComparePage() {
         <fieldset className="flex items-center gap-1">
           <legend className="sr-only">{UI.compare.layout}</legend>
           {LAYOUTS.map((l) => (
-            <button key={l} type="button" className={chip(layout === l)} aria-pressed={layout === l} onClick={() => set({ layout: l })}>
+            <button
+              key={l}
+              type="button"
+              className={chip(layout === l)}
+              aria-pressed={layout === l}
+              onClick={() => set({ layout: l })}
+            >
               {UI.compare[l]}
             </button>
           ))}
@@ -138,7 +159,15 @@ export default function ComparePage() {
         ) : (
           <div className="grid gap-3 lg:grid-cols-2">
             {metrics.map((m) => (
-              <CompareRow key={m.id} label={m.label} unit={m.unit} digits={m.digits} cars={cars} result={compareMetric(cars, m)} ps={m.id !== 'dcChargeKw'} />
+              <CompareRow
+                key={m.id}
+                label={m.label}
+                unit={m.unit}
+                digits={m.digits}
+                cars={cars}
+                result={compareMetric(cars, m)}
+                ps={m.id !== 'dcChargeKw'}
+              />
             ))}
             {!system && ratio && (
               <CompareRow
@@ -147,7 +176,10 @@ export default function ComparePage() {
                 digits={ratio.digits}
                 cars={cars}
                 note={ratio.note}
-                result={rankCells(cars.map((c) => derivedCell(c, ratio)), ratio.better)}
+                result={rankCells(
+                  cars.map((c) => derivedCell(c, ratio)),
+                  ratio.better,
+                )}
               />
             )}
           </div>
@@ -168,13 +200,25 @@ export default function ComparePage() {
                   {cars.map((c) => {
                     const t = PARTS[c.id][p];
                     return (
-                      <li key={c.id} className="flex flex-col gap-1 rounded border border-line bg-surface-2 p-2">
+                      <li
+                        key={c.id}
+                        className="flex flex-col gap-1 rounded border border-line bg-surface-2 p-2"
+                      >
                         <span className="flex items-baseline justify-between gap-2">
                           <span className="text-sm font-semibold">{c.short}</span>
-                          {t.presence.kind === 'absent' && <span className="rounded border border-line px-1 text-xs text-muted">{UI.dissect.absentTag}</span>}
+                          {t.presence.kind === 'absent' && (
+                            <span className="rounded border border-line px-1 text-xs text-muted">
+                              {UI.dissect.absentTag}
+                            </span>
+                          )}
                         </span>
-                        <span className="text-sm text-text">{t.presence.kind === 'absent' ? t.presence.reason : t.summary}</span>
-                        <Link to={`/bedah/${c.id}?part=${p}&xray=1`} className="mt-auto text-xs text-accent-text underline underline-offset-2">
+                        <span className="text-sm text-text">
+                          {t.presence.kind === 'absent' ? t.presence.reason : t.summary}
+                        </span>
+                        <Link
+                          to={`/bedah/${c.id}?part=${p}&xray=1`}
+                          className="mt-auto text-xs text-accent-text underline underline-offset-2"
+                        >
                           {UI.compare.openInDissect}
                         </Link>
                       </li>
