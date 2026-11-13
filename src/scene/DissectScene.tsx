@@ -46,7 +46,7 @@ export function DissectScene(p: DissectSceneProps) {
   const onFocus = useCallback((pt: THREE.Vector3) => setFocus(pt.clone()), []);
   const spread = 1 + (p.explode / 100) * 0.9;
   return (
-    <Stage label={p.label}>
+    <Stage label={p.label} onMiss={() => onSelect(null)}>
       <Studio span={4} shadows={p.explode === 0 && p.peel === 0} />
       <CarModel
         key={p.carId}
