@@ -86,7 +86,7 @@ export const MODEL: Record<CarId, ModelParams> = {
     eff: 0.82,
     drivenFraction: 0.58,
     cgHeightM: 0.43,
-    cdA: 0.75,
+    cdA: 0.84,
     crr: 0.012,
     downforceCapped: true,
     downforceDriven: 0.6,
