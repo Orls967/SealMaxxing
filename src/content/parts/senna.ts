@@ -1,0 +1,230 @@
+import { noPart, part, type CarParts } from '../types';
+
+export const sennaParts: CarParts = {
+  'body-panels': part(
+    'Panel serat karbon sangat tipis yang seluruh bentuknya ditentukan aerodinamika.',
+    'Seluruh panel bodi beratnya hanya puluhan kilogram. Bodi dipotong-potong oleh bukaan, sirip, dan saluran sehingga tampak tidak mulus.',
+    'McLaren terang-terangan mengorbankan keindahan demi downforce dan berat.',
+    ['lengthMm', 'widthMm', 'heightMm'],
+  ),
+  doors: part(
+    'Dua pintu dihedral karbon dengan jendela kaca di bagian bawah.',
+    'Pintu membuka ke atas dan membawa sebagian atap. Panel bawah pintu bisa dipesan dari kaca sehingga pengemudi melihat aspal di sampingnya.',
+    'Kaca bawah membantu melihat tepi lintasan dan menambah kesan kecepatan.',
+    ['seats'],
+  ),
+  glass: part(
+    'Kaca depan, kaca atap, kaca pintu bawah, dan jendela samping kecil yang hanya sebagian bisa dibuka.',
+    'Hanya bagian kecil jendela samping yang bisa turun karena bentuk pintu. Kaca dibuat setipis mungkin.',
+    'Mekanisme jendela penuh terlalu berat dan tidak muat di pintu yang penuh saluran udara.',
+  ),
+  lights: part(
+    'Lampu depan LED tipis di dalam bukaan udara dan lampu belakang berupa satu bilah tipis.',
+    'Lampu depan berbagi ruang dengan saluran udara dan bilah aero aktif. Lampu belakang dirancang agar tidak mengganggu aliran udara dari diffuser.',
+    'Bahkan lampu pun ditempatkan supaya tidak menghalangi udara.',
+  ),
+  tub: part(
+    'Monocage III: sel serat karbon paling kuat yang pernah dibuat McLaren untuk mobil jalan raya.',
+    'Bak, atap, dan struktur belakang kabin dicetak sebagai satu kesatuan. Ruang di belakang kursi dibentuk untuk menyimpan dua helm dan baju balap.',
+    'Sel yang kaku dan ringan adalah dasar dari mobil seberat kurang dari 1,2 ton kering.',
+    ['dryKg', 'kerbKg'],
+  ),
+  subframes: part(
+    'Rangka bantu aluminium depan dan belakang.',
+    'Rangka belakang memegang V8, transmisi, dan suspensi. Dudukan mesin dibuat kaku sehingga getaran mesin terasa di kabin.',
+    'Dudukan kaku memberi respons lebih langsung dan sengaja dibiarkan terasa.',
+  ),
+  'crash-structure': part(
+    'Struktur remuk aluminium yang dibaut ke Monocage III.',
+    'Ujung depan dan belakang dirancang hancur menyerap energi. Sel karbon tetap utuh.',
+    'Sama seperti mobil balap, hanya ujungnya yang dikorbankan.',
+  ),
+  engine: part(
+    'V8 4,0 liter twin-turbo 800 PS, mesin bakar terkuat McLaren untuk jalan raya saat itu.',
+    'Poros engkol datar, piston ringan, dan dua turbo gulir-kembar berespons cepat. Udara dihisap lewat corong di atap tepat di atas kepala penumpang.',
+    'Tanpa bantuan listrik, respons harus datang dari mesin itu sendiri: komponen ringan dan turbo yang cepat berputar.',
+    ['cylinders', 'displacementCc', 'enginePowerKw', 'engineTorqueNm', 'engineMaxRpm'],
+  ),
+  induction: part(
+    'Corong udara karbon di atap, dua turbo gulir-kembar, dan intercooler.',
+    'Corong atap menyalurkan udara ke plenum karbon. Turbo berinersia rendah memampatkannya dengan jeda kecil.',
+    'Suara hisapan sengaja disalurkan ke kabin sebagai bagian dari pengalaman.',
+  ),
+  'motor-front': noPart(
+    'Senna tidak memiliki motor listrik penggerak sama sekali.',
+    'Motor depan menggerakkan roda depan pada mobil berpenggerak empat roda.',
+    'Senna berpenggerak roda belakang dengan mesin bakar saja.',
+    'Sistem hibrida P1 menambah sekitar 150 kg lebih; Senna membuangnya demi bobot.',
+  ),
+  'motor-rear': noPart(
+    'Senna tidak memiliki motor listrik penggerak.',
+    'Pada hibrida, motor belakang menambah tenaga dan mengisi celah torsi.',
+    'Seluruh 800 PS datang dari V8. Celah torsi ditutup dengan turbo yang lebih cepat berputar dan gigi yang rapat.',
+    'Tanpa motor dan baterai, Senna hampir 200 kg lebih ringan daripada P1 dalam keadaan siap jalan.',
+  ),
+  transmission: part(
+    'Transmisi kopling ganda 7 tingkat.',
+    'Perpindahan gigi dibuat sangat cepat, dan pada mode paling agresif pengapian diputus sesaat untuk mempercepatnya.',
+    'Transmisi yang sama dengan keluarga McLaren lain, disetel untuk perpindahan paling cepat.',
+    ['gears'],
+  ),
+  driveline: part(
+    'Diferensial terbuka dengan Brake Steer.',
+    'Rem roda belakang bagian dalam ditekan ringan di tikungan untuk membantu mobil berbelok. Tidak ada diferensial pengunci mekanis.',
+    'Lebih ringan daripada diferensial aktif dan sudah terbukti di P1.',
+  ),
+  battery: noPart(
+    'Tidak ada baterai traksi; hanya aki 12 V litium ringan untuk starter dan elektronika.',
+    'Baterai traksi menyimpan listrik untuk motor penggerak.',
+    'Senna menyimpan seluruh energinya sebagai bensin. Aki litium kecil menggantikan aki timbal demi menghemat beberapa kilogram.',
+    'Membuang sistem hibrida adalah keputusan utama yang membuat Senna paling ringan.',
+  ),
+  'fuel-tank': part(
+    'Tangki bensin sekitar 72 liter di belakang kabin.',
+    'Tangki berada di antara kabin dan mesin, dekat titik berat. Ini satu-satunya penyimpan energi di mobil.',
+    'Bensin menyimpan energi sekitar 50 kali lebih padat per kilogram daripada baterai.',
+    ['fuelTankL'],
+  ),
+  'power-electronics': noPart(
+    'Tanpa penggerak listrik, tidak ada inverter tegangan tinggi.',
+    'Elektronika daya mengubah arus baterai menjadi arus untuk motor penggerak.',
+    'Senna hanya punya sistem kelistrikan 12 V biasa untuk komputer mesin, pompa, dan lampu.',
+    'Tidak ada kabel oranye tegangan tinggi berarti lebih sedikit berat dan lebih sedikit pendinginan.',
+  ),
+  'charge-port': noPart(
+    'Tidak ada baterai traksi untuk diisi.',
+    'Soket pengisian memasukkan listrik dari luar ke baterai.',
+    'Senna hanya punya lubang pengisian bensin.',
+    'Mengisi 72 liter bensin butuh dua menit; itu salah satu keunggulan praktis mesin bakar.',
+  ),
+  radiators: part(
+    'Radiator samping besar yang dimiringkan dan radiator depan untuk intercooler.',
+    'Radiator samping diberi makan lewat bukaan besar di depan roda belakang. Udara panas dibuang ke atas melewati kisi di dek belakang.',
+    'Membuang udara panas ke atas menjauhkannya dari sayap belakang dan diffuser.',
+  ),
+  'battery-cooling': noPart(
+    'Tidak ada baterai traksi yang perlu didinginkan.',
+    'Pendingin baterai menjaga suhu sel tetap dalam rentang aman.',
+    'Seluruh kapasitas pendinginan Senna dipakai untuk mesin, oli, transmisi, dan intercooler.',
+    'Satu sirkuit pendingin lebih sedikit berarti lebih ringan dan lebih sederhana.',
+  ),
+  'air-paths': part(
+    'Udara melewati bodi di banyak tempat: lewat spatbor depan, pintu, dek belakang, dan celah sayap.',
+    'Bukaan di atas roda depan melepas tekanan dari rumah roda. Saluran di samping mengarahkan udara ke radiator dan mengelilingi buritan menuju diffuser.',
+    'Setiap bukaan punya tugas ganda: mendinginkan dan menambah downforce.',
+  ),
+  exhaust: part(
+    'Knalpot Inconel dan titanium yang keluar ke atas melalui dek belakang.',
+    'Tiga pipa menyembul di dek belakang, tepat di depan sayap. Gas buang diarahkan menjauh dari diffuser dan sayap.',
+    'Keluar di atas memendekkan pipa dan menjaga aliran udara di bawah sayap tetap bersih.',
+  ),
+  'suspension-front': part(
+    'Wishbone ganda dengan RaceActive Chassis Control II hidropneumatik.',
+    'Peredam saling terhubung secara hidraulik dan menggantikan batang stabilizer. Dalam mode Race, hidung turun lebih banyak daripada buritan.',
+    'Menurunkan hidung memiringkan lantai dan menambah downforce depan.',
+  ),
+  'suspension-rear': part(
+    'Wishbone ganda belakang dengan sistem hidropneumatik yang sama.',
+    'Kekakuan dan tinggi mobil diatur terus-menerus. Sistem menahan mobil agar tidak "jongkok" ketika downforce 800 kg menekan dari atas.',
+    'Tanpa kendali tinggi, downforce sebesar itu akan membuat mobil menyentuh aspal.',
+  ),
+  steering: part(
+    'Kemudi elektro-hidraulik.',
+    'Pompa listrik menyediakan tekanan hidraulik. McLaren mempertahankan hidraulik demi rasa jalan.',
+    'Rasa kemudi adalah bagian inti dari mobil yang dibuat untuk sirkuit.',
+  ),
+  discs: part(
+    'Cakram karbon-keramik CCM-R 390 mm, tiap cakram dibuat selama berbulan-bulan.',
+    'Bahan CCM-R lebih kuat dan menghantarkan panas beberapa kali lebih baik daripada karbon-keramik biasa. Karena itu cakram bisa lebih kecil dan ringan.',
+    'Rem yang bekerja lebih dingin lebih tahan dipakai putaran demi putaran.',
+    ['discFrontMm', 'discRearMm'],
+  ),
+  calipers: part(
+    'Kaliper monoblok enam piston di depan dengan saluran pendingin khusus.',
+    'Kaliper dirancang dengan sirip pendingin dan dialiri udara dari bumper. Rasa pedal dibuat keras seperti mobil balap.',
+    'Pedal keras memudahkan pengemudi menakar pengereman di batasnya.',
+  ),
+  regen: noPart(
+    'Tanpa motor listrik, tidak ada pengereman regeneratif.',
+    'Regenerasi mengubah gerak mobil menjadi listrik saat melambat.',
+    'Seluruh energi gerak Senna dibuang sebagai panas pada cakram karbon-keramik dan lewat hambatan udara.',
+    'Tidak ada baterai untuk menampungnya; sebagai gantinya remnya dibuat luar biasa kuat.',
+  ),
+  'air-brake': part(
+    'Sayap belakang menegak hampir vertikal saat mengerem keras.',
+    'Dalam sepersekian detik sayap berputar ke sudut curam. Hambatan melonjak dan roda belakang ditekan kuat ke aspal.',
+    'Bersama downforce, rem udara membuat Senna berhenti dari 200 km/jam dalam sekitar 100 meter.',
+  ),
+  wheels: part(
+    'Pelek tempa ultraringan dengan mur tengah tunggal.',
+    'Tiap pelek dikunci satu mur besar seperti mobil balap. Desainnya dibuat seminimal mungkin.',
+    'Mur tunggal lebih ringan dan mempercepat pergantian roda.',
+    ['wheelFrontIn', 'wheelRearIn'],
+  ),
+  tires: part(
+    'Ban Pirelli P Zero Trofeo R: 245 mm di depan dan 315 mm di belakang.',
+    'Trofeo R pada dasarnya ban sirkuit yang masih legal di jalan, dengan alur sangat sedikit. Cengkeramannya di aspal kering jauh di atas ban jalan biasa.',
+    'Ban adalah satu-satunya penghubung ke aspal; tanpa ban sirkuit, downforce 800 kg tidak bisa dimanfaatkan.',
+    ['tireFrontMm', 'tireRearMm'],
+  ),
+  'front-aero': part(
+    'Splitter depan besar dengan bilah aero aktif di dalam bukaan bumper.',
+    'Splitter menjorok jauh ke depan. Bilah aktif di kiri dan kanan mengubah sudut untuk menyeimbangkan downforce depan dengan sayap belakang.',
+    'Keseimbangan aero harus tetap ketika sayap belakang terus bergerak.',
+    ['downforceKg'],
+  ),
+  underbody: part(
+    'Lantai rata dan diffuser dua tingkat yang sangat besar.',
+    'Diffuser mulai naik dari bawah poros belakang dan menjulang sampai buritan. Ia menarik udara dari bawah mobil dengan kuat.',
+    'Diffuser besar menghasilkan downforce dengan hambatan lebih kecil daripada sayap.',
+  ),
+  'rear-wing': part(
+    'Sayap karbon dua elemen yang digantung dari atas pada tiang leher angsa.',
+    'Tiang memegang sayap dari permukaan atas sehingga sisi bawah, yang paling banyak bekerja, tetap bersih. Sayap seberat beberapa kilogram ini menahan beban ratusan kilogram.',
+    'Sisi bawah sayap menghasilkan sebagian besar downforce, jadi tidak boleh terganggu tiang.',
+    ['downforceKg'],
+  ),
+  'active-aero': part(
+    'Sayap belakang dan bilah depan yang terus-menerus bergerak, termasuk fungsi DRS.',
+    'Komputer mengubah sudut sayap tanpa henti untuk menjaga keseimbangan, meratakannya di lintasan lurus, dan menegakkannya saat mengerem. Di atas 250 km/jam downforce dibatasi agar tidak membebani ban berlebihan.',
+    'Downforce yang terus naik tanpa batas akan merusak ban dan suspensi.',
+    ['downforceKg'],
+  ),
+  seats: part(
+    'Dua kursi cangkang karbon dengan bantalan tipis yang hanya ditempel di titik tumpu.',
+    'Cangkang tiap kursi beratnya hanya beberapa kilogram. Bantalan dipasang hanya di tempat badan menekan.',
+    'Kursi adalah contoh paling jelas dari obsesi berat mobil ini.',
+    ['seats'],
+  ),
+  dashboard: part(
+    'Layar instrumen lipat dan layar tengah tegak di dasbor karbon terbuka.',
+    'Layar instrumen bisa merebah sehingga hanya menampilkan jalur tipis berisi putaran mesin dan gigi. Karbon dibiarkan terbuka tanpa pelapis.',
+    'Layar yang merebah mengurangi gangguan pandangan di sirkuit.',
+  ),
+  controls: part(
+    'Kemudi polos tanpa tombol, tombol starter di atap, dan pemilih gigi di kursi.',
+    'Kemudi sengaja tidak diberi tombol. Tombol starter dan pembuka pintu dipasang di konsol atap.',
+    'Kemudi tanpa tombol menjaga pengemudi fokus pada satu hal.',
+  ),
+  cargo: part(
+    'Tidak ada bagasi; hanya ruang di belakang kursi untuk dua helm dan baju balap.',
+    'Rongga di Monocage di belakang kursi dibentuk pas untuk helm. Tidak ada ruang penyimpanan di depan.',
+    'Yang dibawa ke sirkuit hanya helm, jadi hanya itu yang diberi tempat.',
+  ),
+  'drive-modes': part(
+    'Mode Comfort, Sport, Track, dan Race.',
+    'Mode Race menurunkan mobil, mengeraskan suspensi, dan menyetel aero untuk downforce penuh. Kendali mesin dan sasis diatur terpisah.',
+    'Senna legal di jalan, tetapi setelan terbaiknya hanya untuk sirkuit.',
+  ),
+  stability: part(
+    'Kendali stabilitas dengan mode dinamis dan pengatur selip yang bisa disetel.',
+    'Pengemudi bisa memilih seberapa besar sudut selip yang diizinkan sebelum sistem campur tangan. Brake Steer membantu memutar mobil di tikungan.',
+    'Batas yang bisa disetel membantu pengemudi belajar mendekati batas mobil secara bertahap.',
+  ),
+  'driver-assist': noPart(
+    'Tidak ada bantuan pengemudi seperti jaga lajur atau kendali jelajah adaptif.',
+    'Sistem bantu pengemudi memakai kamera dan radar untuk membantu mengerem dan menjaga lajur.',
+    'Senna hanya menyediakan sensor parkir dan kamera mundur sebagai pilihan tanpa biaya.',
+    'Untuk mobil sirkuit, setiap sensor adalah berat yang tidak membuatnya lebih cepat.',
+  ),
+};
