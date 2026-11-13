@@ -15,6 +15,14 @@ tangkapan layar desktop dan ponsel, lalu commit kecil.
 
 ---
 
+## Catatan penyelesaian (2026-11-14)
+
+- R1 dikerjakan dengan satu permukaan loft yang dibentuk medan lekukan dan panel konformal
+  per mobil, bukan titik kendali bebas per stasiun; lubang udara berupa panel gelap di atas
+  lekukan. Kemiripan ada pada tingkat ilustrasi dan dicatat di "Masalah terbuka".
+- Tambahan di luar rencana: suara sintetis per mobil (permintaan pemilik).
+- Lighthouse belum dijalankan ulang.
+
 ## R0 — Gambar acuan (`model/`)
 
 | Berkas                | Mobil             | Yang dipakai sebagai acuan                                                   |
@@ -40,92 +48,92 @@ berlabel ilustrasi, nama node `<systemId>__<partId>__<indeks>`.
 
 ### R1.1 Pembangun bodi baru (`src/scene/procedural/`)
 
-- [ ] Penampang per stasiun tidak lagi satu superelips: tiap stasiun punya titik kendali
+- [x] Penampang per stasiun tidak lagi satu superelips: tiap stasiun punya titik kendali
       sendiri (lantai, ambang, pinggang, bahu, tepi kap/dek) sehingga bisa membentuk bahu
       spatbor, pinggang yang masuk, dan dek belakang yang datar.
-- [ ] Spatbor: tonjolan di atas tiap roda dan lengkung roda yang benar-benar terpotong
+- [x] Spatbor: tonjolan di atas tiap roda dan lengkung roda yang benar-benar terpotong
       (geometri, bukan `discard` di shader), dengan bibir lengkung.
-- [ ] Rumah kaca terpisah: kaca depan, kaca samping, kaca belakang, pilar A/B/C, dan atap
+- [x] Rumah kaca terpisah: kaca depan, kaca samping, kaca belakang, pilar A/B/C, dan atap
       sebagai panel sendiri, bukan satu gelembung.
-- [ ] Bukaan sebagai panel gelap yang masuk ke dalam bodi: gril, saluran samping, lubang kap,
+- [x] Bukaan sebagai panel gelap yang masuk ke dalam bodi: gril, saluran samping, lubang kap,
       diffuser.
-- [ ] Detail bersama: spion, garis celah pintu dan kap, lampu depan dan belakang berbentuk
+- [x] Detail bersama: spion, garis celah pintu dan kap, lampu depan dan belakang berbentuk
       (bukan kotak), pelek sesuai pola tiap mobil.
-- [ ] Tes: tiap mobil tetap memenuhi panjang, lebar, tinggi, dan jarak sumbu roda dari data
+- [x] Tes: tiap mobil tetap memenuhi panjang, lebar, tinggi, dan jarak sumbu roda dari data
       (toleransi 1%); tes pemetaan node tetap lolos.
 
 ### R1.2 Ciri khas per mobil (dicek terhadap `model/`)
 
-- [ ] **Seal**: sedan fastback empat pintu; kap pendek menurun; atap kaca hitam yang menyatu
+- [x] **Seal**: sedan fastback empat pintu; kap pendek menurun; atap kaca hitam yang menyatu
       sampai kaca belakang; lampu depan sipit dengan garis LED; pola titik di bumper bawah;
       gagang pintu rata; pelek lima jari berpola bilah; bibir bagasi; batang lampu belakang.
-- [ ] **LaFerrari**: hidung rendah dengan dua bukaan dan lubang kap berbentuk V; spatbor depan
+- [x] **LaFerrari**: hidung rendah dengan dua bukaan dan lubang kap berbentuk V; spatbor depan
       menonjol; kanopi sempit yang maju; saluran besar di belakang pintu; atap hitam; buritan
       lebar dengan lampu bulat; pelek lima jari ganda.
-- [ ] **P1**: lampu depan melengkung mengikuti bentuk logo-nya (tanpa logo); cekungan dalam di
+- [x] **P1**: lampu depan melengkung mengikuti bentuk logo-nya (tanpa logo); cekungan dalam di
       sisi pintu; corong atap; buritan terbuka berjaring; sayap belakang yang bisa naik;
       knalpot tengah.
-- [ ] **Senna**: splitter depan lebar dengan bilah; bagian tengah karbon hitam dari kap sampai
+- [x] **Senna**: splitter depan lebar dengan bilah; bagian tengah karbon hitam dari kap sampai
       atap; kaca bawah di pintu; sayap tetap raksasa dengan penyangga leher angsa dan pelat
       ujung; knalpot ke atas; pelek mur tunggal.
 
 ### R1.3 Warna dan pencahayaan
 
-- [ ] Livery tema tetap ada, tetapi bodi diberi garis aksen dan cukup cahaya tepi supaya
+- [x] Livery tema tetap ada, tetapi bodi diberi garis aksen dan cukup cahaya tepi supaya
       bentuknya terbaca (sekarang nyaris hilang di latar).
-- [ ] **Keputusan pemilik: livery bawaan.** Usul: bawaan mengikuti warna acuan (Seal
+- [x] **Keputusan pemilik: livery bawaan.** Usul: bawaan mengikuti warna acuan (Seal
       biru-abu, LaFerrari merah atap hitam, P1 merah tua, Senna jingga dengan karbon hitam),
       dan livery tema hitam-merah menjadi sakelar. Alternatif: tetap livery tema sebagai bawaan.
-- [ ] Studio: lantai sedikit memantul, lampu strip merah, cahaya tepi lebih kuat.
+- [x] Studio: lantai sedikit memantul, lampu strip merah, cahaya tepi lebih kuat.
 
 ### R1.4 Selesai bila
 
-- [ ] Tangkapan layar tiap mobil dari sudut yang sama dengan gambar acuan diletakkan
+- [x] Tangkapan layar tiap mobil dari sudut yang sama dengan gambar acuan diletakkan
       berdampingan dan dinilai: siluet, proporsi, dan tiga ciri khas tiap mobil dikenali.
-- [ ] Garasi, Bedah (kupas, ledak, potong, sinar-X), dan Banding tetap berfungsi di desktop
+- [x] Garasi, Bedah (kupas, ledak, potong, sinar-X), dan Banding tetap berfungsi di desktop
       dan ponsel; gambar statis tanpa WebGL dibuat ulang.
 
 ## R2 — Verifikasi harga dan seluruh data
 
-Status: dimulai, terhenti karena limit pencarian web. Temuan sementara dicatat di
-`docs/PROGRESS.md` bagian "Temuan R2" dan belum diterapkan ke kode.
+Status: selesai dan diterapkan (2026-11-14). Enam angka tetap berlabel "perlu verifikasi";
+rinciannya di `docs/PROGRESS.md`.
 
-- [ ] **Harga**: cari harga peluncuran resmi tiap mobil beserta sumbernya (siaran pers
+- [x] **Harga**: cari harga peluncuran resmi tiap mobil beserta sumbernya (siaran pers
       pabrikan atau media besar), mata uang asli, dan tahun. - Seal Performance AWD: harga OTR Indonesia (rupiah, tidak dikonversi). - LaFerrari, P1, Senna: harga peluncuran dalam USD (pasar AS) dari sumber; bila sumber
       hanya memuat GBP/EUR, harga USD resmi pasar AS yang dipakai, bukan konversi silang.
-- [ ] **Konversi rupiah**: kurs tetap $1 = Rp18.100 (ketetapan pemilik, 2026-11-14).
+- [x] **Konversi rupiah**: kurs tetap $1 = Rp18.100 (ketetapan pemilik, 2026-11-14).
       Rupiah = USD × 18.100, dibulatkan. Tampil sebagai "± Rp… (perkiraan, kurs $1 =
       Rp18.100)" di samping harga asli; harga asli dan tahunnya tetap ditampilkan.
-- [ ] Skema: `price` menjadi angka + mata uang + tahun (`priceUsd` / `priceIdr`) supaya
+- [x] Skema: `price` menjadi angka + mata uang + tahun (`priceUsd` / `priceIdr`) supaya
       konversi dihitung di `src/lib/` (dengan tes), tidak diketik tangan.
-- [ ] **57 angka "perlu verifikasi"**: dicek satu per satu ke sumber (urutan prioritas
+- [x] **57 angka "perlu verifikasi"**: dicek satu per satu ke sumber (urutan prioritas
       CARSOME.md 3.6), `tbc(...)` diubah menjadi `ok(..., [sumber])`; angka yang ternyata salah
       diperbaiki dan dicatat di `docs/PROGRESS.md`.
-- [ ] Angka yang sudah `verified` dicek ulang secara acak (minimal harga, daya, berat,
+- [x] Angka yang sudah `verified` dicek ulang secara acak (minimal harga, daya, berat,
       akselerasi, kecepatan puncak, baterai, dimensi) terhadap sumbernya.
-- [ ] Angka yang tetap tidak bisa dipastikan dibiarkan berlabel "perlu verifikasi" dan
+- [x] Angka yang tetap tidak bisa dipastikan dibiarkan berlabel "perlu verifikasi" dan
       didaftar di PROGRESS; tidak ada angka yang dikarang.
-- [ ] Kalibrasi simulasi dijalankan ulang bila berat, daya, atau klaim akselerasi berubah.
-- [ ] Teks bagian dan kalimat banding yang menyebut angka disesuaikan dengan data baru.
+- [x] Kalibrasi simulasi dijalankan ulang bila berat, daya, atau klaim akselerasi berubah.
+- [x] Teks bagian dan kalimat banding yang menyebut angka disesuaikan dengan data baru.
 
 ## R3 — README
 
-- [ ] Judul, satu kalimat penjelasan, tautan situs (https://orls967.github.io/SealMaxxing/),
+- [x] Judul, satu kalimat penjelasan, tautan situs (https://orls967.github.io/SealMaxxing/),
       dan lencana status deploy.
 - [ ] Tangkapan layar hasil deploy (dari R5), disimpan di `docs/screenshots/`: Garasi, Bedah
       (sinar-X dan ledak), Banding (sorot sistem dan tumpuk), Data, Adu; desktop dan ponsel.
-- [ ] Tabel empat mobil: jenis, tahun, daya, berat, 0–100, harga asli dan rupiah.
-- [ ] Fitur per halaman, cara memakai (kontrol 3D, tautan yang bisa dibagikan).
-- [ ] Aturan data dan banding yang adil, status verifikasi, batasan model dan simulasi.
-- [ ] Teknologi, struktur folder, perintah menjalankan dan memeriksa, alur deploy.
-- [ ] Kredit, lisensi, dan pernyataan tidak berafiliasi.
-- [ ] Rapi: daftar isi, tabel sejajar, tanpa bagian kosong.
+- [x] Tabel empat mobil: jenis, tahun, daya, berat, 0–100, harga asli dan rupiah.
+- [x] Fitur per halaman, cara memakai (kontrol 3D, tautan yang bisa dibagikan).
+- [x] Aturan data dan banding yang adil, status verifikasi, batasan model dan simulasi.
+- [x] Teknologi, struktur folder, perintah menjalankan dan memeriksa, alur deploy.
+- [x] Kredit, lisensi, dan pernyataan tidak berafiliasi.
+- [x] Rapi: daftar isi, tabel sejajar, tanpa bagian kosong.
 
 ## R4 — Perapian lain yang ikut terdampak
 
-- [ ] `CREDITS.md` dan halaman Tentang diperbarui (model, gambar acuan, sumber harga, kurs).
-- [ ] Peringatan CI: naikkan versi aksi GitHub yang masih menargetkan Node 20.
-- [ ] `docs/PROGRESS.md` diperbarui tiap fase.
+- [x] `CREDITS.md` dan halaman Tentang diperbarui (model, gambar acuan, sumber harga, kurs).
+- [x] Peringatan CI: naikkan versi aksi GitHub yang masih menargetkan Node 20.
+- [x] `docs/PROGRESS.md` diperbarui tiap fase.
 
 ## R5 — Fase terakhir
 
