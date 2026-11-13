@@ -1,0 +1,22 @@
+export const SOURCES = {
+  'byd-id': { title: 'BYD Seal — spesifikasi', publisher: 'BYD Indonesia', url: 'https://www.byd.com/id/car/seal', accessed: '2026-11-13' },
+  'byd-au': { title: 'BYD Seal brochure & build page', publisher: 'BYD Automotive Australia', url: 'https://bydautomotive.com.au/seal', accessed: '2026-11-13' },
+  evdb: { title: 'BYD SEAL 82.5 kWh AWD Excellence (MY26)', publisher: 'EV Database', url: 'https://ev-database.org/car/3516/BYD-SEAL-825-kWh-AWD-Excellence', accessed: '2026-11-13' },
+  carexpert: { title: 'BYD Seal Performance features and specs', publisher: 'CarExpert', url: 'https://www.carexpert.com.au/byd/seal/performance/features-and-specs', accessed: '2026-11-13' },
+  zigwheels: { title: 'BYD Seal Performance AWD', publisher: 'Zigwheels Indonesia', url: 'https://www.zigwheels.co.id/mobil-baru/byd/seal/performance-awd/', accessed: '2026-11-13' },
+  moladin: { title: 'Harga BYD Seal terbaru 2026', publisher: 'Moladin', url: 'https://moladin.com/news/harga-byd-seal-terbaru-2026/', accessed: '2026-11-13' },
+  'ferrari-official': { title: 'LaFerrari — scheda tecnica', publisher: 'Ferrari S.p.A.', url: 'https://www.ferrari.com/en-EN/auto/laferrari', accessed: '2026-11-13' },
+  rosso: { title: '2013 Ferrari LaFerrari', publisher: 'Rosso Automobili', url: 'https://rossoautomobili.com/blogs/ferrari-models/2013-ferrari-laferrari', accessed: '2026-11-13' },
+  autozine: { title: 'Ferrari LaFerrari', publisher: 'AutoZine', url: 'https://autozine.org/Archive/Ferrari/new/LaFerrari.html', accessed: '2026-11-13' },
+  ecr: { title: 'Ferrari LaFerrari registry', publisher: 'Exclusive Car Registry', url: 'https://exclusivecarregistry.com/model/ferrari/laferrari', accessed: '2026-11-13' },
+  'mclaren-p1': { title: 'McLaren P1 — Facts & Figures', publisher: 'McLaren Automotive', url: 'https://cars.mclaren.com/ultimate-series/p1/specification', accessed: '2026-11-13' },
+  'wiki-p1': { title: 'McLaren P1', publisher: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/McLaren_P1', accessed: '2026-11-13' },
+  'autocar-senna': { title: 'McLaren Senna: full technical breakdown', publisher: 'Autocar', url: 'https://www.autocar.co.uk/node/85478', accessed: '2026-11-13' },
+  'ph-senna': { title: 'McLaren Senna — full details', publisher: 'PistonHeads', url: 'https://www.pistonheads.com/news/general/mclaren-senna--full-details/37520', accessed: '2026-11-13' },
+  'wiki-senna': { title: 'McLaren Senna', publisher: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/McLaren_Senna', accessed: '2026-11-13' },
+  'wiki-laferrari': { title: 'LaFerrari', publisher: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/LaFerrari', accessed: '2026-11-13' },
+  'tg-fxxk': { title: 'The Ferrari FXX K Evo in numbers', publisher: 'Top Gear', url: 'https://www.topgear.com/car-news/supercars/ferrari-fxx-k-evo-numbers', accessed: '2026-11-13' },
+  'ca-sennagtr': { title: 'McLaren Senna GTR: downforce, suspension specifics revealed', publisher: 'CarAdvice', url: 'https://www.caradvice.com.au/news/mclaren-senna-gtr-downforce/', accessed: '2026-11-13' },
+  spec: { title: 'CARSOME.md Bagian 3 (data awal, belum dicek)', publisher: 'Proyek', url: '', accessed: '2026-11-13' },
+} as const;
+export type SourceId = keyof typeof SOURCES;
