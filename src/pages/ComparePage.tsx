@@ -138,7 +138,7 @@ export default function ComparePage() {
         ) : (
           <div className="grid gap-3 lg:grid-cols-2">
             {metrics.map((m) => (
-              <CompareRow key={m.id} label={m.label} unit={m.unit} digits={m.digits} cars={cars} result={compareMetric(cars, m)} />
+              <CompareRow key={m.id} label={m.label} unit={m.unit} digits={m.digits} cars={cars} result={compareMetric(cars, m)} ps={m.id !== 'dcChargeKw'} />
             ))}
             {!system && ratio && (
               <CompareRow
