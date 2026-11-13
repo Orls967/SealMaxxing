@@ -87,6 +87,9 @@ berlabel ilustrasi, nama node `<systemId>__<partId>__<indeks>`.
 
 ## R2 — Verifikasi harga dan seluruh data
 
+Status: dimulai, terhenti karena limit pencarian web. Temuan sementara dicatat di
+`docs/PROGRESS.md` bagian "Temuan R2" dan belum diterapkan ke kode.
+
 - [ ] **Harga**: cari harga peluncuran resmi tiap mobil beserta sumbernya (siaran pers
       pabrikan atau media besar), mata uang asli, dan tahun. - Seal Performance AWD: harga OTR Indonesia (rupiah, tidak dikonversi). - LaFerrari, P1, Senna: harga peluncuran dalam USD (pasar AS) dari sumber; bila sumber
       hanya memuat GBP/EUR, harga USD resmi pasar AS yang dipakai, bukan konversi silang.

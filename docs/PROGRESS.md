@@ -1,20 +1,18 @@
 # PROGRESS
 Diperbarui: 2026-11-14
-Milestone aktif: M9 selesai; sudah dipublikasikan
-Sub-tugas aktif: tidak ada
-Langkah berikut yang persis: lihat "Masalah terbuka"; lanjutkan verifikasi angka di "Data yang belum terverifikasi" (ubah `tbc(...)` menjadi `ok(..., [sumber])` di `src/content/cars/*.ts`).
+Milestone aktif: revisi (lihat `revisi.md`), fase R2
+Sub-tugas aktif: verifikasi harga dan data ke sumber; terhenti karena limit pencarian web
+Langkah berikut yang persis: lanjutkan R2 di `revisi.md` mulai dari daftar "Belum dicek" di bawah, lalu terapkan "Temuan R2" ke `src/content/cars/*.ts` dan `src/content/sources.ts`; setelah itu R1 (model 3D).
 
-## Selesai
-- M0 Fondasi: Vite, lint, format, tes, token bred, HashRouter, `scripts/shots.mjs`.
-- M1 Skema dan data awal: skema Zod, empat berkas mobil, registri metrik, metrik turunan, validasi konten.
-- M2 Verifikasi data: sebagian besar angka dicek ke sumber; sisanya tercatat di bawah.
-- M3 Studio dan model prosedural: studio bred, pustaka material, empat bodi berskala benar, Garasi.
-- M4 Komponen dalam: semua bagian di 3.4 dimodelkan skematis; tes pemetaan node lolos untuk keempat mobil.
-- M5 Bedah: kupas, ledak (pegas teredam + garis penghubung), potong tiga sumbu, sinar-X, klik/hover/klik ganda, daftar keyboard, panel bagian dengan strip banding, preset kamera.
-- M6 Banding: berjajar (satu kanvas, beberapa viewport) dan tumpuk dengan tiga titik acuan, kamera sinkron, sorot sistem, baris banding, kalimat ringkas, bagian padanan. Delapan cerita 3.5 punya tautan di Garasi.
-- M7 Data dan grafik: tabel induk (cari, saring, urut), batang, radar, sebar, kurva downforce, varian ekstrem, ekspor CSV, glosarium, daftar sumber.
-- M8 Adu: akselerasi, pengereman, downforce, aliran energi. Kalibrasi teruji.
-- M9: cadangan tanpa WebGL (gambar statis), halaman Tentang, CREDITS, README, e2e, audit aksesibilitas.
+## Temuan R2 sejauh ini (belum diterapkan ke kode)
+- Seal: Rp750 juta OTR Jakarta dikonfirmasi beberapa sumber (Zigwheels, Fortune IDN, Gridoto mengutip situs BYD Indonesia). Tidak dikonversi.
+- Senna: harga AS $958.966 (lembar media McLaren) → ± Rp17.357.284.600 pada kurs $1 = Rp18.100.
+- P1: harga AS $1.150.000 (duPont Registry; Motor1 menulis angka lain, perlu sumber kedua) → ± Rp20.815.000.000.
+- LaFerrari: harga AS belum ditemukan; Wikipedia hanya menyebut "lebih dari 1 juta euro".
+- LaFerrari (Wikipedia): panjang 4.702, lebar 1.992, tinggi 1.116, jarak sumbu 2.650 mm; berat siap jalan 1.585 kg; mesin 588 kW pada 9.000 rpm, 700 Nm pada 6.750 rpm; motor 120 kW; gabungan 708 kW dan 900 Nm; 7 tingkat; cakram 398/380 mm; ban 265/30 R19 dan 345/30 R20; Aperta 200 unit + 9 + 1 (kode menulis 210: sama). 0–100 tertulis 2,6 dtk (kode: klaim < 3,0). 0–300: klaim 15 dtk dibantah, terukur 21,99 dtk.
+- P1 (Wikipedia): dimensi 4.588 × 1.946 × 1.188, jarak sumbu 2.670 mm; torsi mesin 720 Nm pada 4.000 rpm; jarak listrik 11 km NEDC (kode: > 10 km); berat siap jalan 1.490 kg di kotak info tetapi 1.547 kg di teks (sumber bertentangan); baterai 535 V.
+- Senna (Wikipedia) BERBEDA dari kode: lebar 2.153 mm (kode 1.958), tinggi 1.195 mm (kode 1.229), berat siap jalan 1.374 kg (kode ± 1.309). Harus dicek ke lembar media McLaren sebelum diubah; lebar kemungkinan termasuk spion.
+- Belum dicek: harga AS LaFerrari; putaran maksimum ketiga mesin; cakram, ban, pelek, tangki, massa MonoCage P1 dan Senna; downforce LaFerrari; tinggi, jarak sumbu, Cd, dan tingkat transmisi Seal; daya FXX K Evo.
 
 ## Publikasi
 - Repositori: https://github.com/Orls967/SealMaxxing (publik, cabang `master`, tag m0–m9).
