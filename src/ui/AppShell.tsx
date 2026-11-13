@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { UI } from '@/content/ui';
+import { ChartDefs } from './charts/ChartDefs';
 
 const LINKS = [
   { to: '/', label: UI.nav.garage, end: true },
@@ -15,6 +16,7 @@ const LINKS = [
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-full flex-col">
+      <ChartDefs />
       <a href="#isi" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-accent focus:p-2 focus:text-text">
         {UI.app.skip}
       </a>
