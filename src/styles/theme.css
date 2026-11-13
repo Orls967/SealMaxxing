@@ -43,3 +43,8 @@ input[type='range'] {
     animation: none !important;
   }
 }
+
+/* Full-height work area below the sticky header. */
+@utility h-stage {
+  height: calc(100dvh - 3.25rem);
+}

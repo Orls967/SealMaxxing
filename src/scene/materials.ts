@@ -99,7 +99,7 @@ export function matGhost(color: string = PALETTE.white, strength = 1): THREE.Mat
         varying vec3 vN; varying vec3 vV;
         void main() {
           float f = 1.0 - abs(dot(normalize(vN), normalize(vV)));
-          float a = (0.035 + pow(f, 2.2) * 0.55) * uStrength;
+          float a = (0.012 + pow(f, 3.0) * 0.26) * uStrength;
           gl_FragColor = vec4(uColor, a);
         }`,
       transparent: true,
