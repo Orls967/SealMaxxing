@@ -1,5 +1,6 @@
 import { CAR_LIST } from '@/content/cars';
 import { METRIC_BY_ID, METRIC_IDS } from '@/content/metrics';
+import { SOUND_CREDITS } from '@/content/sounds';
 import { UI } from '@/content/ui';
 import { fmtSourced } from '@/lib/format';
 import { priceView } from '@/lib/price';
@@ -25,6 +26,22 @@ export default function AboutPage() {
           <p className="text-text">{s.p}</p>
         </section>
       ))}
+      <section>
+        <h2 className="font-display text-xl font-bold uppercase tracking-wide text-accent-text">
+          {UI.sound.creditsTitle}
+        </h2>
+        <p className="text-sm text-muted">{UI.sound.creditsLead}</p>
+        <ul className="mt-1 list-disc pl-5 text-sm text-text">
+          {SOUND_CREDITS.map((c) => (
+            <li key={c.url}>
+              <a href={c.url} className="underline hover:text-accent-text" rel="noreferrer">
+                {c.title}
+              </a>{' '}
+              · {c.author} · {c.licence}
+            </li>
+          ))}
+        </ul>
+      </section>
       <section>
         <h2 className="font-display text-xl font-bold uppercase tracking-wide text-warn">
           {UI.about.unverifiedTitle}

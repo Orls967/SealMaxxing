@@ -237,8 +237,12 @@ export const UI = {
   sound: {
     hold: 'Tahan untuk injak gas',
     label: (car: string) => `Tahan untuk mendengar suara ${car} saat digas`,
-    kind: { ice: 'suara mesin', ev: 'dengung motor listrik' },
-    note: 'Suara sintetis buatan sendiri (ilustrasi), bukan rekaman mobil asli.',
+    recorded: 'rekaman',
+    substitute: 'rekaman pengganti',
+    synthetic: 'suara sintetis',
+    note: 'Rekaman gagal dimuat, jadi yang terdengar suara sintetis (ilustrasi), bukan rekaman mobil asli.',
+    creditsTitle: 'Rekaman suara',
+    creditsLead: 'Klip dipotong dan dinormalkan dari rekaman berlisensi terbuka berikut:',
   },
   about: {
     title: 'Tentang',
@@ -269,7 +273,7 @@ export const UI = {
       },
       {
         h: 'Suara',
-        p: 'Tombol "Tahan untuk injak gas" memainkan suara yang dibangkitkan langsung di peramban, tanpa berkas rekaman. Nadanya dihitung dari jumlah silinder dan putaran maksimum tiap mesin: V12 LaFerrari melengking tinggi, V8 twin-turbo P1 dan Senna lebih berat dengan siulan turbo, dan Seal hanya berdengung seperti motor listrik. Ini ilustrasi, bukan rekaman mobil aslinya.',
+        p: 'Tombol "Tahan untuk injak gas" memutar rekaman berlisensi terbuka. P1 dan LaFerrari (saat digas) memakai rekaman mobil itu sendiri. Untuk Seal, Senna, dan suara langsam LaFerrari belum ada rekaman terbuka dari mobil yang sama, jadi dipakai rekaman pengganti dari mobil sejenis; tombolnya berlabel "rekaman pengganti" dan keterangannya menyebut mobil apa yang sebenarnya terdengar. Bila rekaman gagal dimuat, yang terdengar suara sintetis dan tombolnya berlabel demikian.',
       },
       {
         h: 'Livery',
