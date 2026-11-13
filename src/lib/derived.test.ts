@@ -19,7 +19,10 @@ describe('derived', () => {
     expect(get('electricSharePct').get(CARS.senna)!.value).toBe(0);
   });
   it('is unverified when any input is unverified', () => {
-    expect(get('powerPerTonneKw').get(CARS.senna)!.verified).toBe(false);
+    const kerb = CARS.senna.specs.kerbKg!;
+    const car = { ...CARS.senna, specs: { ...CARS.senna.specs, kerbKg: { ...kerb, verified: false } } };
+    expect(get('powerPerTonneKw').get(CARS.senna)!.verified).toBe(true);
+    expect(get('powerPerTonneKw').get(car)!.verified).toBe(false);
   });
   it('reports a derived metric as absent when its input does not exist on the car', () => {
     expect(derivedCell(CARS.senna, get('batteryWhPerKg')).kind).toBe('absent');

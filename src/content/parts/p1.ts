@@ -75,7 +75,7 @@ export const p1Parts: CarParts = {
   ),
   battery: part(
     'Paket litium-ion 4,7 kWh seberat 96 kg di belakang kabin, menyatu dengan MonoCage.',
-    'Paket berdaya-padat tinggi ini bisa diisi dari mesin atau dicolok ke listrik. Kapasitasnya dua kali LaFerrari sehingga cukup untuk berjalan listrik murni lebih dari 10 km.',
+    'Paket berdaya-padat tinggi ini bisa diisi dari mesin atau dicolok ke listrik. Kapasitasnya dua kali LaFerrari sehingga cukup untuk berjalan listrik murni sekitar 11 km (NEDC).',
     'Kemampuan berjalan listrik menuntut kapasitas lebih besar, dan itu dibayar dengan berat.',
     ['batteryKwh', 'batteryKg', 'evRangeKm'],
   ),

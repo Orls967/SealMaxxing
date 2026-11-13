@@ -17,7 +17,7 @@ describe('csv', () => {
   });
   it('exports value, basis and verification status', () => {
     expect(cellText(cellFor(CARS.seal, METRIC_BY_ID.evRangeKm), 'km', 0, L)).toBe('520 km (WLTP)');
-    expect(cellText(cellFor(CARS.senna, METRIC_BY_ID.kerbKg), 'kg', 0, L)).toContain('[perlu verifikasi]');
+    expect(cellText(cellFor(CARS.senna, METRIC_BY_ID.fuelTankL), 'L', 0, L)).toContain('[perlu verifikasi]');
   });
   it('exports absence with its reason, never a zero', () => {
     const t = cellText(cellFor(CARS.senna, METRIC_BY_ID.batteryKwh), 'kWh', 2, L);

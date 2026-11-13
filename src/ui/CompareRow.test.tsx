@@ -42,7 +42,7 @@ describe('CompareRow', () => {
     expect(within(r).getByText('WLTP')).toBeInTheDocument();
   });
   it('flags unverified data', () => {
-    const r = row('kerbKg');
+    const r = row('fuelTankL');
     expect(within(r).getAllByText(UI.common.unverified).length).toBeGreaterThan(0);
   });
 });
