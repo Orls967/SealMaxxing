@@ -2,19 +2,38 @@
 
 ## Aset
 
-| Aset                                                              | Asal                                                                                             | Lisensi        |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | -------------- |
-| Model 3D keempat mobil (bodi, kaca, roda, seluruh komponen dalam) | Dibuat sendiri secara prosedural di `src/scene/procedural/` dari dimensi yang dipublikasikan     | Buatan sendiri |
-| Suara mesin dan motor listrik                                     | Dibangkitkan di peramban dengan Web Audio (`src/ui/sound/`); tidak ada berkas audio atau rekaman | Buatan sendiri |
-| Tangkapan layar `docs/screenshots/*.png`                          | Tangkapan dari situs yang tayang                                                                 | Buatan sendiri |
-| Gambar statis `public/static/*.webp`                              | Tangkapan dari model di atas (`scripts/static-cars.mjs`)                                         | Buatan sendiri |
-| Ikon `public/favicon.svg`                                         | Dibuat sendiri                                                                                   | Buatan sendiri |
-| Pencahayaan studio                                                | Dibangun dari light former di kode; tidak ada HDRI yang diunduh                                  | Buatan sendiri |
+| Aset                                                              | Asal                                                                                                | Lisensi         |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------- |
+| Model 3D keempat mobil (bodi, kaca, roda, seluruh komponen dalam) | Dibuat sendiri secara prosedural di `src/scene/procedural/` dari dimensi yang dipublikasikan        | Buatan sendiri  |
+| Klip audio `public/sounds/*`                                      | Dipotong dan dinormalisasi dari rekaman terbuka; detail sumber dan perbedaan model dicatat di bawah | CC0 / CC BY 3.0 |
+| Suara sintetis cadangan (dipakai hanya bila rekaman gagal dimuat) | Dibangkitkan dengan Web Audio (`src/ui/sound/engineVoice.ts`)                                       | Buatan sendiri  |
+| Tangkapan layar `docs/screenshots/*.png`                          | Tangkapan dari situs yang tayang                                                                    | Buatan sendiri  |
+| Gambar statis `public/static/*.webp`                              | Tangkapan dari model di atas (`scripts/static-cars.mjs`)                                            | Buatan sendiri  |
+| Ikon `public/favicon.svg`                                         | Dibuat sendiri                                                                                      | Buatan sendiri  |
+| Pencahayaan studio                                                | Dibangun dari light former di kode; tidak ada HDRI yang diunduh                                     | Buatan sendiri  |
 
 Tidak ada model hasil ekstraksi game, tidak ada model unduhan, dan tidak ada logo pabrikan.
 Tingkat 1 pada CARSOME.md 4.3 (model eksterior CC0/CC-BY) tidak dipakai: tidak ada model
 berlisensi terbuka yang bisa diverifikasi untuk keempat mobil, sehingga jalur prosedural
 menjadi satu-satunya sumber.
+
+## Rekaman suara
+
+Semua klip dipotong menjadi 5–7 detik, dinormalisasi, dan dikonversi ke MP3 untuk proyek ini.
+Klip Freesound generik dipakai sebagai pengganti dan bukan rekaman model mobil pada nama berkasnya;
+rekaman P1 dan LaFerrari dari Commons adalah model yang disebutkan:
+
+| Berkas                                                        | Rekaman sumber                                                                                                                                                                                               | Lisensi dan perubahan                                                                                              |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `public/sounds/seal-accel.mp3`                                | [“Acceleration of an electric car”](https://freesound.org/people/justVova/sounds/761685/) — justVova; sumbernya Tesla Model S Plaid, bukan BYD Seal                                                          | CC0; pratinjau MP3 dipangkas dan dinormalisasi. Dipakai sebagai pengganti dengung motor listrik saat akselerasi.   |
+| `public/sounds/senna-idle.mp3`, `public/sounds/senna-rev.mp3` | [“Supercar rev”](https://freesound.org/people/richwise/sounds/478756/) — richwise; model mobil tidak diketahui                                                                                               | CC0; bagian langsam dan rev dipangkas lalu dinormalisasi. Bukan rekaman McLaren Senna.                             |
+| `public/sounds/p1-idle.mp3`, `public/sounds/p1-rev.mp3`       | [“McLaren P1 — engine and exhaust sound”](<https://commons.wikimedia.org/wiki/File:McLaren_P1_-_engine_and_exhaust_sound_(YouTube_M1xuT1ue10c).opus>) — audio video YouTube oleh Alfisti J                   | CC BY 3.0; dipotong dan dikonversi ke MP3. Halaman Commons saat pengambilan masih bertanda perlu tinjauan lisensi. |
+| `public/sounds/laferrari-idle.mp3`                            | [“Ferrari_motor_idle”](https://freesound.org/people/jtvdb/sounds/857147/) — jtvdb; model Ferrari tidak diketahui                                                                                             | CC0; dipangkas dan dinormalisasi. Bukan rekaman LaFerrari.                                                         |
+| `public/sounds/laferrari-rev.mp3`                             | [“Ferrari LaFerrari — engine and exhaust sound”](<https://commons.wikimedia.org/wiki/File:Ferrari_LaFerrari_-_engine_and_exhaust_sound_(YouTube_miX50gTQndk).opus>) — audio video YouTube oleh Erwin Lindsen | CC BY 3.0; dipotong dan dikonversi ke MP3. Halaman Commons saat pengambilan masih bertanda perlu tinjauan lisensi. |
+
+Audio McLaren Senna spesifik yang ditemukan di YouTube tidak dipakai karena lisensi penggunaan ulangnya
+tidak dapat diverifikasi. Rekaman CC BY Commons di atas menampilkan lisensi CC BY 3.0, tetapi juga
+memiliki penanda tinjauan lisensi yang belum selesai.
 
 ## Gambar acuan
 

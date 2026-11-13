@@ -70,8 +70,8 @@ untuk menentukan pemenang.
 - **Alat bedah:** penggeser kupas dan ledak, bidang potong pada tiga sumbu, sakelar sinar-X,
   dan lima preset kamera. Semuanya bisa digabung.
 - **Suara:** tahan tombol "Tahan untuk injak gas" (atau tahan Spasi/Enter) untuk mendengar
-  mobil digas; lepas untuk kembali ke putaran rendah. Suaranya sintetis, lihat
-  [Batasan](#batasan).
+  mobil digas; lepas untuk kembali langsam. Label tombol menyebut apakah yang terdengar
+  rekaman mobil itu sendiri atau rekaman pengganti, lihat [Batasan](#batasan).
 - **Warna:** bawaan mengikuti warna acuan tiap mobil; sakelar "Livery tema hitam-merah"
   mengganti keempatnya ke livery tema.
 - **Tautan yang bisa dibagikan:** seluruh keadaan tampilan tersimpan di hash URL, misalnya
@@ -102,9 +102,10 @@ Aplikasi ini alat belajar, bukan lembar data pabrikan.
 - **Model 3D.** Dibangun secara prosedural dari dimensi yang dipublikasikan. Bodi adalah
   pendekatan bentuk; komponen dalam (mesin, baterai, sasis) adalah ilustrasi skematis. Yang
   dijaga benar: skala antarmobil, jumlah silinder, serta ukuran dan letak kasar komponen utama.
-- **Suara.** Dibangkitkan di peramban dengan Web Audio, tanpa berkas rekaman. Nadanya dihitung
-  dari jumlah silinder dan putaran maksimum tiap mesin; Seal hanya berdengung seperti motor
-  listrik. Ini ilustrasi, bukan rekaman mobil aslinya.
+- **Suara.** Rekaman berlisensi terbuka (CC0 dan CC BY 3.0). P1 dan LaFerrari saat digas
+  memakai rekaman mobil itu sendiri. Seal (Tesla Model S Plaid), Senna (supercar tak
+  dikenal), dan langsam LaFerrari (Ferrari lain) memakai rekaman pengganti dan berlabel
+  demikian. Bila rekaman gagal dimuat, yang terdengar suara sintetis.
 - **Simulasi.** Model fisika sederhana yang dikalibrasi supaya 0–100 dan 0–200 km/jam berada
   dalam ±5% dari klaim pabrikan; hasilnya selalu tampil di samping klaimnya. Kurva downforce
   adalah perkiraan dari satu titik klaim.
@@ -159,8 +160,8 @@ Sumber utama: lembar media McLaren Senna, paket pers McLaren P1, lembar data pel
 LaFerrari, panduan produk BYD Seal, EV Database, CarExpert, Autocar, PistonHeads, dan
 Wikipedia. Daftar lengkap dengan tautan ada di halaman Data dan `src/content/sources.ts`.
 
-Seluruh model 3D, gambar, ikon, dan suara dibuat sendiri untuk proyek ini; tidak ada model
-unduhan, rekaman, atau logo pabrikan. Rinciannya ada di [`CREDITS.md`](CREDITS.md).
+Model 3D, gambar, dan ikon dibuat sendiri untuk proyek ini; tidak ada model unduhan atau logo
+pabrikan. Rekaman suara berasal dari Freesound (CC0) dan Wikimedia Commons (CC BY 3.0). Rinciannya ada di [`CREDITS.md`](CREDITS.md).
 
 Spesifikasi proyek ada di [`CARSOME.md`](CARSOME.md) dan aturan kode di
 [`CLAUDE.md`](CLAUDE.md). Proyek ini bukan produk resmi dan tidak berafiliasi, disponsori,
