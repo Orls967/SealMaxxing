@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { UI } from '@/content/ui';
 import { ChartDefs } from './charts/ChartDefs';
 
@@ -14,6 +14,7 @@ const LINKS = [
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation();
   return (
     <div className="flex min-h-full flex-col">
       <ChartDefs />
@@ -43,7 +44,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 to={l.to}
                 end={'end' in l}
                 className={({ isActive }) =>
-                  `shrink-0 rounded px-3 py-1.5 text-sm font-medium ${isActive ? 'bg-accent text-text' : 'text-muted hover:bg-surface-2 hover:text-text'}`
+                  `shrink-0 rounded px-3 py-1.5 text-sm font-medium ${isActive || ('match' in l && pathname.startsWith(l.match)) ? 'bg-accent text-text' : 'text-muted hover:bg-surface-2 hover:text-text'}`
                 }
               >
                 {l.label}
