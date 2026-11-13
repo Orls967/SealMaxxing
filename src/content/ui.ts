@@ -1,7 +1,9 @@
 /** Every display string of the interface. Components never hard-code text. */
 export const UI = {
   app: {
-    name: 'CarSome',
+    name: 'SealMaxxing',
+    /** The two halves of the wordmark; the second is drawn in the accent colour. */
+    nameParts: ['Seal', 'Maxxing'],
     tagline: 'Bedah & banding mobil 3D',
     skip: 'Lompat ke isi',
     loading: 'Memuat…',
@@ -234,7 +236,7 @@ export const UI = {
     sections: [
       {
         h: 'Apa ini',
-        p: 'CarSome adalah aplikasi web 3D untuk membedah dan membandingkan empat mobil dengan empat filosofi penggerak: listrik baterai, hibrida V12, hibrida plug-in V8, dan bensin murni. Setiap penjelasan bagian selalu tampil berdampingan dengan padanannya di mobil lain.',
+        p: 'SealMaxxing adalah aplikasi web 3D untuk membedah dan membandingkan empat mobil dengan empat filosofi penggerak: listrik baterai, hibrida V12, hibrida plug-in V8, dan bensin murni. Setiap penjelasan bagian selalu tampil berdampingan dengan padanannya di mobil lain.',
       },
       {
         h: 'Tidak berafiliasi',

@@ -79,7 +79,7 @@ export default function DataPage() {
         return cell ? cellText(cell, r.unit, r.digits, { ...labels, unknown: '' }) : '';
       }),
     ]);
-    downloadText('carsome-data.csv', 'text/csv;charset=utf-8', `${BOM}${toCsv([head, ...body])}`);
+    downloadText('sealmaxxing-data.csv', 'text/csv;charset=utf-8', `${BOM}${toCsv([head, ...body])}`);
   };
 
   return (

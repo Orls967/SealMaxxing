@@ -34,7 +34,7 @@ Langkah berikut yang persis: lihat "Masalah terbuka"; lanjutkan verifikasi angka
 - Pengereman: tidak ada klaim pabrikan yang seragam, jadi hanya hasil model yang tampil.
 - "Harga per kW" (2.5) tidak dihitung: harga keempat mobil berbeda mata uang dan tahun, sehingga hasilnya tidak sebanding (2.6).
 - Warna aksen digelapkan dari #e11d2e ke #cc1626 supaya teks putih di atasnya lolos kontras AA.
-- Nama proyek dan tujuan hosting: ditanyakan ke pemilik saat publikasi (Bagian 6).
+- Nama akhir proyek: SealMaxxing (keputusan pemilik, 2026-11-14). Hosting: GitHub Pages lewat GitHub Actions, repositori publik. Nama berkas `CARSOME.md` dan judul `CLAUDE.md` tidak diubah.
 
 ## Masalah terbuka
 - Bodi adalah pendekatan siluet dari penampang yang di-loft; detail seperti lubang udara, lampu, dan lengkung spatbor masih kasar.

@@ -1,4 +1,4 @@
-# CarSome
+# SealMaxxing
 
 Aplikasi web 3D untuk membedah dan membandingkan empat mobil dengan empat filosofi penggerak:
 

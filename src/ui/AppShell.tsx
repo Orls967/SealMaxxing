@@ -31,7 +31,8 @@ export function AppShell({ children }: { children: ReactNode }) {
             className="flex shrink-0 items-baseline gap-2 font-display text-xl font-bold uppercase tracking-wide"
           >
             <span>
-              Car<span className="text-accent-text">Some</span>
+              {UI.app.nameParts[0]}
+              <span className="text-accent-text">{UI.app.nameParts[1]}</span>
             </span>
           </NavLink>
           <nav
