@@ -146,7 +146,65 @@ rinciannya di `docs/PROGRESS.md`.
 
 ---
 
+# Revisi putaran 2 (masukan pemilik, 2026-11-14)
+
+Masukan: (1) model baru mirip ± 55%, target minimal 99%; (2) suara jangan sintetis;
+(3) akselerasi tidak sesuai: Seal seharusnya lebih kencang di awal.
+
+## R6 — Akselerasi: Seal unggul di awal
+
+- [x] R6.1 Periksa model: mobil bermesin bakar mendapat traksi penuh sejak t = 0, sehingga
+      Seal tertinggal sejak start (bertentangan dengan CARSOME.md 2.7).
+- [x] R6.2 Tambah waktu bangun dorongan saat start (`launchS`): Seal 0,05 dtk; LaFerrari dan
+      P1 0,35 dtk; Senna 0,4 dtk (parameter model, bukan data pabrikan).
+- [x] R6.3 Kalibrasi ulang cengkeraman dan efisiensi supaya 0–100 dan 0–200 tetap dalam ±5%
+      dari klaim; tes: Seal di depan ketiga hypercar pada 0,5 dan 1 dtk, tersusul sebelum 3 dtk.
+- [x] R6.4 Catatan model di halaman Adu menjelaskan sebabnya.
+- [ ] R6.5 Pemilik menilai hasil di halaman Adu. Klaim pabrikan (Seal 3,8 dtk; LaFerrari
+      < 3,0; P1 2,8; Senna 2,8) sudah dicek ke sumber dan tidak diubah.
+
+## R7 — Model 3D minimal 99% mirip
+
+Kemiripan 99% tidak bisa dicapai dengan bodi prosedural (bentuk dari rumus). Butuh model 3D
+sungguhan (GLB) tiap mobil. Pencarian 2026-11-14 tidak menemukan model CC0/CC-BY yang
+lisensi dan asal-usulnya bisa dipastikan untuk keempat mobil.
+
+- [ ] R7.1 **Keputusan pemilik: sumber model.** (a) pemilik menyediakan empat berkas GLB
+      beserta bukti lisensinya; atau (b) pemilik membeli model berlisensi (CGTrader,
+      RenderHub, dan sejenisnya) yang lisensinya mengizinkan ditayangkan di web publik; atau
+      (c) pemilik mengizinkan model Sketchfab berlabel CC-BY walau asal-usulnya tidak bisa
+      dipastikan (menyimpang dari aturan keras 5, harus tertulis).
+- [ ] R7.2 Simpan GLB di `public/models/<carId>.glb`, catat lisensi dan pembuat di `CREDITS.md`.
+- [ ] R7.3 Optimasi: `scripts/optimize-models.mjs` (Draco/Meshopt, tekstur WebP/KTX2), target
+      ≤ 5 MB per mobil, dimuat saat diperlukan dengan indikator kemajuan.
+- [ ] R7.4 Pemuat GLB di `src/scene/`: skala disetel ke panjang dari data (skala sebenarnya),
+      titik asal di poros depan, logo pabrikan dihapus dari mesh/tekstur.
+- [ ] R7.5 Petakan mesh GLB ke `PartId` (panel bodi, pintu, kaca, lampu, roda, ban, sayap)
+      supaya pilih, sorot, kupas, ledak, dan sinar-X tetap berfungsi; komponen dalam tetap
+      ilustrasi prosedural di dalam bodi baru.
+- [ ] R7.6 Bodi prosedural menjadi cadangan saat GLB gagal dimuat; gambar statis dibuat ulang.
+- [ ] R7.7 Selesai bila tangkapan layar dari sudut gambar acuan (`model/`) diletakkan
+      berdampingan dan dinilai pemilik.
+
+## R8 — Suara rekaman asli
+
+Pencarian 2026-11-14 tidak menemukan rekaman LaFerrari, P1, atau Senna berlisensi terbuka.
+
+- [ ] R8.1 **Pemilik menyiapkan rekaman** tiap mobil (MP3/OGG/WAV) beserta asal dan
+      lisensinya. Paling baik dua klip per mobil: langsam (bisa diulang) dan digas sampai
+      putaran tinggi, 3–8 detik, tanpa musik atau suara orang. Seal: dengung motor saat
+      berakselerasi.
+- [ ] R8.2 Simpan di `public/sounds/<carId>-idle.*` dan `<carId>-rev.*`; catat di `CREDITS.md`.
+- [ ] R8.3 Pemutar: tombol "Tahan untuk injak gas" memutar rekaman (langsam berulang, lalu
+      klip digas dengan nada dan volume mengikuti gas); dimuat saat tombol pertama ditekan.
+- [ ] R8.4 Suara sintetis hanya menjadi cadangan bila berkas rekaman sebuah mobil belum ada,
+      dan tetap berlabel sintetis.
+
+---
+
 ## Keputusan yang ditunggu dari pemilik
+
+2. Sumber model 3D (R7.1) dan rekaman suara (R8.1).
 
 1. Livery bawaan: dikerjakan dengan warna acuan sebagai bawaan dan livery tema sebagai sakelar
    (usul di R1.3); dibalik bila pemilik memilih sebaliknya.
