@@ -1,9 +1,9 @@
 # PROGRESS
 
 Diperbarui: 2026-11-14
-Milestone aktif: revisi (lihat `revisi.md`), fase R5
-Sub-tugas aktif: menunggu konfirmasi pemilik atas hasil revisi
-Langkah berikut yang persis: setelah pemilik mengonfirmasi hasil sesuai, hapus `revisi.md`, commit, push. Bila ada masukan bentuk mobil, ubah `src/scene/procedural/shapes.ts` (profil, `dents`, `patches`) lalu periksa dengan `scripts/shots.mjs`.
+Milestone aktif: revisi putaran 2 (lihat `revisi.md`), fase R7 dan R8
+Sub-tugas aktif: menunggu berkas dari pemilik: model GLB (R7.1) dan rekaman suara (R8.1)
+Langkah berikut yang persis: begitu pemilik menaruh GLB di `public/models/` atau rekaman di `public/sounds/` (atau memutuskan sumbernya), kerjakan R7.2–R7.7 dan R8.2–R8.4 di `revisi.md`. `revisi.md` belum dihapus.
 
 ## Selesai
 
@@ -31,6 +31,7 @@ Langkah berikut yang persis: setelah pemilik mengonfirmasi hasil sesuai, hapus `
 
 - `lint`, `typecheck`, `build` lolos. Vitest: 90 tes lolos. Playwright: 15 tes lolos.
 - Lighthouse aksesibilitas belum dijalankan ulang setelah revisi (terakhir 100 di semua halaman sebelum revisi).
+- R6 (2026-11-14): model akselerasi diberi waktu bangun dorongan saat start (`launchS`); Seal kini di depan ketiga hypercar pada 0,5 dan 1 dtk dan tersusul sebelum 3 dtk. Kalibrasi baru (model / klaim 0–100): Seal 3,70 / 3,8; LaFerrari 2,89 / < 3,0; P1 ± 2,8 / 2,8; Senna ± 2,8 / 2,8.
 - Kalibrasi model tetap dalam ±5% untuk 0–100 dan 0–200. `cdA` Senna dinaikkan 0,75 → 0,84 supaya 0–300 model tetap dalam 10% dari angka baru 18,8 dtk.
 - Suara: keempat profil diperiksa lewat render luring (`OfflineAudioContext`): sinyal ada, tidak terpotong (puncak < 0,4), nada naik bersama gas. Belum dinilai dengan telinga oleh pemilik.
 
