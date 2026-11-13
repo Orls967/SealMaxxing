@@ -1,3 +1,4 @@
+import type { MetricId } from '@/content/metrics';
 import type { Car, Sourced } from '@/content/types';
 
 export interface DerivedMetric {
@@ -7,6 +8,8 @@ export interface DerivedMetric {
   better: 'higher' | 'lower' | 'none';
   digits: number;
   note: string;
+  /** Stored metrics this one is computed from. */
+  inputs: MetricId[];
   get: (car: Car) => Sourced | null;
 }
 
@@ -30,6 +33,7 @@ export const DERIVED: DerivedMetric[] = [
     better: 'higher',
     digits: 0,
     note: 'Daya gabungan dibagi berat siap jalan.',
+    inputs: ['powerTotalKw', 'kerbKg'],
     get: (c) => {
       const p = c.specs.powerTotalKw;
       const m = c.specs.kerbKg;
@@ -43,6 +47,7 @@ export const DERIVED: DerivedMetric[] = [
     better: 'higher',
     digits: 0,
     note: 'Torsi gabungan dibagi berat siap jalan.',
+    inputs: ['torqueTotalNm', 'kerbKg'],
     get: (c) => {
       const t = c.specs.torqueTotalNm;
       const m = c.specs.kerbKg;
@@ -56,6 +61,7 @@ export const DERIVED: DerivedMetric[] = [
     better: 'none',
     digits: 0,
     note: 'Daya motor listrik dibagi daya gabungan.',
+    inputs: ['motorPowerKw', 'powerTotalKw'],
     get: (c) => {
       const p = c.specs.powerTotalKw;
       if (c.absent.motorPowerKw && p) return { ...p, value: 0, basis: 'tidak ada motor listrik', qualifier: 'exact' };
@@ -70,6 +76,7 @@ export const DERIVED: DerivedMetric[] = [
     better: 'none',
     digits: 0,
     note: 'Baterai hibrida dirancang untuk daya sesaat, bukan kapasitas, jadi angkanya rendah.',
+    inputs: ['batteryKwh', 'batteryKg'],
     get: (c) => {
       const e = c.specs.batteryKwh;
       const m = c.specs.batteryKg;
@@ -83,6 +90,7 @@ export const DERIVED: DerivedMetric[] = [
     better: 'none',
     digits: 0,
     note: 'Berat siap jalan dibagi panjang bodi.',
+    inputs: ['kerbKg', 'lengthMm'],
     get: (c) => {
       const m = c.specs.kerbKg;
       const l = c.specs.lengthMm;

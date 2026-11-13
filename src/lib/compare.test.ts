@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CAR_LIST, CARS } from '@/content/cars';
 import { METRIC_BY_ID } from '@/content/metrics';
-import { cellFor, compareMetric, normalise, rankCells } from './compare';
+import { cellFor, compareMetric, derivedCell, normalise, rankCells } from './compare';
 import { DERIVED } from './derived';
 import { fmt, fmtSourced, kwToPs } from './format';
 
@@ -51,6 +51,11 @@ describe('derived', () => {
   });
   it('is unverified when any input is unverified', () => {
     expect(get('powerPerTonneKw').get(CARS.senna)!.verified).toBe(false);
+  });
+  it('reports a derived metric as absent when its input does not exist on the car', () => {
+    expect(derivedCell(CARS.senna, get('batteryWhPerKg')).kind).toBe('absent');
+    expect(derivedCell(CARS.seal, get('batteryWhPerKg')).kind).toBe('unknown');
+    expect(derivedCell(CARS.p1, get('batteryWhPerKg')).kind).toBe('value');
   });
   it('returns null when an input is missing', () => {
     expect(get('batteryWhPerKg').get(CARS.senna)).toBeNull();

@@ -1,6 +1,7 @@
 import type { CarId } from '@/content/ids';
 import type { Better, Metric } from '@/content/metrics';
 import type { Car, Sourced } from '@/content/types';
+import type { DerivedMetric } from './derived';
 
 export type Cell =
   | { kind: 'value'; carId: CarId; data: Sourced }
@@ -65,4 +66,15 @@ export function normalise(values: (number | null)[], better: 'higher' | 'lower')
     if (better === 'higher') return max === 0 ? 0 : v / max;
     return v === 0 ? 1 : min / v;
   });
+}
+
+/** Cell for a computed metric: absent when an input does not exist on the car, unknown when one is unpublished. */
+export function derivedCell(car: Car, d: DerivedMetric): Cell {
+  const data = d.get(car);
+  if (data) return { kind: 'value', carId: car.id, data };
+  for (const id of d.inputs) {
+    const reason = car.absent[id];
+    if (reason) return { kind: 'absent', carId: car.id, reason };
+  }
+  return { kind: 'unknown', carId: car.id };
 }
