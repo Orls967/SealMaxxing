@@ -169,11 +169,31 @@ Kemiripan 99% tidak bisa dicapai dengan bodi prosedural (bentuk dari rumus). But
 sungguhan (GLB) tiap mobil. Pencarian 2026-11-14 tidak menemukan model CC0/CC-BY yang
 lisensi dan asal-usulnya bisa dipastikan untuk keempat mobil.
 
-- [ ] R7.1 **Keputusan pemilik: sumber model.** (a) pemilik menyediakan empat berkas GLB
-      beserta bukti lisensinya; atau (b) pemilik membeli model berlisensi (CGTrader,
-      RenderHub, dan sejenisnya) yang lisensinya mengizinkan ditayangkan di web publik; atau
-      (c) pemilik mengizinkan model Sketchfab berlabel CC-BY walau asal-usulnya tidak bisa
-      dipastikan (menyimpang dari aturan keras 5, harus tertulis).
+- [x] R7.1 **Keputusan pemilik (2026-11-14): cari model Sketchfab berlabel CC-BY.** Hasil
+      pencarian dan penyaringan (API pencarian Sketchfab, hanya yang bisa diunduh):
+
+      | Mobil     | Model terpilih (CC BY 4.0)                                                                 | Pembuat       | Ukuran GLB | Catatan asal-usul                                                          |
+      | --------- | ------------------------------------------------------------------------------------------ | ------------- | ---------- | -------------------------------------------------------------------------- |
+      | Seal      | [2024 BYD Seal Performance AWD](https://sketchfab.com/3d-models/96ec5c34852f4c3090a755d4445f5e98) | NazhDesign    | 16 MB      | "Convert from Skp": dikonversi dari model SketchUp; pembuat asli tidak disebut |
+      | LaFerrari | [Ferrari Laferrari](https://sketchfab.com/3d-models/006a4b4047754c35aa5ed0366bff3b49)       | Res1n         | 10 MB      | "free 3d model"; asal-usul tidak dijelaskan                                |
+      | P1        | [McLaren P1](https://sketchfab.com/3d-models/e791b5aee5c6497c83994f4e5f1db84b)              | hartwelkisaka | 11 MB      | Pembuat menyebutnya karya sendiri                                          |
+      | Senna     | [McLaren senna](https://sketchfab.com/3d-models/f3ada11a4618463cac2e082c008cc340)           | hartwelkisaka | 13 MB      | Pembuat menyebutnya karya sendiri                                          |
+
+      Cadangan: Senna [LiteBeet](https://sketchfab.com/3d-models/42a67f79f3d64ba58c7746b6d48d0ab7)
+      (karya sendiri di Blender, 51 MB, perlu dikurangi poligonnya); LaFerrari
+      [deepa.gurnani.ntpc](https://sketchfab.com/3d-models/46e5cedb114d49cd914e6f2bf8e7397a)
+      (unggahan ulang karya orang lain).
+
+      Dibuang karena hasil ekstraksi game (aturan keras 5): semua model ddiaz-design dan
+      unggahan ulangnya oleh tangwang920 (bertanda `csr2`, dari CSR Racing 2); P1 milik
+      NodeStar, heynic, dan Car2022 (deskripsinya menyebut Assetto Corsa). Dibuang karena
+      lisensi non-komersial atau tanpa turunan: bohmerang, echoo., outpiston, MattDoesBlender.
+
+      Penyimpangan yang disetujui pemilik: asal-usul model Seal dan LaFerrari tidak bisa
+      dipastikan; keduanya dipakai atas dasar label CC-BY di Sketchfab dan diganti bila ada
+      keberatan.
+
+- [ ] R7.1b Unduh keempat GLB (perlu masuk akun Sketchfab) ke `public/models/<carId>.glb`.
 - [ ] R7.2 Simpan GLB di `public/models/<carId>.glb`, catat lisensi dan pembuat di `CREDITS.md`.
 - [ ] R7.3 Optimasi: `scripts/optimize-models.mjs` (Draco/Meshopt, tekstur WebP/KTX2), target
       ≤ 5 MB per mobil, dimuat saat diperlukan dengan indikator kemajuan.
@@ -204,7 +224,7 @@ Pencarian 2026-11-14 tidak menemukan rekaman LaFerrari, P1, atau Senna berlisens
 
 ## Keputusan yang ditunggu dari pemilik
 
-2. Sumber model 3D (R7.1). Rekaman suara (R8.1) sudah disiapkan pemilik.
+2. Tidak ada; yang ditunggu adalah berkas GLB (R7.1b).
 
 1. Livery bawaan: dikerjakan dengan warna acuan sebagai bawaan dan livery tema sebagai sakelar
    (usul di R1.3); dibalik bila pemilik memilih sebaliknya.

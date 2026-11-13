@@ -2,8 +2,8 @@
 
 Diperbarui: 2026-11-14
 Milestone aktif: revisi putaran 2 (lihat `revisi.md`), fase R7
-Sub-tugas aktif: menunggu berkas model GLB dari pemilik (R7.1)
-Langkah berikut yang persis: begitu pemilik menaruh GLB di `public/models/` (atau memutuskan sumbernya), kerjakan R7.2–R7.7 di `revisi.md`. `revisi.md` belum dihapus.
+Sub-tugas aktif: menunggu empat berkas GLB diunduh ke `public/models/` (R7.1b); kandidat terpilih ada di `revisi.md` R7.1
+Langkah berikut yang persis: setelah `public/models/{seal,laferrari,p1,senna}.glb` ada, kerjakan R7.2–R7.7 di `revisi.md` (kredit, optimasi, pemuat GLB, pemetaan bagian, cadangan prosedural). `revisi.md` belum dihapus.
 
 ## Selesai
 
