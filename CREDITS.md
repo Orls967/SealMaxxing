@@ -2,17 +2,25 @@
 
 ## Aset
 
-| Aset | Asal | Lisensi |
-|---|---|---|
-| Model 3D keempat mobil (bodi, kaca, roda, seluruh komponen dalam) | Dibuat sendiri secara prosedural di `src/scene/procedural/` dari dimensi yang dipublikasikan | Buatan sendiri |
-| Gambar statis `public/static/*.webp` | Tangkapan dari model di atas (`scripts/static-cars.mjs`) | Buatan sendiri |
-| Ikon `public/favicon.svg` | Dibuat sendiri | Buatan sendiri |
-| Pencahayaan studio | Dibangun dari light former di kode; tidak ada HDRI yang diunduh | Buatan sendiri |
+| Aset                                                              | Asal                                                                                             | Lisensi        |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | -------------- |
+| Model 3D keempat mobil (bodi, kaca, roda, seluruh komponen dalam) | Dibuat sendiri secara prosedural di `src/scene/procedural/` dari dimensi yang dipublikasikan     | Buatan sendiri |
+| Suara mesin dan motor listrik                                     | Dibangkitkan di peramban dengan Web Audio (`src/ui/sound/`); tidak ada berkas audio atau rekaman | Buatan sendiri |
+| Tangkapan layar `docs/screenshots/*.png`                          | Tangkapan dari situs yang tayang                                                                 | Buatan sendiri |
+| Gambar statis `public/static/*.webp`                              | Tangkapan dari model di atas (`scripts/static-cars.mjs`)                                         | Buatan sendiri |
+| Ikon `public/favicon.svg`                                         | Dibuat sendiri                                                                                   | Buatan sendiri |
+| Pencahayaan studio                                                | Dibangun dari light former di kode; tidak ada HDRI yang diunduh                                  | Buatan sendiri |
 
 Tidak ada model hasil ekstraksi game, tidak ada model unduhan, dan tidak ada logo pabrikan.
 Tingkat 1 pada CARSOME.md 4.3 (model eksterior CC0/CC-BY) tidak dipakai: tidak ada model
 berlisensi terbuka yang bisa diverifikasi untuk keempat mobil, sehingga jalur prosedural
 menjadi satu-satunya sumber.
+
+## Gambar acuan
+
+Bentuk dan warna bawaan tiap mobil disusun dengan melihat foto acuan yang disimpan pemilik
+proyek di folder lokal `model/`. Foto itu milik pihak ketiga, tidak masuk repositori
+(`.gitignore`), dan tidak pernah dimuat oleh aplikasi.
 
 ## Huruf
 
@@ -29,6 +37,11 @@ berlisensi MIT, ISC, BSD, atau Apache-2.0; lihat `package.json` dan lisensi tiap
 
 Sumber tiap angka tercantum di `src/content/sources.ts` dan tampil di halaman Data. Angka
 yang belum dicek ke sumber berstatus `verified: false` dan ditandai "perlu verifikasi".
+
+Harga peluncuran: BYD Seal dari Zigwheels Indonesia dan Moladin (OTR Jakarta); LaFerrari dari
+Autoblog dan CarGurus (MSRP pasar AS); McLaren P1 dari siaran pers McLaren (PR Newswire) dan
+Autoblog; McLaren Senna dari lembar media McLaren. Perkiraan rupiah memakai kurs tetap
+$1 = Rp18.100 yang ditetapkan pemilik proyek pada 14 November 2026 (`src/content/fx.ts`).
 
 ## Pernyataan
 

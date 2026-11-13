@@ -253,7 +253,7 @@ export const UI = {
       },
       {
         h: 'Model 3D adalah ilustrasi',
-        p: 'Semua model dibangun secara prosedural dari dimensi yang dipublikasikan. Bodi adalah pendekatan siluet, dan komponen dalam (mesin, baterai, sasis) adalah ilustrasi skematis, bukan CAD pabrikan. Yang dijaga benar: skala antarmobil, jumlah silinder, serta ukuran dan letak kasar komponen utama.',
+        p: 'Semua model dibangun secara prosedural dari dimensi yang dipublikasikan. Bodi adalah pendekatan bentuk dengan ciri khas tiap mobil (spatbor, lubang udara, lampu, sayap), dan komponen dalam (mesin, baterai, sasis) adalah ilustrasi skematis, bukan CAD pabrikan. Yang dijaga benar: skala antarmobil, jumlah silinder, serta ukuran dan letak kasar komponen utama.',
       },
       {
         h: 'Dari mana angkanya',
@@ -277,7 +277,7 @@ export const UI = {
       },
       {
         h: 'Kredit',
-        p: 'Semua model 3D, gambar, dan ikon dibuat sendiri untuk proyek ini. Dibangun dengan React, three.js, React Three Fiber, drei, Zustand, d3-scale, d3-shape, Zod, dan Tailwind CSS. Rincian ada di berkas CREDITS.md.',
+        p: 'Semua model 3D, gambar, ikon, dan suara dibuat sendiri untuk proyek ini. Dibangun dengan React, three.js, React Three Fiber, drei, Zustand, d3-scale, d3-shape, Zod, dan Tailwind CSS. Rincian ada di berkas CREDITS.md.',
       },
     ],
     unverifiedTitle: 'Data yang belum terverifikasi',
