@@ -234,6 +234,12 @@ export const UI = {
     search: 'Cari istilah',
     empty: 'Tidak ada istilah yang cocok.',
   },
+  sound: {
+    hold: 'Tahan untuk injak gas',
+    label: (car: string) => `Tahan untuk mendengar suara ${car} saat digas`,
+    kind: { ice: 'suara mesin', ev: 'dengung motor listrik' },
+    note: 'Suara sintetis buatan sendiri (ilustrasi), bukan rekaman mobil asli.',
+  },
   about: {
     title: 'Tentang',
     sections: [
@@ -260,6 +266,10 @@ export const UI = {
       {
         h: 'Simulasi',
         p: 'Halaman Adu memakai model fisika sederhana yang dikalibrasi ke klaim pabrikan. Hasilnya menunjukkan watak tiap mobil, bukan prediksi uji nyata, dan selalu ditampilkan di samping klaim pabrikan.',
+      },
+      {
+        h: 'Suara',
+        p: 'Tombol "Tahan untuk injak gas" memainkan suara yang dibangkitkan langsung di peramban, tanpa berkas rekaman. Nadanya dihitung dari jumlah silinder dan putaran maksimum tiap mesin: V12 LaFerrari melengking tinggi, V8 twin-turbo P1 dan Senna lebih berat dengan siulan turbo, dan Seal hanya berdengung seperti motor listrik. Ini ilustrasi, bukan rekaman mobil aslinya.',
       },
       {
         h: 'Livery',

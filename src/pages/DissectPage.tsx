@@ -9,6 +9,7 @@ import { hasWebgl } from '@/scene/webgl';
 import { useView } from '@/store/view';
 import { CarTabs } from '@/ui/CarTabs';
 import { DissectTools } from '@/ui/DissectTools';
+import { EngineSoundButton } from '@/ui/sound/EngineSoundButton';
 import { PartPanel } from '@/ui/PartPanel';
 import { StaticCars } from '@/ui/StaticCars';
 import { SystemList } from '@/ui/SystemList';
@@ -121,6 +122,9 @@ export default function DissectPage() {
         />
       </div>
       <aside className="border-line p-3 lg:order-3 lg:w-96 lg:shrink-0 lg:overflow-y-auto lg:border-l">
+        <div className="mb-3">
+          <EngineSoundButton key={carId} car={car} />
+        </div>
         <PartPanel carId={carId} part={part} onClear={() => set({ part: null })} />
       </aside>
       <aside className="border-t border-line p-3 lg:order-1 lg:w-64 lg:shrink-0 lg:overflow-y-auto lg:border-r lg:border-t-0">
