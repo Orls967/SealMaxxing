@@ -14,7 +14,7 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, dev
 for (const id of cars) {
   await page.goto(`${base}#/bedah/${id}`);
   await page.reload();
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(8000);
   const png = await page.locator('canvas').first().screenshot();
   await sharp(png).resize({ width: 800 }).webp({ quality: 78 }).toFile(`public/static/${id}.webp`);
   console.log('saved', id);
