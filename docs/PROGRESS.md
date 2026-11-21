@@ -1,9 +1,9 @@
 # PROGRESS
 
 Diperbarui: 2026-11-14
-Milestone aktif: revisi putaran 2 (lihat `revisi.md`), fase R7
-Sub-tugas aktif: menunggu empat berkas GLB diunduh ke `public/models/` (R7.1b); kandidat terpilih ada di `revisi.md` R7.1
-Langkah berikut yang persis: setelah `public/models/{seal,laferrari,p1,senna}.glb` ada, kerjakan R7.2–R7.7 di `revisi.md` (kredit, optimasi, pemuat GLB, pemetaan bagian, cadangan prosedural). `revisi.md` belum dihapus.
+Milestone aktif: revisi putaran 2 (lihat `revisi.md`), R7 selesai dikerjakan
+Sub-tugas aktif: menunggu penilaian pemilik atas model 3D baru (R7.7)
+Langkah berikut yang persis: bila pemilik menyetujui, hapus `revisi.md`, commit, push. Bila ada bagian model yang salah kelompok atau emblem yang masih tampak, ubah konfigurasi mobil itu di `scripts/build-models.mjs` (`paint`, `drop`, `dropBoxes`, `wing`, `doors`) lalu `npm run models` dan `node scripts/static-cars.mjs`. Berkas mentah ada di `model/glb/` (lokal).
 
 ## Selesai
 
@@ -14,6 +14,8 @@ Langkah berikut yang persis: setelah `public/models/{seal,laferrari,p1,senna}.gl
 - Tambahan (permintaan pemilik, 2026-11-14): suara tiap mobil lewat tombol "Tahan untuk injak gas" di kartu Garasi dan di halaman Bedah.
 
 - R8 (2026-11-14): tombol "Tahan untuk injak gas" memutar rekaman di `public/sounds/` (disiapkan pemilik): klip langsam berulang ditambah klip digas selama tombol ditahan. Data klip dan kredit di `src/content/sounds.ts`; suara sintetis hanya cadangan bila rekaman gagal dimuat. Diperiksa di peramban: ketujuh berkas termuat dan terurai, keempat tombol memutar rekaman tanpa galat. Belum dinilai dengan telinga.
+
+- R7 (2026-11-22): bodi luar kini model Sketchfab CC BY 4.0 (`public/models/`, dibangun dari `model/glb/` oleh `scripts/build-models.mjs`). Pemuat `src/scene/glb/GlbBody.tsx` memetakan node `<sistem>__<bagian>__<sisi>` ke bagian aplikasi; komponen dalam skematis mengikuti poros yang terukur pada model dan disembunyikan selama mobil utuh; bodi prosedural menjadi cadangan.
 
 ## Hasil verifikasi R2
 
@@ -52,6 +54,11 @@ Langkah berikut yang persis: setelah `public/models/{seal,laferrari,p1,senna}.gl
 - Nama akhir proyek: SealMaxxing. Hosting: GitHub Pages lewat GitHub Actions.
 
 ## Masalah terbuka
+
+- Model Seal dan LaFerrari berlabel CC BY di Sketchfab tetapi asal-usulnya tidak bisa dipastikan (disetujui pemilik); ganti bila ada keberatan.
+- Jarak sumbu model Seal 3,03 m, data 2,92 m: proporsi model, bukan data, yang meleset. Komponen dalam mengikuti poros model.
+- Interior model masuk ke bagian `body-panels`, jadi ikut tersorot saat panel bodi dipilih.
+- Model Seal (SketchUp) tidak bisa disederhanakan di bawah ±136 ribu segitiga; total keempat model ±4,4 MB.
 
 - Rekaman pengganti: Seal memakai Tesla Model S Plaid, Senna memakai supercar tak dikenal, langsam LaFerrari memakai Ferrari lain; UI melabelinya "rekaman pengganti". Ganti bila ada rekaman terbuka dari mobil yang sama.
 - Rekaman P1 dan LaFerrari dari Wikimedia Commons berlisensi CC BY 3.0 tetapi halaman sumbernya masih bertanda "menunggu tinjauan lisensi"; bila tinjauan itu gagal, kedua rekaman harus diganti.

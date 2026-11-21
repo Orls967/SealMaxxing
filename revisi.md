@@ -193,16 +193,21 @@ lisensi dan asal-usulnya bisa dipastikan untuk keempat mobil.
       dipastikan; keduanya dipakai atas dasar label CC-BY di Sketchfab dan diganti bila ada
       keberatan.
 
-- [ ] R7.1b Unduh keempat GLB (perlu masuk akun Sketchfab) ke `public/models/<carId>.glb`.
-- [ ] R7.2 Simpan GLB di `public/models/<carId>.glb`, catat lisensi dan pembuat di `CREDITS.md`.
-- [ ] R7.3 Optimasi: `scripts/optimize-models.mjs` (Draco/Meshopt, tekstur WebP/KTX2), target
+- [x] R7.1b Unduh keempat GLB (perlu masuk akun Sketchfab) ke `public/models/<carId>.glb`.
+- [x] R7.2 Simpan GLB di `public/models/<carId>.glb`, catat lisensi dan pembuat di `CREDITS.md`.
+- [x] R7.3 Optimasi: `scripts/optimize-models.mjs` (Draco/Meshopt, tekstur WebP/KTX2), target
       ≤ 5 MB per mobil, dimuat saat diperlukan dengan indikator kemajuan.
-- [ ] R7.4 Pemuat GLB di `src/scene/`: skala disetel ke panjang dari data (skala sebenarnya),
+- [x] R7.4 Pemuat GLB di `src/scene/`: skala disetel ke panjang dari data (skala sebenarnya),
       titik asal di poros depan, logo pabrikan dihapus dari mesh/tekstur.
-- [ ] R7.5 Petakan mesh GLB ke `PartId` (panel bodi, pintu, kaca, lampu, roda, ban, sayap)
+- [x] R7.5 Petakan mesh GLB ke `PartId` (panel bodi, pintu, kaca, lampu, roda, ban, sayap)
       supaya pilih, sorot, kupas, ledak, dan sinar-X tetap berfungsi; komponen dalam tetap
       ilustrasi prosedural di dalam bodi baru.
-- [ ] R7.6 Bodi prosedural menjadi cadangan saat GLB gagal dimuat; gambar statis dibuat ulang.
+- [x] R7.6 Bodi prosedural menjadi cadangan saat GLB gagal dimuat; gambar statis dibuat ulang.
+- Catatan R7 (2026-11-22): pengolahan memakai `scripts/build-models.mjs` (meshopt, tanpa tekstur),
+  bukan `optimize-models.mjs`. Hasil: Seal 2,0 MB, LaFerrari 0,9 MB, P1 0,7 MB, Senna 0,8 MB.
+  Jarak sumbu terukur pada model: Seal 3,03 m (data 2,92), LaFerrari 2,64, P1 2,63, Senna 2,68.
+  Model Senna tanpa ban: poros diambil dari lengkung spatbor, roda dan ban digambar aplikasi.
+  Emblem dibuang: LaFerrari (badge dan perisai), P1 (hidung), Senna (hidung dan buritan).
 - [ ] R7.7 Selesai bila tangkapan layar dari sudut gambar acuan (`model/`) diletakkan
       berdampingan dan dinilai pemilik.
 
@@ -224,7 +229,7 @@ Pencarian 2026-11-14 tidak menemukan rekaman LaFerrari, P1, atau Senna berlisens
 
 ## Keputusan yang ditunggu dari pemilik
 
-2. Tidak ada; yang ditunggu adalah berkas GLB (R7.1b).
+2. Penilaian pemilik atas model baru (R7.7).
 
 1. Livery bawaan: dikerjakan dengan warna acuan sebagai bawaan dan livery tema sebagai sakelar
    (usul di R1.3); dibalik bila pemilik memilih sebaliknya.
