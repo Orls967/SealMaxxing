@@ -124,15 +124,16 @@ npm install
 npm run dev        # http://localhost:5173
 ```
 
-| Perintah                                                 | Guna                                          |
-| -------------------------------------------------------- | --------------------------------------------- |
-| `npm run build`                                          | `tsc --noEmit` lalu build produksi ke `dist/` |
-| `npm run preview`                                        | Menyajikan `dist/`                            |
-| `npm run lint` · `npm run typecheck`                     | ESLint · TypeScript                           |
-| `npm run test`                                           | Unit, konten, dan komponen (Vitest)           |
-| `npm run e2e`                                            | Playwright terhadap build produksi            |
-| `npm run check:content`                                  | Kelengkapan konten dan sumber                 |
-| `node scripts/shots.mjs out.png '#/bedah/seal' 1440x900` | Tangkapan layar untuk memeriksa tampilan      |
+| Perintah                                                 | Guna                                                      |
+| -------------------------------------------------------- | --------------------------------------------------------- |
+| `npm run build`                                          | `tsc --noEmit` lalu build produksi ke `dist/`             |
+| `npm run preview`                                        | Menyajikan `dist/`                                        |
+| `npm run lint` · `npm run typecheck`                     | ESLint · TypeScript                                       |
+| `npm run test`                                           | Unit, konten, dan komponen (Vitest)                       |
+| `npm run e2e`                                            | Playwright terhadap build produksi                        |
+| `npm run check:content`                                  | Kelengkapan konten dan sumber                             |
+| `npm run a11y`                                           | Skor aksesibilitas Lighthouse tiap halaman (situs tayang) |
+| `node scripts/shots.mjs out.png '#/bedah/seal' 1440x900` | Tangkapan layar untuk memeriksa tampilan                  |
 
 ## Struktur
 
