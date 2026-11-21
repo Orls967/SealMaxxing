@@ -23,7 +23,6 @@ export function EngineSoundButton({ car }: { car: Car }) {
       <button
         type="button"
         className="relative select-none overflow-hidden rounded border border-line bg-bg px-3 py-2 text-left text-sm font-semibold text-text hover:border-accent"
-        aria-label={UI.sound.label(car.name, tag)}
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
           press();
@@ -46,6 +45,8 @@ export function EngineSoundButton({ car }: { car: Car }) {
         <span className="relative flex items-center justify-between gap-2">
           <span>{UI.sound.hold}</span>
           <span className="text-xs font-normal text-muted">{tag}</span>
+          {/* After the visible text, so the accessible name still begins with what is on screen. */}
+          <span className="sr-only">{UI.sound.label(car.name)}</span>
         </span>
       </button>
       <p className="text-xs text-muted">{synthetic ? UI.sound.note : sound.note}</p>
