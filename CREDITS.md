@@ -4,7 +4,8 @@
 
 | Aset                                                              | Asal                                                                                                | Lisensi         |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------- |
-| Model 3D keempat mobil (bodi, kaca, roda, seluruh komponen dalam) | Dibuat sendiri secara prosedural di `src/scene/procedural/` dari dimensi yang dipublikasikan        | Buatan sendiri  |
+| Model 3D bodi luar keempat mobil (`public/models/*.glb`)          | Sketchfab, diolah dengan `scripts/build-models.mjs`; rincian di bawah                               | CC BY 4.0       |
+| Komponen dalam, bodi cadangan, roda dan ban Senna                 | Dibuat sendiri secara prosedural di `src/scene/procedural/`                                         | Buatan sendiri  |
 | Klip audio `public/sounds/*`                                      | Dipotong dan dinormalisasi dari rekaman terbuka; detail sumber dan perbedaan model dicatat di bawah | CC0 / CC BY 3.0 |
 | Suara sintetis cadangan (dipakai hanya bila rekaman gagal dimuat) | Dibangkitkan dengan Web Audio (`src/ui/sound/engineVoice.ts`)                                       | Buatan sendiri  |
 | Tangkapan layar `docs/screenshots/*.png`                          | Tangkapan dari situs yang tayang                                                                    | Buatan sendiri  |
@@ -12,10 +13,30 @@
 | Ikon `public/favicon.svg`                                         | Dibuat sendiri                                                                                      | Buatan sendiri  |
 | Pencahayaan studio                                                | Dibangun dari light former di kode; tidak ada HDRI yang diunduh                                     | Buatan sendiri  |
 
-Tidak ada model hasil ekstraksi game, tidak ada model unduhan, dan tidak ada logo pabrikan.
-Tingkat 1 pada CARSOME.md 4.3 (model eksterior CC0/CC-BY) tidak dipakai: tidak ada model
-berlisensi terbuka yang bisa diverifikasi untuk keempat mobil, sehingga jalur prosedural
-menjadi satu-satunya sumber.
+## Model 3D
+
+Model bodi diunduh dari Sketchfab dengan lisensi [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Berkas mentahnya disimpan lokal di `model/glb/` (tidak masuk repositori); yang tayang adalah hasil
+olah `scripts/build-models.mjs`.
+
+| Mobil     | Model                                                                                             | Pembuat       |
+| --------- | ------------------------------------------------------------------------------------------------- | ------------- |
+| Seal      | [2024 BYD Seal Performance AWD](https://sketchfab.com/3d-models/96ec5c34852f4c3090a755d4445f5e98) | Nazh Design   |
+| LaFerrari | [Ferrari Laferrari](https://sketchfab.com/3d-models/006a4b4047754c35aa5ed0366bff3b49)             | Res1n         |
+| P1        | [McLaren P1](https://sketchfab.com/3d-models/e791b5aee5c6497c83994f4e5f1db84b)                    | hartwelkisaka |
+| Senna     | [McLaren senna](https://sketchfab.com/3d-models/f3ada11a4618463cac2e082c008cc340)                 | hartwelkisaka |
+
+Perubahan yang dibuat proyek ini: diputar dan diskalakan ke panjang sebenarnya, poros roda
+diukur pada model, segitiga dipecah ke bagian aplikasi (panel bodi, pintu, kaca, lampu, roda, ban,
+sayap), jaring disederhanakan dan dikompresi, tekstur dibuang, emblem pabrikan dibuang, dan
+warna diganti dengan warna acuan atau livery tema. Model LaFerrari aslinya berwarna hitam. Model
+Senna tidak menyertakan ban; roda dan bannya digambar oleh aplikasi.
+
+Asal-usul: model P1 dan Senna dinyatakan pembuatnya sebagai karya sendiri. Asal-usul model Seal
+("dikonversi dari SketchUp") dan LaFerrari tidak bisa dipastikan; keduanya dipakai atas dasar
+label CC BY di Sketchfab, dengan persetujuan pemilik proyek, dan akan diganti bila ada keberatan.
+Model yang jelas berasal dari ekstraksi game (CSR Racing 2, Assetto Corsa) sengaja tidak dipakai.
+Tidak ada logo pabrikan yang ditampilkan.
 
 ## Rekaman suara
 

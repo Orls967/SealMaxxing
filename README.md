@@ -23,8 +23,9 @@ Tampilan ponsel:
 | ------------------------------------------------------- | ----------------------------------------------------- |
 | ![Garasi di ponsel](docs/screenshots/garasi-ponsel.png) | ![Bedah di ponsel](docs/screenshots/bedah-ponsel.png) |
 
-> Bukan produk resmi. Tidak berafiliasi dengan BYD, Ferrari, atau McLaren. Model 3D adalah
-> ilustrasi buatan sendiri, bukan CAD pabrikan; skala antarmobil sebenarnya.
+> Bukan produk resmi. Tidak berafiliasi dengan BYD, Ferrari, atau McLaren. Bodi 3D memakai
+> model penggemar berlisensi CC BY 4.0 (bukan CAD pabrikan, emblem pabrikan dibuang); komponen
+> dalam adalah ilustrasi buatan sendiri. Skala antarmobil sebenarnya.
 
 ## Daftar isi
 
@@ -99,9 +100,12 @@ tangki bensin P1 dan Senna. Daftar terkini selalu ada di halaman Tentang.
 
 Aplikasi ini alat belajar, bukan lembar data pabrikan.
 
-- **Model 3D.** Dibangun secara prosedural dari dimensi yang dipublikasikan. Bodi adalah
-  pendekatan bentuk; komponen dalam (mesin, baterai, sasis) adalah ilustrasi skematis. Yang
-  dijaga benar: skala antarmobil, jumlah silinder, serta ukuran dan letak kasar komponen utama.
+- **Model 3D.** Bodi luar memakai model penggemar dari Sketchfab (CC BY 4.0), diskalakan ke
+  panjang sebenarnya; detailnya bisa sedikit berbeda dari mobil aslinya (jarak sumbu roda
+  model Seal ±4% lebih panjang dari data). Model Senna tidak membawa ban, jadi roda dan bannya
+  digambar aplikasi. Komponen dalam (mesin, baterai, sasis) adalah ilustrasi skematis yang
+  diletakkan pada poros roda model. Keempat model ±4,4 MB dan dimuat setelah halaman tampil;
+  sementara itu, dan bila model gagal dimuat, bodi skematis yang tampil.
 - **Suara.** Rekaman berlisensi terbuka (CC0 dan CC BY 3.0). P1 dan LaFerrari saat digas
   memakai rekaman mobil itu sendiri. Seal (Tesla Model S Plaid), Senna (supercar tak
   dikenal), dan langsam LaFerrari (Ferrari lain) memakai rekaman pengganti dan berlabel
@@ -136,7 +140,7 @@ npm run dev        # http://localhost:5173
 src/
 ├─ content/   data mobil, sumber, kurs, dan seluruh teks UI (tanpa logika)
 ├─ lib/       fungsi murni dan teruji: banding, turunan, harga, simulasi, suara, format, CSV
-├─ scene/     semua three.js / React Three Fiber, termasuk pembangun bodi prosedural
+├─ scene/     semua three.js / React Three Fiber: pemuat model, bodi cadangan, komponen dalam
 ├─ ui/        komponen tampilan, grafik SVG, dan pembangkit suara
 ├─ pages/     satu berkas per rute, dimuat malas
 └─ store/     Zustand, disinkronkan dengan hash URL
@@ -160,8 +164,9 @@ Sumber utama: lembar media McLaren Senna, paket pers McLaren P1, lembar data pel
 LaFerrari, panduan produk BYD Seal, EV Database, CarExpert, Autocar, PistonHeads, dan
 Wikipedia. Daftar lengkap dengan tautan ada di halaman Data dan `src/content/sources.ts`.
 
-Model 3D, gambar, dan ikon dibuat sendiri untuk proyek ini; tidak ada model unduhan atau logo
-pabrikan. Rekaman suara berasal dari Freesound (CC0) dan Wikimedia Commons (CC BY 3.0). Rinciannya ada di [`CREDITS.md`](CREDITS.md).
+Model bodi berasal dari Sketchfab (CC BY 4.0: Nazh Design, Res1n, hartwelkisaka) dan diolah
+dengan `npm run models`; emblem pabrikan dibuang. Rekaman suara berasal dari Freesound (CC0)
+dan Wikimedia Commons (CC BY 3.0). Komponen dalam, gambar, dan ikon dibuat sendiri. Rinciannya ada di [`CREDITS.md`](CREDITS.md).
 
 Spesifikasi proyek ada di [`CARSOME.md`](CARSOME.md) dan aturan kode di
 [`CLAUDE.md`](CLAUDE.md). Proyek ini bukan produk resmi dan tidak berafiliasi, disponsori,
