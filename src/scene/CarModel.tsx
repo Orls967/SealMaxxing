@@ -1,9 +1,11 @@
-import { useMemo } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import type * as THREE from 'three';
 import type { CarId, PartId } from '@/content/ids';
 import { PARTS } from '@/content/parts';
 import { partMode, type DisplayState } from './display';
 import { ExplodeAnimator } from './dissect/ExplodeAnimator';
+import { GlbBody, type ModelInfo } from './glb/GlbBody';
+import { ModelBoundary } from './glb/ModelBoundary';
 import type { Livery } from '@/lib/viewState';
 import { PALETTE } from './materials';
 import { CarCtx, type CarContext, type PartEntry } from './prim';
@@ -65,11 +67,37 @@ export function CarModel({
   );
   const s = SHAPES[carId];
   const lay = LAYOUTS[carId];
+  const paint = livery === 'theme' ? 'paint' : s.paint;
+  // Parts supplied by the loaded model file; null while the procedural body stands in.
+  const [model, setModel] = useState<ModelInfo | null>(null);
+  const onParts = useCallback((m: ModelInfo | null) => setModel(m), []);
+  // The schematic internals follow the axles measured on the loaded model, so brakes and
+  // suspension sit inside its wheels even where the model's proportions differ slightly.
+  const inner = useMemo(
+    () =>
+      model && Number.isFinite(model.wheelbaseM) && Number.isFinite(model.frontOverhangM)
+        ? { ...s, wb: model.wheelbaseM, fo: model.frontOverhangM }
+        : s,
+    [s, model],
+  );
+  // A loaded model brings its own cabin, and its glass is clear: while the car is shut (body
+  // solid, nothing exploded) the schematic internals would only show through and clash.
+  const closed = model !== null && partMode('body-panels', display) === 'solid' && explode === 0;
+  const procedural = <CarBody s={s} lay={lay} paint={paint} cut={cut} />;
   return (
     <CarCtx.Provider value={ctx}>
       <group position={position}>
-        <CarBody s={s} lay={lay} paint={livery === 'theme' ? 'paint' : s.paint} cut={cut} />
-        <CarInternals s={s} lay={lay} exteriorOnly={detail === 'exterior'} />
+        <ModelBoundary fallback={procedural}>
+          <Suspense fallback={procedural}>
+            <GlbBody carId={carId} paint={paint} onParts={onParts} />
+          </Suspense>
+        </ModelBoundary>
+        <CarInternals
+          s={inner}
+          lay={lay}
+          exteriorOnly={detail === 'exterior' || closed}
+          fromModel={model?.parts ?? null}
+        />
         <ExplodeAnimator target={explode} instant={instant} />
       </group>
     </CarCtx.Provider>

@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from 'react';
 import type { V3 } from '../explode';
+import type { PartId } from '@/content/ids';
 import { Box, Cyl, Part, Ring, Rod, Sph, Tube, useMode } from '../prim';
 import type { CarLayout } from './layouts';
 import { stationAt, tOf, type CarShape } from './shapes';
@@ -11,6 +12,9 @@ interface P {
   s: CarShape;
   lay: CarLayout;
 }
+
+/** Parts already drawn by the loaded model file; their schematic versions are skipped. */
+type FromModel = ReadonlySet<PartId> | null;
 
 const belt = (s: CarShape, x: number) => stationAt(s, tOf(s, x)).belt;
 const halfW = (s: CarShape, x: number) => stationAt(s, tOf(s, x)).hw;
@@ -476,7 +480,7 @@ function Exhaust({ s, lay }: P) {
 
 /* ---------- Corners: suspension, brakes, wheels ---------- */
 
-function Corner({ s, lay, rear, z }: P & { rear: boolean; z: Side }) {
+function Corner({ s, lay, rear, z, fromModel }: P & { rear: boolean; z: Side; fromModel: FromModel }) {
   const a = axles(s)[rear ? 1 : 0];
   const zw = z * wheelZ(s, rear);
   const zi = z * (wheelZ(s, rear) - 0.42);
@@ -528,27 +532,31 @@ function Corner({ s, lay, rear, z }: P & { rear: boolean; z: Side }) {
           r={[0, 0, rear ? -0.9 : 0.9]}
         />
       </Part>
-      <Part id="wheels" mirror={mirror}>
-        <Cyl k="dark" p={[a.x, a.r, zw]} rad={a.rim} h={a.w * 0.96} axis="z" />
-        <group position={[a.x, a.r, zw + z * (a.w / 2 + 0.002)]}>
-          {Array.from({ length: n }, (_, i) => (
-            <Box
-              key={i}
-              k={w.k}
-              s={[a.rim * 0.94, w.twin ? 0.02 : 0.026, 0.02]}
-              p={[Math.cos(angle(i)) * a.rim * 0.5, Math.sin(angle(i)) * a.rim * 0.5, 0]}
-              r={[0, 0, angle(i)]}
-            />
-          ))}
-          <Cyl k={w.centreLock ? 'red' : w.k} rad={w.centreLock ? 0.05 : 0.04} h={0.03} axis="z" />
-          <Ring k={w.k} rad={a.rim * 0.97} axis="z" />
-        </group>
-      </Part>
-      <Part id="tires" mirror={mirror}>
-        <Cyl k="rubber" p={[a.x, a.r, zw]} rad={a.r} h={a.w * 0.9} axis="z" />
-        <Ring k="rubber" p={[a.x, a.r, zw + a.w * 0.36]} rad={a.r - 0.02} axis="z" />
-        <Ring k="rubber" p={[a.x, a.r, zw - a.w * 0.36]} rad={a.r - 0.02} axis="z" />
-      </Part>
+      {!fromModel?.has('wheels') && (
+        <Part id="wheels" mirror={mirror}>
+          <Cyl k="dark" p={[a.x, a.r, zw]} rad={a.rim} h={a.w * 0.96} axis="z" />
+          <group position={[a.x, a.r, zw + z * (a.w / 2 + 0.002)]}>
+            {Array.from({ length: n }, (_, i) => (
+              <Box
+                key={i}
+                k={w.k}
+                s={[a.rim * 0.94, w.twin ? 0.02 : 0.026, 0.02]}
+                p={[Math.cos(angle(i)) * a.rim * 0.5, Math.sin(angle(i)) * a.rim * 0.5, 0]}
+                r={[0, 0, angle(i)]}
+              />
+            ))}
+            <Cyl k={w.centreLock ? 'red' : w.k} rad={w.centreLock ? 0.05 : 0.04} h={0.03} axis="z" />
+            <Ring k={w.k} rad={a.rim * 0.97} axis="z" />
+          </group>
+        </Part>
+      )}
+      {!fromModel?.has('tires') && (
+        <Part id="tires" mirror={mirror}>
+          <Cyl k="rubber" p={[a.x, a.r, zw]} rad={a.r} h={a.w * 0.9} axis="z" />
+          <Ring k="rubber" p={[a.x, a.r, zw + a.w * 0.36]} rad={a.r - 0.02} axis="z" />
+          <Ring k="rubber" p={[a.x, a.r, zw - a.w * 0.36]} rad={a.r - 0.02} axis="z" />
+        </Part>
+      )}
     </>
   );
 }
@@ -580,7 +588,7 @@ function Steering({ s, lay }: P) {
 
 /* ---------- Aero ---------- */
 
-function Aero({ s, lay }: P) {
+function Aero({ s, lay, fromModel }: P & { fromModel: FromModel }) {
   const nose = -s.fo;
   const xTail = s.L - s.fo;
   const ev = !lay.engine;
@@ -589,118 +597,152 @@ function Aero({ s, lay }: P) {
   const wingZ = lay.wing === 'fixed' ? s.W * 0.98 : s.W * 0.8;
   const wingY = lay.wing === 'fixed' ? s.H - 0.02 : deck + 0.2;
   const wingX = lay.wing === 'fixed' ? xTail - 0.08 : xTail - 0.28;
+  // Over a real body these schematic bits would poke through it: show them only when singled out.
+  const Wrap = fromModel ? Hint : Fragment;
   return (
     <>
-      <Part id="front-aero">
-        <Box
-          k={ev ? 'plastic' : 'carbon'}
-          p={[nose + (ev ? 0.16 : 0.26), ev ? 0.2 : 0.085, 0]}
-          s={[ev ? 0.14 : 0.36, ev ? 0.05 : 0.014, halfW(s, nose + (ev ? 0.16 : 0.2)) * (ev ? 1.5 : 1.9)]}
-        />
-        {!ev &&
-          SIDES.map((z) => (
-            <Box
-              key={z}
-              k="carbon"
-              p={[nose + 0.26, 0.12, z * halfW(s, nose + 0.2) * 0.94]}
-              s={[0.3, 0.08, 0.012]}
-            />
-          ))}
-      </Part>
-      <Part id="underbody">
-        <Box
-          k="plastic"
-          p={[(nose + 0.5 + s.wb + 0.1) / 2, floorY, 0]}
-          s={[s.wb - nose - 0.4, 0.012, s.W * 0.7]}
-        />
-        <Box
-          k="carbon"
-          p={[(s.wb + 0.1 + xTail) / 2, floorY + (ev ? 0.07 : 0.14), 0]}
-          s={[xTail - s.wb - 0.1, 0.012, s.W * 0.7]}
-          r={[0, 0, ev ? -0.16 : -0.3]}
-        />
-        {(ev ? [-0.3, 0.3] : [-0.45, -0.15, 0.15, 0.45]).map((f) => (
+      {!fromModel?.has('front-aero') && (
+        <Part id="front-aero">
           <Box
-            key={f}
+            k={ev ? 'plastic' : 'carbon'}
+            p={[nose + (ev ? 0.16 : 0.26), ev ? 0.2 : 0.085, 0]}
+            s={[ev ? 0.14 : 0.36, ev ? 0.05 : 0.014, halfW(s, nose + (ev ? 0.16 : 0.2)) * (ev ? 1.5 : 1.9)]}
+          />
+          {!ev &&
+            SIDES.map((z) => (
+              <Box
+                key={z}
+                k="carbon"
+                p={[nose + 0.26, 0.12, z * halfW(s, nose + 0.2) * 0.94]}
+                s={[0.3, 0.08, 0.012]}
+              />
+            ))}
+        </Part>
+      )}
+      <Part id="underbody">
+        <Wrap>
+          <Box
+            k="plastic"
+            p={[(nose + 0.5 + s.wb + 0.1) / 2, floorY, 0]}
+            s={[s.wb - nose - 0.4, 0.012, s.W * 0.7]}
+          />
+          <Box
             k="carbon"
-            p={[(s.wb + 0.1 + xTail) / 2 + 0.1, floorY + (ev ? 0.06 : 0.12), f * s.W * 0.7]}
-            s={[xTail - s.wb - 0.3, ev ? 0.08 : 0.18, 0.012]}
+            p={[(s.wb + 0.1 + xTail) / 2, floorY + (ev ? 0.07 : 0.14), 0]}
+            s={[xTail - s.wb - 0.1, 0.012, s.W * 0.7]}
             r={[0, 0, ev ? -0.16 : -0.3]}
           />
-        ))}
-      </Part>
-      <Part id="rear-wing">
-        {lay.wing === 'lip' && (
-          <Box
-            k="paint"
-            p={[xTail - 0.2, belt(s, xTail - 0.2) + 0.012, 0]}
-            s={[0.12, 0.03, s.W * 0.72]}
-            r={[0, 0, -0.25]}
-          />
-        )}
-        {lay.wing === 'hidden' && (
-          <Box k="carbon" p={[xTail - 0.2, deck + 0.05, 0]} s={[0.26, 0.016, s.W * 0.7]} r={[0, 0, -0.2]} />
-        )}
-        {(lay.wing === 'raised' || lay.wing === 'fixed') && (
-          <>
+          {(ev ? [-0.3, 0.3] : [-0.45, -0.15, 0.15, 0.45]).map((f) => (
             <Box
+              key={f}
               k="carbon"
-              p={[wingX, wingY, 0]}
-              s={[lay.wing === 'fixed' ? 0.4 : 0.32, 0.024, wingZ]}
-              r={[0, 0, -0.16]}
+              p={[(s.wb + 0.1 + xTail) / 2 + 0.1, floorY + (ev ? 0.06 : 0.12), f * s.W * 0.7]}
+              s={[xTail - s.wb - 0.3, ev ? 0.08 : 0.18, 0.012]}
+              r={[0, 0, ev ? -0.16 : -0.3]}
             />
-            {lay.wing === 'fixed' && (
-              <Box k="carbon" p={[wingX + 0.16, wingY + 0.05, 0]} s={[0.14, 0.014, wingZ]} r={[0, 0, -0.5]} />
-            )}
-            {SIDES.map((z) => (
-              <Fragment key={z}>
-                {lay.wing === 'fixed' ? (
-                  <>
-                    <Tube
-                      k="carbon"
-                      pts={[
-                        [xTail - 0.5, deck, z * 0.42],
-                        [xTail - 0.42, wingY + 0.12, z * 0.42],
-                        [wingX - 0.05, wingY + 0.03, z * 0.42],
-                      ]}
-                      rad={0.022}
-                    />
-                    <Box
-                      k="carbon"
-                      p={[wingX + 0.04, wingY - 0.04, (z * wingZ) / 2]}
-                      s={[0.5, 0.26, 0.012]}
-                    />
-                  </>
-                ) : (
-                  <Rod k="dark" a={[wingX, deck - 0.02, z * 0.4]} b={[wingX, wingY, z * 0.4]} rad={0.024} />
-                )}
-              </Fragment>
-            ))}
-          </>
-        )}
+          ))}
+        </Wrap>
       </Part>
+      {!fromModel?.has('rear-wing') && (
+        <Part id="rear-wing">
+          <Wrap>
+            {lay.wing === 'lip' && (
+              <Box
+                k="paint"
+                p={[xTail - 0.2, belt(s, xTail - 0.2) + 0.012, 0]}
+                s={[0.12, 0.03, s.W * 0.72]}
+                r={[0, 0, -0.25]}
+              />
+            )}
+            {lay.wing === 'hidden' && (
+              <Box
+                k="carbon"
+                p={[xTail - 0.2, deck + 0.05, 0]}
+                s={[0.26, 0.016, s.W * 0.7]}
+                r={[0, 0, -0.2]}
+              />
+            )}
+            {(lay.wing === 'raised' || lay.wing === 'fixed') && (
+              <>
+                <Box
+                  k="carbon"
+                  p={[wingX, wingY, 0]}
+                  s={[lay.wing === 'fixed' ? 0.4 : 0.32, 0.024, wingZ]}
+                  r={[0, 0, -0.16]}
+                />
+                {lay.wing === 'fixed' && (
+                  <Box
+                    k="carbon"
+                    p={[wingX + 0.16, wingY + 0.05, 0]}
+                    s={[0.14, 0.014, wingZ]}
+                    r={[0, 0, -0.5]}
+                  />
+                )}
+                {SIDES.map((z) => (
+                  <Fragment key={z}>
+                    {lay.wing === 'fixed' ? (
+                      <>
+                        <Tube
+                          k="carbon"
+                          pts={[
+                            [xTail - 0.5, deck, z * 0.42],
+                            [xTail - 0.42, wingY + 0.12, z * 0.42],
+                            [wingX - 0.05, wingY + 0.03, z * 0.42],
+                          ]}
+                          rad={0.022}
+                        />
+                        <Box
+                          k="carbon"
+                          p={[wingX + 0.04, wingY - 0.04, (z * wingZ) / 2]}
+                          s={[0.5, 0.26, 0.012]}
+                        />
+                      </>
+                    ) : (
+                      <Rod
+                        k="dark"
+                        a={[wingX, deck - 0.02, z * 0.4]}
+                        b={[wingX, wingY, z * 0.4]}
+                        rad={0.024}
+                      />
+                    )}
+                  </Fragment>
+                ))}
+              </>
+            )}
+          </Wrap>
+        </Part>
+      )}
       <Part id="active-aero">
-        {SIDES.map((z) => (
+        <Wrap>
+          {SIDES.map((z) => (
+            <Box
+              key={z}
+              k="redDeep"
+              p={[nose + 0.5, 0.1, z * s.W * 0.26]}
+              s={[0.2, 0.012, 0.3]}
+              r={[0, 0, 0.25]}
+            />
+          ))}
           <Box
-            key={z}
             k="redDeep"
-            p={[nose + 0.5, 0.1, z * s.W * 0.26]}
-            s={[0.2, 0.012, 0.3]}
-            r={[0, 0, 0.25]}
+            p={[xTail - 0.12, floorY + 0.24, 0]}
+            s={[0.2, 0.012, s.W * 0.5]}
+            r={[0, 0, -0.5]}
           />
-        ))}
-        <Box k="redDeep" p={[xTail - 0.12, floorY + 0.24, 0]} s={[0.2, 0.012, s.W * 0.5]} r={[0, 0, -0.5]} />
+        </Wrap>
       </Part>
       <Part id="air-brake">
-        {SIDES.map((z) => (
-          <Rod
-            key={z}
-            k="red"
-            a={[wingX - 0.1, deck - 0.04, z * 0.24]}
-            b={[wingX + 0.02, lay.wing === 'hidden' ? deck + 0.04 : wingY - 0.02, z * 0.24]}
-            rad={0.016}
-          />
-        ))}
+        <Wrap>
+          {SIDES.map((z) => (
+            <Rod
+              key={z}
+              k="red"
+              a={[wingX - 0.1, deck - 0.04, z * 0.24]}
+              b={[wingX + 0.02, lay.wing === 'hidden' ? deck + 0.04 : wingY - 0.02, z * 0.24]}
+              rad={0.016}
+            />
+          ))}
+        </Wrap>
       </Part>
     </>
   );
@@ -792,15 +834,20 @@ function Cabin({ s, lay }: P) {
   );
 }
 
-export function CarInternals({ s, lay, exteriorOnly = false }: P & { exteriorOnly?: boolean }) {
+export function CarInternals({
+  s,
+  lay,
+  exteriorOnly = false,
+  fromModel = null,
+}: P & { exteriorOnly?: boolean; fromModel?: FromModel }) {
   const corners = ([false, true] as const).flatMap((rear) =>
-    SIDES.map((z) => <Corner key={`${rear}${z}`} s={s} lay={lay} rear={rear} z={z} />),
+    SIDES.map((z) => <Corner key={`${rear}${z}`} s={s} lay={lay} rear={rear} z={z} fromModel={fromModel} />),
   );
   if (exteriorOnly)
     return (
       <>
         {corners}
-        <Aero s={s} lay={lay} />
+        <Aero s={s} lay={lay} fromModel={fromModel} />
       </>
     );
   return (
@@ -812,7 +859,7 @@ export function CarInternals({ s, lay, exteriorOnly = false }: P & { exteriorOnl
       <Exhaust s={s} lay={lay} />
       {corners}
       <Steering s={s} lay={lay} />
-      <Aero s={s} lay={lay} />
+      <Aero s={s} lay={lay} fromModel={fromModel} />
       <Cabin s={s} lay={lay} />
     </>
   );
