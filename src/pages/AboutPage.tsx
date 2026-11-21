@@ -1,5 +1,6 @@
-import { CAR_LIST } from '@/content/cars';
 import { METRIC_BY_ID, METRIC_IDS } from '@/content/metrics';
+import { CAR_LIST } from '@/content/cars';
+import { LICENCE_URL, MODELS } from '@/content/models';
 import { SOUND_CREDITS } from '@/content/sounds';
 import { UI } from '@/content/ui';
 import { fmtSourced } from '@/lib/format';
@@ -26,6 +27,34 @@ export default function AboutPage() {
           <p className="text-text">{s.p}</p>
         </section>
       ))}
+      <section>
+        <h2 className="font-display text-xl font-bold uppercase tracking-wide text-accent-text">
+          {UI.sound.modelsTitle}
+        </h2>
+        <p className="text-sm text-muted">{UI.sound.modelsLead}</p>
+        <ul className="mt-1 list-disc pl-5 text-sm text-text">
+          {CAR_LIST.map((car) => {
+            const m = MODELS[car.id];
+            return (
+              <li key={car.id}>
+                {car.short}:{' '}
+                <a href={m.url} className="underline hover:text-accent-text" rel="noreferrer">
+                  {m.title}
+                </a>{' '}
+                · {m.author} ·{' '}
+                <a
+                  href={LICENCE_URL[m.licence]}
+                  className="underline hover:text-accent-text"
+                  rel="noreferrer"
+                >
+                  {m.licence}
+                </a>
+                <span className="block text-xs text-muted">{m.changes}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
       <section>
         <h2 className="font-display text-xl font-bold uppercase tracking-wide text-accent-text">
           {UI.sound.creditsTitle}

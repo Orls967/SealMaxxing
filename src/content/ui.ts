@@ -242,6 +242,8 @@ export const UI = {
     synthetic: 'suara sintetis',
     note: 'Rekaman gagal dimuat, jadi yang terdengar suara sintetis (ilustrasi), bukan rekaman mobil asli.',
     creditsTitle: 'Rekaman suara',
+    modelsTitle: 'Model 3D bodi',
+    modelsLead: 'Model berikut dipakai di bawah lisensi CC BY 4.0. Perubahan yang dibuat proyek ini:',
     creditsLead: 'Klip dipotong dan dinormalkan dari rekaman berlisensi terbuka berikut:',
   },
   about: {
@@ -256,8 +258,8 @@ export const UI = {
         p: 'Ini bukan produk resmi dan tidak berafiliasi, disponsori, atau disetujui oleh BYD, Ferrari, atau McLaren. Nama merek dan model dipakai hanya sebagai penyebutan. Tidak ada logo pabrikan yang digunakan.',
       },
       {
-        h: 'Model 3D adalah ilustrasi',
-        p: 'Semua model dibangun secara prosedural dari dimensi yang dipublikasikan. Bodi adalah pendekatan bentuk dengan ciri khas tiap mobil (spatbor, lubang udara, lampu, sayap), dan komponen dalam (mesin, baterai, sasis) adalah ilustrasi skematis, bukan CAD pabrikan. Yang dijaga benar: skala antarmobil, jumlah silinder, serta ukuran dan letak kasar komponen utama.',
+        h: 'Model 3D',
+        p: 'Bodi luar tiap mobil memakai model 3D berlisensi CC BY 4.0 dari Sketchfab (pembuatnya tercantum di bawah), diskalakan ke panjang sebenarnya dan dibuang emblem pabrikannya. Model itu buatan penggemar, bukan CAD pabrikan, jadi detailnya bisa sedikit berbeda dari mobil aslinya; jarak sumbu roda model Seal, misalnya, sekitar 4% lebih panjang dari data. Komponen dalam (mesin, baterai, sasis) tetap ilustrasi skematis buatan sendiri yang ditempatkan pada poros roda model. Bila sebuah model gagal dimuat, bodi skematis lama ditampilkan sebagai gantinya.',
       },
       {
         h: 'Dari mana angkanya',
@@ -281,7 +283,7 @@ export const UI = {
       },
       {
         h: 'Kredit',
-        p: 'Semua model 3D, gambar, ikon, dan suara dibuat sendiri untuk proyek ini. Dibangun dengan React, three.js, React Three Fiber, drei, Zustand, d3-scale, d3-shape, Zod, dan Tailwind CSS. Rincian ada di berkas CREDITS.md.',
+        p: 'Model bodi berasal dari Sketchfab (CC BY 4.0) dan rekaman suara dari Freesound (CC0) serta Wikimedia Commons (CC BY 3.0); rinciannya ada di bawah. Komponen dalam, gambar, dan ikon dibuat sendiri. Dibangun dengan React, three.js, React Three Fiber, drei, Zustand, d3-scale, d3-shape, Zod, dan Tailwind CSS. Rincian ada di berkas CREDITS.md.',
       },
     ],
     unverifiedTitle: 'Data yang belum terverifikasi',
