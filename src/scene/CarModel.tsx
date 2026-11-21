@@ -26,6 +26,8 @@ export interface CarModelProps {
   /** `exterior` skips everything hidden behind the body: for views that never open the car. */
   detail?: 'full' | 'exterior';
   cut?: boolean;
+  /** false = draw only the procedural body, without loading the model file. */
+  bodyModel?: boolean;
   instant?: boolean;
   position?: [number, number, number];
   onSelect?: (id: PartId) => void;
@@ -46,6 +48,7 @@ export function CarModel({
   tint = PALETTE.white,
   detail = 'full',
   cut = false,
+  bodyModel = true,
   instant = false,
   position,
   onSelect,
@@ -87,11 +90,15 @@ export function CarModel({
   return (
     <CarCtx.Provider value={ctx}>
       <group position={position}>
-        <ModelBoundary fallback={procedural}>
-          <Suspense fallback={procedural}>
-            <GlbBody carId={carId} paint={paint} onParts={onParts} />
-          </Suspense>
-        </ModelBoundary>
+        {bodyModel ? (
+          <ModelBoundary fallback={procedural}>
+            <Suspense fallback={procedural}>
+              <GlbBody carId={carId} paint={paint} onParts={onParts} />
+            </Suspense>
+          </ModelBoundary>
+        ) : (
+          procedural
+        )}
         <CarInternals
           s={inner}
           lay={lay}

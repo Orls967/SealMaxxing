@@ -6,7 +6,7 @@ import { CarModel } from './CarModel';
 
 describe('CarModel node mapping', () => {
   it.each(CAR_IDS)('%s has a named node for every present part and none for absent ones', async (carId) => {
-    const r = await create(<CarModel carId={carId} instant />);
+    const r = await create(<CarModel carId={carId} instant bodyModel={false} />);
     const names = new Set<string>();
     r.scene.instance.traverse((o) => {
       const m = /^([a-z]+)__([a-z-]+)__\d+$/.exec(o.name);
