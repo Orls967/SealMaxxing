@@ -1,9 +1,9 @@
 # PROGRESS
 
-Diperbarui: 2026-11-14
-Milestone aktif: revisi putaran 2 (lihat `revisi.md`), R7 selesai dikerjakan
-Sub-tugas aktif: menunggu penilaian pemilik atas model 3D baru (R7.7)
-Langkah berikut yang persis: bila pemilik menyetujui, hapus `revisi.md`, commit, push. Bila ada bagian model yang salah kelompok atau emblem yang masih tampak, ubah konfigurasi mobil itu di `scripts/build-models.mjs` (`paint`, `drop`, `dropBoxes`, `wing`, `doors`) lalu `npm run models` dan `node scripts/static-cars.mjs`. Berkas mentah ada di `model/glb/` (lokal).
+Diperbarui: 2026-11-22
+Milestone aktif: tidak ada; revisi putaran 1 dan 2 selesai dan disetujui pemilik (2026-11-22), `revisi.md` dihapus
+Sub-tugas aktif: tidak ada
+Langkah berikut yang persis: tunggu masukan pemilik. Untuk memperbaiki bagian model: ubah konfigurasi mobil di `scripts/build-models.mjs` (`paint`, `drop`, `dropBoxes`, `wing`, `doors`), jalankan `npm run models` lalu `node scripts/static-cars.mjs`. Berkas mentah ada di `model/glb/` (lokal).
 
 ## Selesai
 
