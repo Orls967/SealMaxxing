@@ -34,7 +34,7 @@ Langkah berikut yang persis: tunggu masukan pemilik. Untuk memperbaiki bagian mo
 ## Hasil pemeriksaan akhir
 
 - `lint`, `typecheck`, `build` lolos. Vitest: 90 tes lolos. Playwright: 15 tes lolos.
-- Lighthouse aksesibilitas (2026-11-22, situs tayang): 100 di Garasi, Bedah, Banding, Data, Adu (akselerasi, aliran energi), Glosarium, Tentang. Catatan tanpa bobot `label-content-name-mismatch` pada tombol suara diperbaiki: nama aksesibelnya kini diawali teks yang terlihat. Lighthouse dipasang sebagai dev dependency; perintahnya ada di README.
+- Lighthouse aksesibilitas (2026-11-22, situs tayang): 100 di Garasi, Bedah, Banding, Data, Adu (akselerasi, aliran energi), Glosarium, Tentang. Catatan tanpa bobot `label-content-name-mismatch` pada tombol suara diperbaiki (nama mobil kini teks khusus pembaca layar setelah teks yang terlihat); audit ulang bersih. Jalankan ulang dengan `npm run a11y`.
 - R6 (2026-11-14): model akselerasi diberi waktu bangun dorongan saat start (`launchS`); Seal kini di depan ketiga hypercar pada 0,5 dan 1 dtk dan tersusul sebelum 3 dtk. Kalibrasi baru (model / klaim 0–100): Seal 3,70 / 3,8; LaFerrari 2,89 / < 3,0; P1 ± 2,8 / 2,8; Senna ± 2,8 / 2,8.
 - Kalibrasi model tetap dalam ±5% untuk 0–100 dan 0–200. `cdA` Senna dinaikkan 0,75 → 0,84 supaya 0–300 model tetap dalam 10% dari angka baru 18,8 dtk.
 - Suara: keempat profil diperiksa lewat render luring (`OfflineAudioContext`): sinyal ada, tidak terpotong (puncak < 0,4), nada naik bersama gas. Belum dinilai dengan telinga oleh pemilik.
