@@ -16,13 +16,14 @@ export function EngineSoundButton({ car }: { car: Car }) {
   const onFallback = useCallback(() => setSynthetic(true), []);
   const { press, release, warm } = useEngineSound(sound, profile, meter, onFallback);
   const exact = sound.rev.exact && (sound.idle?.exact ?? true);
+  const tag = synthetic ? UI.sound.synthetic : exact ? UI.sound.recorded : UI.sound.substitute;
   if (!soundSupported()) return null;
   return (
     <div className="flex flex-col gap-1">
       <button
         type="button"
         className="relative select-none overflow-hidden rounded border border-line bg-bg px-3 py-2 text-left text-sm font-semibold text-text hover:border-accent"
-        aria-label={UI.sound.label(car.name)}
+        aria-label={UI.sound.label(car.name, tag)}
         onPointerDown={(e) => {
           e.currentTarget.setPointerCapture(e.pointerId);
           press();
@@ -44,9 +45,7 @@ export function EngineSoundButton({ car }: { car: Car }) {
         <span ref={meter} aria-hidden="true" className="absolute inset-y-0 left-0 w-0 bg-accent-dim" />
         <span className="relative flex items-center justify-between gap-2">
           <span>{UI.sound.hold}</span>
-          <span className="text-xs font-normal text-muted">
-            {synthetic ? UI.sound.synthetic : exact ? UI.sound.recorded : UI.sound.substitute}
-          </span>
+          <span className="text-xs font-normal text-muted">{tag}</span>
         </span>
       </button>
       <p className="text-xs text-muted">{synthetic ? UI.sound.note : sound.note}</p>

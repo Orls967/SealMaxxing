@@ -236,7 +236,8 @@ export const UI = {
   },
   sound: {
     hold: 'Tahan untuk injak gas',
-    label: (car: string) => `Tahan untuk mendengar suara ${car} saat digas`,
+    // Starts with the visible text so voice-control users can say what they see.
+    label: (car: string, kind: string) => `Tahan untuk injak gas: ${car}, ${kind}`,
     recorded: 'rekaman',
     substitute: 'rekaman pengganti',
     synthetic: 'suara sintetis',
