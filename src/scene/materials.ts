@@ -36,6 +36,16 @@ const DEFS = {
   /** Openings: grilles, ducts, meshes. */
   intake: () => std({ color: '#050506', metalness: 0.1, roughness: 0.85 }),
   trim: () => std({ color: '#121215', metalness: 0.2, roughness: 0.6 }),
+  lampCover: () =>
+    phys({
+      color: '#c9ccd2',
+      metalness: 0.1,
+      roughness: 0.05,
+      transparent: true,
+      opacity: 0.28,
+      clearcoat: 1,
+      depthWrite: false,
+    }),
   lens: () => phys({ color: '#0d0d10', metalness: 0.4, roughness: 0.08, clearcoat: 1 }),
   liner: () => std({ color: '#060607', metalness: 0, roughness: 1, side: THREE.DoubleSide }),
   glassDark: () =>
@@ -125,6 +135,48 @@ export function matHi(key: MatKey): THREE.Material {
       m.opacity = Math.min(1, m.opacity * 2);
     }
     hi.set(key, m);
+  }
+  return m;
+}
+
+const twoSided = new Map<THREE.Material, THREE.Material>();
+
+/** The same material drawn from both sides, for models whose faces are not consistently wound. */
+export function doubleSided(m: THREE.Material): THREE.Material {
+  let d = twoSided.get(m);
+  if (!d) {
+    d = m.clone();
+    d.side = THREE.DoubleSide;
+    twoSided.set(m, d);
+  }
+  return d;
+}
+
+const adopted = new Map<string, THREE.Material>();
+
+/**
+ * Material for a surface that arrives with a downloaded model: keeps the model's own colour,
+ * but is built here so it obeys the cut tool and gets the same highlight as every other part.
+ */
+export function matAdopted(name: string, color: THREE.Color, highlighted: boolean): THREE.Material {
+  const k = `${name}:${color.getHexString()}:${highlighted ? 1 : 0}`;
+  let m = adopted.get(k);
+  if (!m) {
+    const hsl = { h: 0, s: 0, l: 0 };
+    color.getHSL(hsl);
+    // Near-black parts are trim and carbon; pale neutral ones are bare metal.
+    const metal = hsl.s < 0.12 && hsl.l > 0.3;
+    const made = std({
+      color: hsl.l < 0.02 ? color.clone().setScalar(0.012) : color,
+      metalness: metal ? 0.85 : 0.25,
+      roughness: metal ? 0.35 : hsl.l < 0.08 ? 0.55 : 0.5,
+    });
+    if (highlighted) {
+      made.emissive = new THREE.Color(PALETTE.red);
+      made.emissiveIntensity = 0.55;
+    }
+    m = made;
+    adopted.set(k, m);
   }
   return m;
 }
